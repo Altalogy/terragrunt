@@ -1,0 +1,12 @@
+<div class="col-sm-8">
+  <div class="row">
+    <div class="cb-doc-listing js-scroll-spy" data-scroll-spy-nav-selector="#toc">
+      {% for doc_group in include.docs_grouped %}
+        <h3 class="category-head">{{ doc_group.name | capitalize | replace: '-',' ' | replace: '%20', ' ' }}</h3>
+        {% for doc in doc_group.items %}
+          {% include collection_browser/_doc-thumb.html doc=doc %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

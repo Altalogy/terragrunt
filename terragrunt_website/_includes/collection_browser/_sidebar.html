@@ -1,0 +1,11 @@
+<div class="col-sm-2">
+  <div id="toc" class="categories js-scroll-with-user" data-scroll-after-selector=".cb-search-cmp" data-scroll-until-selector=".cb-doc-listing">
+    <ul class="sectlevel1">
+      {% for category in include.categories %}
+          <li data-category="{{ category | downcase | slugify }}" class="{{ category | downcase }}">
+            <a href="#{{category | slugify}}" ga-on="click" ga-event-category="{{collection_name}}-listings-{{ page.path | slugify}}" ga-event-action="category-{{ category | slugify }}">{{category | capitalize | replace: '-',' '}}</a>
+          </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

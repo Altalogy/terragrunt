@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fira+Mono&display=swap" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<title>Work with multiple AWS accounts</title>
+<meta name="description" content="Learn how the Terragrunt may help you to work with mulitple AWS accounts.">
+<link rel="canonical" href="https://terragrunt.io/use-cases/work-with-multiple-aws-accounts/
+">
+
+<META NAME="robots" CONTENT="index">
+
+<link rel="stylesheet" href="/assets/css/app.css" />
+
+
+
+<link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/img/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<meta name="background-color" content="#161d25">
+
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="" />
+<meta name="twitter:title" content="Work with multiple AWS accounts" />
+<meta name="twitter:url" content="https://terragrunt.io/use-cases/work-with-multiple-aws-accounts/
+" />
+<meta name="twitter:description" content="Learn how the Terragrunt may help you to work with mulitple AWS accounts." />
+<meta name="twitter:image" content="https://terragrunt.io/assets/img/terragrunt-thumbnail.png" />
+
+<meta property="og:title" content="Work with multiple AWS accounts"/>
+<meta property="og:url" content="https://terragrunt.io/use-cases/work-with-multiple-aws-accounts/
+"/>
+<meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
+<meta property="article:author" content=""/>
+<meta property="og:description" content="Learn how the Terragrunt may help you to work with mulitple AWS accounts."/>
+<meta property="og:image" content="https://terragrunt.io/assets/img/terragrunt-thumbnail.png"/>
+
+
+
+
+    </head>
+    <body class="work-with-multiple-aws-accounts collection-browser collection-browser-doc subpage" >
+        <div class="subpage__header subpage__header--min section-colorful-bg">
+  <header class="header">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand navbar-brand-beta">
+          <div class="terragrunt-logo">
+  <a class="logo-terragrunt" href="/">Terragrunt</a>
+  <a class="gruntwork" href="https://gruntwork.io/" target="_blank">by <strong>Gruntwork.io</strong></a>
+</div>
+
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/documentation/getting-started/install" ga-on="click" ga-event-category="nav-use-cases-work-with-multiple-aws-accounts-adoc" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-use-cases-work-with-multiple-aws-accounts-adoc" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/documentation/" ga-on="click" ga-event-category="nav-use-cases-work-with-multiple-aws-accounts-adoc" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/use-cases/" ga-on="click" ga-event-category="nav-use-cases-work-with-multiple-aws-accounts-adoc" ga-event-action="use-cases">Use cases</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <div class='header-bg'>
+    <div class='overflow-hide'>
+      <img src='/assets/img/home/t-o-1@3x.png' alt='Shape' class="header-shapes-top" />
+    </div>
+    <img src='/assets/img/home/top_left.svg' alt='Shape' class="header-shapes-hero" />
+  </div>
+</div>
+
+        <!-- Basic collection data -->
+
+
+<!-- Get categories from collection -->
+
+
+
+<!-- Get docs grouped in categories -->
+
+
+<div class="cb-doc-detail">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="cb-doc-header">
+  <ol class="breadcrumb text-center">
+    
+    <a href="/use-cases" ga-on="click" ga-event-category="use-cases-work-with-multiple-aws-accounts" ga-event-action="use-cases-main-index">Use-cases</a>
+    
+      
+        <a href="#"> / <span> Work with multiple AWS accounts</span></a>
+      
+    
+  </ol>
+  <div class="cb-doc-title text-center">
+    
+    <h1>Work with multiple AWS accounts</h1>
+    
+      
+        <span class="badge badge-pill badge-default">
+          
+          Cli
+        </span>
+      
+        <span class="badge badge-pill badge-default">
+          
+          Aws
+        </span>
+      
+        <span class="badge badge-pill badge-default">
+          
+          Aws iam
+        </span>
+      
+    
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="container-cb-lg">
+    <div class="row equal">
+      <div class="col-md-2-5">
+        <div id="toc" class="cb-doc-sidebar js-scroll-with-user" data-scroll-after-selector=".cb-doc-header" data-scroll-until-selector=".cb-doc-detail" data-nav-current-cat="" data-nav-current-page="work-with-multiple-aws-accounts">
+  <div class="toc-toggle visible-xs visible-sm">
+    <button id="toc-toggle-open" class="toc-toggle__button"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+    <button id="toc-toggle-close" class="toc-toggle__button"><span class="glyphicon glyphicon-remove"></span></button>
+  </div>
+  <div class="nav-doc-collection-link">
+    <a href="/use-cases"><span class="glyphicon glyphicon-share-alt icon-flipped"></span> use cases</a>
+  </div>
+  <ul><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-keep-your-terraform-code-dry' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/use-cases/keep-your-terraform-code-dry/'>Keep your Terraform code DRY</a><ul id='doc-nav-id-keep-your-terraform-code-dry' class='collapse'><li class="toc-level-h2"><a href="/use-cases/keep-your-terraform-code-dry/#keep-your-terraform-code-dry">Keep your Terraform code DRY</a>
+<ul>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#motivation">Motivation</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations">Remote Terraform configurations</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#achieve-dry-terraform-code-and-immutable-infrastructure">Achieve DRY Terraform code and immutable infrastructure</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#working-locally">Working locally</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#important-gotcha-terragrunt-caching">Important gotcha: Terragrunt caching</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#important-gotcha-working-with-relative-file-paths">Important gotcha: working with relative file paths</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-terraform-code-dry/#using-terragrunt-with-private-git-repos">Using Terragrunt with private Git repos</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-keep-your-remote-state-configuration-dry' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/use-cases/keep-your-remote-state-configuration-dry/'>Keep your remote state configuration DRY</a><ul id='doc-nav-id-keep-your-remote-state-configuration-dry' class='collapse'><li class="toc-level-h2"><a href="/use-cases/keep-your-remote-state-configuration-dry/#keep-your-remote-state-configuration-dry">Keep your remote state configuration DRY</a>
+<ul>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-remote-state-configuration-dry/#motivation">Motivation</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-remote-state-configuration-dry/#filling-in-remote-state-settings-with-terragrunt">Filling in remote state settings with Terragrunt</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-remote-state-configuration-dry/#rules-for-merging-parent-and-child-configurations">Rules for merging parent and child configurations</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-remote-state-configuration-dry/#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-remote-state-configuration-dry/#s3-specific-remote-state-settings">S3-specific remote state settings</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-remote-state-configuration-dry/#gcs-specific-remote-state-settings">GCS-specific remote state settings</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-keep-your-cli-flags-dry' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/use-cases/keep-your-cli-flags-dry/'>Keep your CLI flags DRY</a><ul id='doc-nav-id-keep-your-cli-flags-dry' class='collapse'><li class="toc-level-h2"><a href="/use-cases/keep-your-cli-flags-dry/#keep-your-cli-flags-dry">Keep your CLI flags DRY</a>
+<ul>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-cli-flags-dry/#motivation">Motivation</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">Multiple extra_arguments blocks</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-cli-flags-dry/#extra_arguments-for-init">extra_arguments for init</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-cli-flags-dry/#required-and-optional-var-files">Required and optional var-files</a></li>
+<li class="toc-level-h3"><a href="/use-cases/keep-your-cli-flags-dry/#handling-whitespace">Handling whitespace</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-execute-terraform-commands-on-multiple-modules-at-once' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/use-cases/execute-terraform-commands-on-multiple-modules-at-once/'>Execute Terraform commands on multiple modules at once</a><ul id='doc-nav-id-execute-terraform-commands-on-multiple-modules-at-once' class='collapse'><li class="toc-level-h2"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#execute-terraform-commands-on-multiple-modules-at-once">Execute Terraform commands on multiple modules at once</a>
+<ul>
+<li class="toc-level-h3"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#motivation">Motivation</a></li>
+<li class="toc-level-h3"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#the-apply-all-destroy-all-output-all-and-plan-all-commands">The apply-all, destroy-all, output-all and plan-all commands</a></li>
+<li class="toc-level-h3"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#passing-outputs-between-modules">Passing outputs between modules</a>
+<ul>
+<li class="toc-level-h4"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#unapplied-dependency-and-mock-outputs">Unapplied dependency and mock outputs</a></li>
+</ul>
+</li>
+<li class="toc-level-h3"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#dependencies-between-modules">Dependencies between modules</a></li>
+<li class="toc-level-h3"><a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#testing-multiple-modules-locally">Testing multiple modules locally</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-work-with-multiple-aws-accounts' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/use-cases/work-with-multiple-aws-accounts/'>Work with multiple AWS accounts</a><ul id='doc-nav-id-work-with-multiple-aws-accounts' class='collapse'><li class="toc-level-h2"><a href="/use-cases/work-with-multiple-aws-accounts/#work-with-multiple-aws-accounts">Work with multiple AWS accounts</a>
+<ul>
+<li class="toc-level-h3"><a href="/use-cases/work-with-multiple-aws-accounts/#motivation">Motivation</a></li>
+<li class="toc-level-h3"><a href="/use-cases/work-with-multiple-aws-accounts/#configuring-terragrunt-to-assume-an-iam-role">Configuring Terragrunt to assume an IAM role</a></li>
+</ul>
+</li>
+</ul></li></ul></ul>
+</div>
+
+      </div>
+      <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
+        <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
+            <div class="sect1">
+<h2 id="work-with-multiple-aws-accounts">Work with multiple AWS accounts</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="motivation">Motivation</h3>
+<div class="paragraph">
+<p>The most secure way to manage infrastructure in AWS is to use <a href="https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/">multiple AWS accounts</a>. You define all your IAM users in one account (e.g., the "security" account) and deploy all of your infrastructure into a number of other accounts (e.g., the "dev", "stage", and "prod" accounts). To access those accounts, you login to the security account and <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-roles.html">assume an IAM role</a> in the other accounts.</p>
+</div>
+<div class="paragraph">
+<p>There are a few ways to assume IAM roles when using AWS CLI tools, such as Terraform:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>One option is to create a named <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html">profile</a>, each with a different <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-roles.html">role_arn</a> parameter. You then tell Terraform which profile to use via the <code>AWS_PROFILE</code> environment variable. The downside to using profiles is that you have to store your AWS credentials in plaintext on your hard drive.</p>
+</li>
+<li>
+<p>Another option is to use environment variables and the <a href="https://aws.amazon.com/cli/">AWS CLI</a>. You first set the credentials for the security account (the one where your IAM users are defined) as the environment variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> and run <code>aws sts assume-role --role-arn &lt;ROLE&gt;</code>. This gives you back a blob of JSON that contains new <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> values you can set as environment variables to allow Terraform to use that role. The advantage of this approach is that you can store your AWS credentials in a secret store and never write them to disk in plaintext. The disadvantage is that assuming an IAM role requires several tedious steps. Worse yet, the credentials you get back from the <code>assume-role</code> command are only good for up to 1 hour, so you have to repeat this process often.</p>
+</li>
+<li>
+<p>A final option is to modify your AWS provider with the <a href="https://www.terraform.io/docs/providers/aws/#assume-role">assume_role configuration</a> and your S3 backend with the <a href="https://www.terraform.io/docs/backends/types/s3.html#role_arn">role_arn parameter</a>. You can then set the credentials for the security account (the one where your IAM users are defined) as the environment variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> and when you run <code>terraform apply</code> or <code>terragrunt apply</code>, Terraform/Terragrunt will assume the IAM role you specify automatically. The advantage of this approach is that you can store your AWS credentials in a secret store and never write them to disk in plaintext, and you get fresh credentials on every run of <code>apply</code>, without the complexity of calling <code>assume-role</code>. The disadvantage is that you have to modify all your Terraform / Terragrunt code to set the <code>role_arn</code> param and your Terraform backend configuration will change (and prompt you to manually confirm the update!) every time you change the IAM role you&#8217;re using.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To avoid these frustrating trade-offs, you can configure Terragrunt to assume an IAM role for you, as described next.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-terragrunt-to-assume-an-iam-role">Configuring Terragrunt to assume an IAM role</h3>
+<div class="paragraph">
+<p>To tell Terragrunt to assume an IAM role, just set the <code>--terragrunt-iam-role</code> command line argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">terragrunt apply --terragrunt-iam-role "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can set the <code>TERRAGRUNT_IAM_ROLE</code> environment variable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">export TERRAGRUNT_IAM_ROLE="arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+terragrunt apply</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additionally, you can specify an <code>iam_role</code> property in the terragrunt config:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-hcl" data-lang="hcl">iam_role = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Terragrunt will resolve the value of the option by first looking for the cli argument, then looking for the environment variable, then defaulting to the value specified in the config file.</p>
+</div>
+<div class="paragraph">
+<p>Terragrunt will call the <code>sts assume-role</code> API on your behalf and expose the credentials it gets back as environment variables when running Terraform. The advantage of this approach is that you can store your AWS credentials in a secret store and never write them to disk in plaintext, you get fresh credentials on every run of Terragrunt, without the complexity of calling <code>assume-role</code> yourself, and you don&#8217;t have to modify your Terraform code or backend configuration at all.</p>
+</div>
+</div>
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <section>
+  <div class="use-cases-cmp">
+  <div class="box shadow box-with-links">
+    <h2>Use cases</h2>
+    <div class="card-links">
+      <div class="card-link">
+        <a href="/use-cases/keep-your-terraform-code-dry/">Keep your Terraform code DRY</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/keep-your-remote-state-configuration-dry/">Keep your remote state configuration DRY</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/keep-your-cli-flags-dry/">Keep your CLI flags DRY</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/">Execute Terraform commands on multiple modules at once</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/work-with-multiple-aws-accounts/">Work with multiple AWS accounts</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="links-section-cmp section-colorful-bg">
+  <h2>Links</h2>
+  <div class="links">
+    <a href="/documentation/getting-started/install" class="link-tag-styled">
+      <img src='/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Install
+    </a>
+    <a href="/documentation/getting-started/quick-start" class="link-tag-styled">
+      <img src='/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Quick start
+    </a>
+    <a href="/documentation" class="link-tag-styled">
+      <img src='/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Full documentation
+    </a>
+  </div>
+  <img src="/assets/img/home/links-shapes-left.png" class="links-shapes-left" alt="shapes" />
+  <img src="/assets/img/home/links-shapes-right.png" class="links-shapes-right" alt="shapes" />
+</div>
+
+</section>
+
+        <footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="terragrunt-logo">
+  <a class="logo-terragrunt" href="/">Terragrunt</a>
+  <a class="gruntwork" href="https://gruntwork.io/" target="_blank">by <strong>Gruntwork.io</strong></a>
+</div>
+
+        <p class="subtitle">Your entire infrastructure. Defined as code. In about a day.</p>
+        <a href="https://gruntwork.io" target="_blank" class="btn btn-primary">Discover Gruntwoork.io</a>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 learn-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/documentation/getting-started/install">Install</a></li>
+          <li><a href="/documentation/getting-started/quick-start">Quick Start</a></li>
+          <li><a href="/documentation">Documentation</a></li>
+          <li><a href="/use-cases">Use cases</a></li>
+        </ul>
+        <h4>Website</h4>
+        <ul>
+          <li><a href="/cookie-policy">Cookie Policy</a></li>
+          <li><a href="/support">Support</a></li>
+        </ul>
+        <div class="footer__copyright">
+          &copy; 2019 Gruntwork, Inc. All rights reserved.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+        <script src="/assets/js/main.js"></script>
+
+  
+    <script src='/assets/js/prism.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/collection-browser_scroll.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/collection-browser_search.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/collection-browser_toc.js' type="text/javascript"></script>
+  
+
+
+<!-- Add here more: Google Analytics etc. -->
+<script src="/assets/js/cookie.js" async></script>
+
+    </body>
+</html>

@@ -1,0 +1,28 @@
+---
+# We need this frontmatter for Jekyll to compile the less code
+---
+
+// Import variables
+@import "bootstrap/less/bootstrap.less";
+@import "user10/variables";
+@import "app-variable-overrides";
+@import "user10/utilities";
+@import "lity";
+
+// Import global styles
+@import "global";
+
+// Import subpage styles
+@import "subpage";
+
+// Import collection browser styles
+@import "collection-browser";
+
+// Import page-specific styles
+@import "pages/cookie-policy";
+@import "pages/home";
+@import "pages/support";
+@import "pages/library";
+
+// Import components
+@import "components";

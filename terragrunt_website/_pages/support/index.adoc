@@ -1,0 +1,22 @@
+---
+layout: subpage
+permalink: /support
+slug: support-page
+title: Support
+subtitle: Need a help?
+classes: text-large
+---
+
+== Stack Overflow
+Many developers use Stack Overflow to find a help. Use `terragrunt` tag to find link:https://stackoverflow.com/questions/tagged/terragrunt[existing questions,window=_blank] or link:https://stackoverflow.com/questions/ask?tags=terragrunt[ask your own,window=_blank].
+
+== Github Issues
+Read through link:https://github.com/gruntwork-io/terragrunt/issues[existing issues,window=_blank] or post a new one. Github issues is a good place to:
+
+* report a bug,
+* ask for a help,
+* ask for improvements,
+* to start contributing by solving simple issues.
+
+== Commercial support
+If you need help with Terragrunt or anything else related to infrastructure or DevOps, Gruntwork offers link:https://gruntwork.io/support/[Commercial Support,window=_blank] via Slack, email, and phone/video. If you're already a Gruntwork customer, hop on Slack and ask away! If not, link:https://www.gruntwork.io/pricing/[subscribe now,window=_blank]. If you're not sure, feel free to email us at support@gruntwork.io.
