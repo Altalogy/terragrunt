@@ -1,1 +1,1 @@
-Sitemap: https://terragrunt.io/sitemap.xml
+Sitemap: https://terragrunt.io/terragrunt/sitemap.xml
