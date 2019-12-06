@@ -1,0 +1,35 @@
+<!-- Basic collection data -->
+{% assign collection_name = page.collection %}
+
+<!-- Get categories from collection -->
+{% assign categories = "" | split:"|" %}
+{% for doc in site[page.collection] %}
+    {% for category in doc.categories %}
+        {% assign categories = categories | push: category | uniq %}
+    {% endfor %}
+{% endfor %}
+
+<!-- Get docs grouped in categories -->
+{% assign docs_grouped = site[page.collection] | group_by: "category" %}
+
+<div class="cb-doc-detail">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        {% include collection_browser/_doc-header.html %}
+      </div>
+    </div>
+  </div>
+  <div class="container-cb-lg">
+    <div class="row equal">
+      <div class="col-md-2-5">
+        {% include collection_browser/_doc-sidebar.html docs_grouped=docs_grouped %}
+      </div>
+      <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
+        <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
+            {{ content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

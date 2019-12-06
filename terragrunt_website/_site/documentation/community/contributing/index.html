@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fira+Mono&display=swap" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/assets/css/prism.css">
+
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<title>Contributing</title>
+<meta name="description" content="Terragrunt is an open source project, and contributions from the community are very welcome!">
+<link rel="canonical" href="https://terragrunt.io/documentation/community/contributing/
+">
+
+<META NAME="robots" CONTENT="index">
+
+<link rel="stylesheet" href="/assets/css/app.css" />
+
+
+
+<link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/img/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<meta name="background-color" content="#161d25">
+
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="" />
+<meta name="twitter:title" content="Contributing" />
+<meta name="twitter:url" content="https://terragrunt.io/documentation/community/contributing/
+" />
+<meta name="twitter:description" content="Terragrunt is an open source project, and contributions from the community are very welcome!" />
+<meta name="twitter:image" content="https://terragrunt.io/assets/img/terragrunt-thumbnail.png" />
+
+<meta property="og:title" content="Contributing"/>
+<meta property="og:url" content="https://terragrunt.io/documentation/community/contributing/
+"/>
+<meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
+<meta property="article:author" content=""/>
+<meta property="og:description" content="Terragrunt is an open source project, and contributions from the community are very welcome!"/>
+<meta property="og:image" content="https://terragrunt.io/assets/img/terragrunt-thumbnail.png"/>
+
+
+
+
+    </head>
+    <body class="contributing collection-browser collection-browser-doc subpage" >
+        <div class="subpage__header subpage__header--min section-colorful-bg">
+  <header class="header">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand navbar-brand-beta">
+          <div class="terragrunt-logo">
+  <a class="logo-terragrunt" href="/">Terragrunt</a>
+  <a class="gruntwork" href="https://gruntwork.io/" target="_blank">by <strong>Gruntwork.io</strong></a>
+</div>
+
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/documentation/" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/use-cases/" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="use-cases">Use cases</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <div class='header-bg'>
+    <div class='overflow-hide'>
+      <img src='/assets/img/home/t-o-1@3x.png' alt='Shape' class="header-shapes-top" />
+    </div>
+    <img src='/assets/img/home/top_left.svg' alt='Shape' class="header-shapes-hero" />
+  </div>
+</div>
+
+        <!-- Basic collection data -->
+
+
+<!-- Get categories from collection -->
+
+
+
+<!-- Get docs grouped in categories -->
+
+
+<div class="cb-doc-detail">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="cb-doc-header">
+  <ol class="breadcrumb text-center">
+    
+    <a href="/documentation" ga-on="click" ga-event-category="documentation-contributing" ga-event-action="documentation-main-index">Documentation</a>
+    
+      
+        <a href="/documentation#community" ga-on="click" ga-event-category="documentation-contributing" ga-event-action="documentation-breadcrumb-community">/ <span>Community</span></a>
+      
+    
+      
+        <a href="#"> / <span> Contributing</span></a>
+      
+    
+  </ol>
+  <div class="cb-doc-title text-center">
+    
+    <h1>Contributing</h1>
+    
+      
+        <span class="badge badge-pill badge-default">
+          
+          Contributing
+        </span>
+      
+        <span class="badge badge-pill badge-default">
+          
+          Community
+        </span>
+      
+    
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="container-cb-lg">
+    <div class="row equal">
+      <div class="col-md-2-5">
+        <div id="toc" class="cb-doc-sidebar js-scroll-with-user" data-scroll-after-selector=".cb-doc-header" data-scroll-until-selector=".cb-doc-detail" data-nav-current-cat="community" data-nav-current-page="contributing">
+  <div class="toc-toggle visible-xs visible-sm">
+    <button id="toc-toggle-open" class="toc-toggle__button"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+    <button id="toc-toggle-close" class="toc-toggle__button"><span class="glyphicon glyphicon-remove"></span></button>
+  </div>
+  <div class="nav-doc-collection-link">
+    <a href="/documentation"><span class="glyphicon glyphicon-share-alt icon-flipped"></span> documentation</a>
+  </div>
+  <ul><li class='toc-level-category'>             <span class='category-head collapsed' data-toggle='collapse' data-target='#cat-nav-id-getting-started'               role='button' aria-expanded='false' aria-controls='getting-started'>               <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>             </span><a href='/documentation#getting-started'>Getting started</a><ul id='cat-nav-id-getting-started' class='collapse'><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-quick-start' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/getting-started/quick-start/'>Quick start</a><ul id='doc-nav-id-quick-start' class='collapse'><li class="toc-level-h2"><a href="/documentation/getting-started/quick-start/#keep-your-backend-configuration-dry">Keep your backend configuration DRY</a></li>
+<li class="toc-level-h2"><a href="/documentation/getting-started/quick-start/#keep-your-terraform-cli-arguments-dry">Keep your Terraform CLI arguments DRY</a></li>
+<li class="toc-level-h2"><a href="/documentation/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments">Promote immutable, versioned Terraform modules across environments</a></li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-install' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/getting-started/install/'>Install</a><ul id='doc-nav-id-install' class='collapse'><li class="toc-level-h2"><a href="/documentation/getting-started/install/#install-terragrunt">Install Terragrunt</a>
+<ul>
+<li class="toc-level-h3"><a href="/documentation/getting-started/install/#windows">Windows</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/install/#macos">macOS</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/install/#linux">Linux</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/install/#manual">Manual</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-cli-options' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/getting-started/cli-options/'>CLI options</a><ul id='doc-nav-id-cli-options' class='collapse'><li class="toc-level-h2"><a href="/documentation/getting-started/cli-options/#cli-options">CLI Options</a></li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-configuration' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/getting-started/configuration/'>Configuration</a><ul id='doc-nav-id-configuration' class='collapse'><li class="toc-level-h2"><a href="/documentation/getting-started/configuration/#configuration">Configuration</a>
+<ul>
+<li class="toc-level-h3"><a href="/documentation/getting-started/configuration/#prevent_destroy">prevent_destroy</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/configuration/#skip">skip</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/configuration/#terraform_binary">terraform_binary</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/configuration/#download_dir">download_dir</a></li>
+<li class="toc-level-h3"><a href="/documentation/getting-started/configuration/#terraform_version_constraint">terraform_version_constraint</a></li>
+</ul>
+</li>
+<li class="toc-level-h2"><a href="/documentation/getting-started/configuration/#configuration-parsing-order">Configuration parsing order</a></li>
+<li class="toc-level-h2"><a href="/documentation/getting-started/configuration/#formatting-terragrunthcl">Formatting terragrunt.hcl</a></li>
+</ul></li></ul></li><li class='toc-level-category'>             <span class='category-head collapsed' data-toggle='collapse' data-target='#cat-nav-id-features'               role='button' aria-expanded='false' aria-controls='features'>               <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>             </span><a href='/documentation#features'>Features</a><ul id='cat-nav-id-features' class='collapse'><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-inputs' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/inputs/'>Inputs</a><ul id='doc-nav-id-inputs' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/inputs/#inputs">Inputs</a>
+<ul>
+<li class="toc-level-h3"><a href="/documentation/features/inputs/#variable-precedence">Variable precedence</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-locals' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/locals/'>Locals</a><ul id='doc-nav-id-locals' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/locals/#locals">Locals</a>
+<ul>
+<li class="toc-level-h3"><a href="/documentation/features/locals/#including-globally-defined-locals">Including globally defined locals</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-built-in-functions' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/built-in-functions/'>Built-in functions</a><ul id='doc-nav-id-built-in-functions' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/built-in-functions/#built-in-functions">Built-in Functions</a>
+<ul>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#terraform-built-in-functions">Terraform built-in functions</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#find_in_parent_folders">find_in_parent_folders</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#path_relative_to_include">path_relative_to_include</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#path_relative_from_include">path_relative_from_include</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_env">get_env</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_terragrunt_dir">get_terragrunt_dir</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_parent_terragrunt_dir">get_parent_terragrunt_dir</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_terraform_commands_that_need_vars">get_terraform_commands_that_need_vars</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_terraform_commands_that_need_input">get_terraform_commands_that_need_input</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_terraform_commands_that_need_locking">get_terraform_commands_that_need_locking</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_terraform_commands_that_need_parallelism">get_terraform_commands_that_need_parallelism</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_aws_account_id">get_aws_account_id</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_aws_caller_identity_arn">get_aws_caller_identity_arn</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#get_aws_caller_identity_user_id">get_aws_caller_identity_user_id</a></li>
+<li class="toc-level-h3"><a href="/documentation/features/built-in-functions/#run_cmd">run_cmd</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-before-and-after-hooks' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/before-and-after-hooks/'>Before and after hooks</a><ul id='doc-nav-id-before-and-after-hooks' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/before-and-after-hooks/#before-and-after-hooks">Before and After Hooks</a></li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-auto-init' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/auto-init/'>Auto-init</a><ul id='doc-nav-id-auto-init' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/auto-init/#auto-init">Auto-Init</a></li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-auto-retry' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/auto-retry/'>Auto-retry</a><ul id='doc-nav-id-auto-retry' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/auto-retry/#auto-retry">Auto-Retry</a></li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-caching' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/caching/'>Caching</a><ul id='doc-nav-id-caching' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/caching/#clearing-the-terragrunt-cache">Clearing the Terragrunt cache</a></li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-aws-auth' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/features/aws-auth/'>AWS Auth</a><ul id='doc-nav-id-aws-auth' class='collapse'><li class="toc-level-h2"><a href="/documentation/features/aws-auth/#aws-credentials">AWS credentials</a></li>
+<li class="toc-level-h2"><a href="/documentation/features/aws-auth/#aws-iam-policies">AWS IAM policies</a></li>
+</ul></li></ul></li><li class='toc-level-category'>             <span class='category-head collapsed' data-toggle='collapse' data-target='#cat-nav-id-community'               role='button' aria-expanded='false' aria-controls='community'>               <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>             </span><a href='/documentation#community'>Community</a><ul id='cat-nav-id-community' class='collapse'><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-contributing' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/community/contributing/'>Contributing</a><ul id='doc-nav-id-contributing' class='collapse'><li class="toc-level-h2"><a href="/documentation/community/contributing/#contributing">Contributing</a></li>
+<li class="toc-level-h2"><a href="/documentation/community/contributing/#developing-terragrunt">Developing Terragrunt</a>
+<ul>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#running-locally">Running locally</a></li>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#dependencies">Dependencies</a></li>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#running-tests">Running tests</a></li>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#debug-logging">Debug logging</a></li>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#error-handling">Error handling</a></li>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#formatting">Formatting</a></li>
+<li class="toc-level-h3"><a href="/documentation/community/contributing/#releasing-new-versions">Releasing new versions</a></li>
+</ul>
+</li>
+</ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-support' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/community/support/'>Support</a><ul id='doc-nav-id-support' class='collapse'></ul></li><li class='toc-level-doc'>                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-license' role='button' aria-expanded='false' aria-controls='toc'>                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>                 </span>                 <a href='/documentation/community/license/'>License</a><ul id='doc-nav-id-license' class='collapse'><li class="toc-level-h2"><a href="/documentation/community/license/#license">License</a></li>
+</ul></li></ul></li></ul>
+</div>
+
+      </div>
+      <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
+        <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
+            <div class="sect1">
+<h2 id="contributing">Contributing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Terragrunt is an open source project, and contributions from the community are very welcome! Please check out the <a href="https://github.com/gruntwork-io/terragrunt/blob/master/CONTRIBUTING.md">Contribution Guidelines</a> and <a href="#developing-terragrunt">Developing Terragrunt</a> for instructions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="developing-terragrunt">Developing Terragrunt</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="running-locally">Running locally</h3>
+<div class="paragraph">
+<p>To run Terragrunt locally, use the <code>go run</code> command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">go run main.go plan</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dependencies">Dependencies</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Terragrunt uses <code>dep</code>, a vendor package management tool for golang. See the dep repo for <a href="https://github.com/golang/dep">installation instructions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-tests">Running tests</h3>
+<div class="paragraph">
+<p><strong>Note</strong>: The tests in the <code>dynamodb</code> folder for Terragrunt run against a real AWS account and will add and remove real data from DynamoDB. DO NOT hit <code>CTRL+C</code> while the tests are running, as this will prevent them from cleaning up temporary tables and data in DynamoDB. We are not responsible for any charges you may incur.</p>
+</div>
+<div class="paragraph">
+<p>Before running the tests, you must configure your <a href="/documentation/features/aws-auth/#aws-credentials">AWS credentials</a> and <a href="/documentation/features/aws-auth/#aws-iam-policies">AWS IAM policies</a>.</p>
+</div>
+<div class="paragraph">
+<p>To run all the tests:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">go test -v ./...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run only the tests in a specific package, such as the package <code>remote</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd remote
+go test -v</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And to run a specific test, such as <code>TestToTerraformRemoteConfigArgsNoBackendConfigs</code> in package <code>remote</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd remote
+go test -v -run TestToTerraformRemoteConfigArgsNoBackendConfigs</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="debug-logging">Debug logging</h3>
+<div class="paragraph">
+<p>If you set the <code>TERRAGRUNT_DEBUG</code> environment variable to "true", the stack trace for any error will be printed to stdout when you run the app.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, newer features introduced in v0.19.0 (such as <code>locals</code> and <code>dependency</code> blocks) can output more verbose logging if you set the <code>TG_LOG</code> environment variable to <code>debug</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="error-handling">Error handling</h3>
+<div class="paragraph">
+<p>In this project, we try to ensure that:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Every error has a stacktrace. This makes debugging easier.</p>
+</li>
+<li>
+<p>Every error generated by our own code (as opposed to errors from Go built-in functions or errors from 3rd party libraries) has a custom type. This makes error handling more precise, as we can decide to handle different types of errors differently.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To accomplish these two goals, we have created an <code>errors</code> package that has several helper methods, such as <code>errors.WithStackTrace(err error)</code>, which wraps the given <code>error</code> in an Error object that contains a stacktrace. Under the hood, the <code>errors</code> package is using the <a href="https://github.com/go-errors/errors">go-errors</a> library, but this may change in the future, so the rest of the code should not depend on <code>go-errors</code> directly.</p>
+</div>
+<div class="paragraph">
+<p>Here is how the <code>errors</code> package should be used:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Any time you want to create your own error, create a custom type for it, and when instantiating that type, wrap it with a call to <code>errors.WithStackTrace</code>. That way, any time you call a method defined in the Terragrunt code, you know the error it returns already has a stacktrace and you don&#8217;t have to wrap it yourself.</p>
+</li>
+<li>
+<p>Any time you get back an error object from a function built into Go or a 3rd party library, immediately wrap it with <code>errors.WithStackTrace</code>. This gives us a stacktrace as close to the source as possible.</p>
+</li>
+<li>
+<p>If you need to get back the underlying error, you can use the <code>errors.IsError</code> and <code>errors.Unwrap</code> functions.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="formatting">Formatting</h3>
+<div class="paragraph">
+<p>Every source file in this project should be formatted with <code>go fmt</code>. There are few helper scripts and targets in the Makefile that can help with this (mostly taken from the <a href="https://github.com/hashicorp/terraform/">terraform repo</a>):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>make fmtcheck</code> Checks to see if all source files are formatted. Exits 1 if there are unformatted files.</p>
+</li>
+<li>
+<p><code>make fmt</code> Formats all source files with <code>gofmt</code>.</p>
+</li>
+<li>
+<p><code>make install-pre-commit-hook</code></p>
+<div class="paragraph">
+<p>Installs a git pre-commit hook that will run all of the source files through <code>gofmt</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To ensure that your changes get properly formatted, please install the git pre-commit hook with <code>make install-pre-commit-hook</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="releasing-new-versions">Releasing new versions</h3>
+<div class="paragraph">
+<p>To release a new version, just go to the <a href="https://github.com/gruntwork-io/terragrunt/releases">Releases Page</a> and create a new release. The CircleCI job for this repo has been configured to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Automatically detect new tags.</p>
+</li>
+<li>
+<p>Build binaries for every OS using that tag as a version number.</p>
+</li>
+<li>
+<p>Upload the binaries to the release in GitHub.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>See <code>.circleci/config.yml</code> for details.</p>
+</div>
+</div>
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <section>
+  <div class="use-cases-cmp">
+  <div class="box shadow box-with-links">
+    <h2>Use cases</h2>
+    <div class="card-links">
+      <div class="card-link">
+        <a href="/use-cases/keep-your-terraform-code-dry/">Keep your Terraform code DRY</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/keep-your-remote-state-configuration-dry/">Keep your remote state configuration DRY</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/keep-your-cli-flags-dry/">Keep your CLI flags DRY</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/execute-terraform-commands-on-multiple-modules-at-once/">Execute Terraform commands on multiple modules at once</a>
+      </div>
+      <div class="card-link">
+        <a href="/use-cases/work-with-multiple-aws-accounts/">Work with multiple AWS accounts</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="links-section-cmp section-colorful-bg">
+  <h2>Links</h2>
+  <div class="links">
+    <a href="/documentation/getting-started/install" class="link-tag-styled">
+      <img src='/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Install
+    </a>
+    <a href="/documentation/getting-started/quick-start" class="link-tag-styled">
+      <img src='/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Quick start
+    </a>
+    <a href="/documentation" class="link-tag-styled">
+      <img src='/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Full documentation
+    </a>
+  </div>
+  <img src="/assets/img/home/links-shapes-left.png" class="links-shapes-left" alt="shapes" />
+  <img src="/assets/img/home/links-shapes-right.png" class="links-shapes-right" alt="shapes" />
+</div>
+
+</section>
+
+        <footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="terragrunt-logo">
+  <a class="logo-terragrunt" href="/">Terragrunt</a>
+  <a class="gruntwork" href="https://gruntwork.io/" target="_blank">by <strong>Gruntwork.io</strong></a>
+</div>
+
+        <p class="subtitle">Your entire infrastructure. Defined as code. In about a day.</p>
+        <a href="https://gruntwork.io" target="_blank" class="btn btn-primary">Discover Gruntwoork.io</a>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 learn-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/documentation/getting-started/install">Install</a></li>
+          <li><a href="/documentation/getting-started/quick-start">Quick Start</a></li>
+          <li><a href="/documentation">Documentation</a></li>
+          <li><a href="/use-cases">Use cases</a></li>
+        </ul>
+        <h4>Website</h4>
+        <ul>
+          <li><a href="/cookie-policy">Cookie Policy</a></li>
+          <li><a href="/support">Support</a></li>
+        </ul>
+        <div class="footer__copyright">
+          &copy; 2019 Gruntwork, Inc. All rights reserved.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+        <script src="/assets/js/main.js"></script>
+
+  
+    <script src='/assets/js/prism.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/collection-browser_scroll.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/collection-browser_search.js' type="text/javascript"></script>
+  
+    <script src='/assets/js/collection-browser_toc.js' type="text/javascript"></script>
+  
+
+
+<!-- Add here more: Google Analytics etc. -->
+<script src="/assets/js/cookie.js" async></script>
+
+    </body>
+</html>
