@@ -6,14 +6,14 @@
         <div class="col-xs-2 img-inner no-padding">
           <img src="{{ doc.image }}" alt="card image" class="img-center">
         </div>
-        <a href="{{ doc.url | prepend: site.baseurl }}">
+        <a href="{{ doc.url }}">
           <div class="col-xs-10 card-body cb-doc-card-description float-right">
             <h5 class="card-title"><b>{{ doc.title }}</b></h5>
             <p class="card-text">{{ doc.excerpt | strip_html }}</p>
           </div>
         </a>
       {% else %}
-        <a href="{{ doc.url | prepend: site.baseurl }}">
+        <a href="{{ doc.url }}">
           <div class="col-xs-12 card-body cb-doc-card-description float-right">
             <h5 class="card-title"><b>{{ doc.title }}</b></h5>
             <p class="card-text">{{ doc.excerpt | strip_html }}</p>

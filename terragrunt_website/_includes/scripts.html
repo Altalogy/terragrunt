@@ -1,13 +1,13 @@
-<script src="{{ site.baseurl }}/{{ site.assets_base_url }}js/main.js"></script>
+<script src="{{ site.assets_base_url }}js/main.js"></script>
 {% if page.custom_js %}
   {% for js_file in page.custom_js %}
-  <script src='{{ site.baseurl }}/assets/js/{{ js_file }}.js' type="text/javascript"></script>
+  <script src='/assets/js/{{ js_file }}.js' type="text/javascript"></script>
   {% endfor %}
 {% elsif layout.custom_js %}
   {% for js_file in layout.custom_js %}
-    <script src='{{ site.baseurl }}/assets/js/{{ js_file }}.js' type="text/javascript"></script>
+    <script src='/assets/js/{{ js_file }}.js' type="text/javascript"></script>
   {% endfor %}
 {% endif %}
 
 <!-- Add here more: Google Analytics etc. -->
-<script src="{{ site.baseurl }}/{{ site.assets_base_url }}js/cookie.js" async></script>
+<script src="{{ site.assets_base_url }}js/cookie.js" async></script>

@@ -17,7 +17,7 @@ class CollectionNavGenerator < Jekyll::Generator
             <span class='category-head collapsed' data-toggle='collapse' data-target='#cat-nav-id-#{ slugify(cat) }' \
               role='button' aria-expanded='false' aria-controls='#{ slugify(cat) }'> \
               <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span> \
-            </span><a href='#{site.baseurl}/#{collection[1].label}##{cat.downcase}'>#{cat.capitalize.gsub('-', ' ')}</a>" unless cat.empty?
+            </span><a href='/#{collection[1].label}##{cat.downcase}'>#{cat.capitalize.gsub('-', ' ')}</a>" unless cat.empty?
           @toc = @toc + "<ul id='cat-nav-id-#{ slugify(cat) }' class='collapse'>" unless cat.empty?
           doc_grouped[1].each do |doc|
             doc.data['subnav'] = []
@@ -26,12 +26,12 @@ class CollectionNavGenerator < Jekyll::Generator
                 <span class='collapsed' data-toggle='collapse' data-target='#doc-nav-id-#{ slugify(doc.data['title']) }' role='button' aria-expanded='false' aria-controls='toc'> \
                   <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span> \
                 </span> \
-                <a href='#{site.baseurl}#{doc.url}'>#{doc.data['title']}</a>"
+                <a href='#{doc.url}'>#{doc.data['title']}</a>"
 
               content = Nokogiri::HTML(parser.convert(doc.content))
               toc_content = parse_content(content, doc.url)
               @toc = @toc + "<ul id='doc-nav-id-#{ slugify(doc.data['title']) }' class='collapse'>"
-              @toc = @toc + build_toc_list(toc_content, site)
+              @toc = @toc + build_toc_list(toc_content)
               @toc = @toc + "</ul>"
               @toc = @toc + "</li>"
             end
@@ -71,7 +71,7 @@ class CollectionNavGenerator < Jekyll::Generator
     end
   end
 
-  def build_toc_list(entries, site)
+  def build_toc_list(entries)
     i = 0
     toc_list = +''
     min_h_num = entries.map { |e| e[:h_num] }.min
@@ -80,12 +80,12 @@ class CollectionNavGenerator < Jekyll::Generator
       entry = entries[i]
       if entry[:h_num] == min_h_num
         # If the current entry should not be indented in the list, add the entry to the list
-        toc_list << %(<li class="toc-level-#{entry[:node_name]}"><a href="#{site.baseurl}#{entry[:doc_url]}##{entry[:id]}">#{entry[:text]}</a>)
+        toc_list << %(<li class="toc-level-#{entry[:node_name]}"><a href="#{entry[:doc_url]}##{entry[:id]}">#{entry[:text]}</a>)
         # If the next entry should be indented in the list, generate a sublist
         next_i = i + 1
         if next_i < entries.count && entries[next_i][:h_num] > min_h_num
           nest_entries = get_nest_entries(entries[next_i, entries.count], min_h_num)
-          toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, site)}</ul>\n)
+          toc_list << %(\n<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
           i += nest_entries.count
         end
         # Add the closing tag for the current entry in the list
@@ -93,7 +93,7 @@ class CollectionNavGenerator < Jekyll::Generator
       elsif entry[:h_num] > min_h_num
         # If the current entry should be indented in the list, generate a sublist
         nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-        toc_list << build_toc_list(nest_entries, site)
+        toc_list << build_toc_list(nest_entries)
         i += nest_entries.count - 1
       end
       i += 1
