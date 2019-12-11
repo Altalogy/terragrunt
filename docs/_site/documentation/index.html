@@ -1,0 +1,4058 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fira+Mono&display=swap" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/terragrunt/assets/css/prism.css">
+
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<title>Documentation</title>
+<meta name="description" content="Learn how to integrate Terragrunt with Terraform.">
+<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/
+">
+
+<META NAME="robots" CONTENT="index">
+
+<!-- <link rel="stylesheet" href="/terragrunt/assets/css/app.css" /> -->
+<link rel="stylesheet" href="/terragrunt/assets/css/app_less.css" />
+<link rel="stylesheet" href="/terragrunt/assets/css/styles.css" />
+
+
+
+<link rel="icon" type="image/x-icon" href="/terragrunt/assets/img/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="/terragrunt/assets/img/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/terragrunt/assets/img/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/terragrunt/assets/img/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/terragrunt/assets/img/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/terragrunt/assets/img/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/terragrunt/assets/img/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/terragrunt/assets/img/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/terragrunt/assets/img/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/terragrunt/assets/img/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/terragrunt/assets/img/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/terragrunt/assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/terragrunt/assets/img/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/terragrunt/assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="/terragrunt/assets/img/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/terragrunt/assets/img/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<meta name="background-color" content="#161d25">
+
+
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="" />
+<meta name="twitter:title" content="Documentation" />
+<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/
+" />
+<meta name="twitter:description" content="Learn how to integrate Terragrunt with Terraform." />
+<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+
+<meta property="og:title" content="Documentation"/>
+<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/
+"/>
+<meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
+<meta property="article:author" content=""/>
+<meta property="og:description" content="Learn how to integrate Terragrunt with Terraform."/>
+<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+
+
+    </head>
+    <body class="documentation collection-browser subpage" >
+        <div class="subpage__header section-colorful-bg">
+  <header class="header">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand navbar-brand-beta">
+          <div class="terragrunt-logo">
+  <a class="logo-terragrunt" href="/terragrunt/">Terragrunt</a>
+  <a class="gruntwork" href="https://gruntwork.io/" target="_blank">by <strong>Gruntwork.io</strong></a>
+</div>
+
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-pages-documentation-index-html" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-pages-documentation-index-html" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-pages-documentation-index-html" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-pages-documentation-index-html" ga-event-action="use-cases">Use cases</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <div class="subpage__hero">
+    <h1>Documentation</h1>
+    <span class='subtitle'>Learn how to integrate Terragrunt with Terraform.</span>
+  </div>
+  <div class='header-bg'>
+    <div class='overflow-hide'>
+      <img src='/terragrunt/assets/img/home/t-o-1@3x.png' alt='Shape' class="header-shapes-top" />
+    </div>
+    <img src='/terragrunt/assets/img/home/top_left.svg' alt='Hero' class="header-shapes-hero" />
+    <img src='/terragrunt/assets/img/home/shape-single-right.svg' alt='Shape' class="header-shape-bottom" />
+  </div>
+</div>
+
+        <!-- Basic collection data -->
+
+
+
+
+<!-- Get categories and tags from collection -->
+
+
+
+
+<!-- Get posts grouped in categories -->
+
+
+  <div class="main">
+
+    <div class="cb-section-white">
+
+        <!-- Search -->
+        <div class='cb-search-cmp container-fluid' data-collection_name='documentation'>
+  <div class="row">
+      <div class="searchrow center">
+          <div class="col-xs-6 col-sm-7 no-padding">
+              <div class="input-group">
+                  <div class="input-group-btn" >
+                      <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-primary" >
+                              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                          </button>
+                      </div>
+                  </div>
+                  <input id="cb-search-box-documentation" type="text" class="form-control guides-input-box" placeholder="Search...." data-collection_name='documentation'>
+              </div>
+          </div>
+          <div class="col-xs-2 col-sm-1 no-padding" id="tags-filter">
+              <button class="btn tags-filter" type="button" data-toggle="collapse" data-target="#filter-options" aria-expanded="false" aria-controls="filter-options">
+                  Filter <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </button>
+          </div>
+      </div>
+      <div class="row">
+          <div class="filter-options center">
+              <div class="col-sm-8 no-padding">
+                  <div class="collapse" id="filter-options" aria-expanded="true">
+                      <div class="card card-body">
+                          <p>Tags</p>
+                          <div class="tags">
+                            
+                              
+                              <div class="checkbox"><input value="CLI" id="filter-CLI" type="checkbox"><label for="filter-CLI">CLI</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="config" id="filter-config" type="checkbox"><label for="filter-config">config</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="formatting" id="filter-formatting" type="checkbox"><label for="filter-formatting">formatting</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="install" id="filter-install" type="checkbox"><label for="filter-install">install</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="Quick Start" id="filter-Quick Start" type="checkbox"><label for="filter-Quick Start">Quick Start</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="DRY" id="filter-DRY" type="checkbox"><label for="filter-DRY">DRY</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="backend" id="filter-backend" type="checkbox"><label for="filter-backend">backend</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="Use cases" id="filter-Use cases" type="checkbox"><label for="filter-Use cases">Use cases</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="AWS" id="filter-AWS" type="checkbox"><label for="filter-AWS">AWS</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="hooks" id="filter-hooks" type="checkbox"><label for="filter-hooks">hooks</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="functions" id="filter-functions" type="checkbox"><label for="filter-functions">functions</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="caching" id="filter-caching" type="checkbox"><label for="filter-caching">caching</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="Modules" id="filter-Modules" type="checkbox"><label for="filter-Modules">Modules</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="inputs" id="filter-inputs" type="checkbox"><label for="filter-inputs">inputs</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="locals" id="filter-locals" type="checkbox"><label for="filter-locals">locals</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="Settings" id="filter-Settings" type="checkbox"><label for="filter-Settings">Settings</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="contributing" id="filter-contributing" type="checkbox"><label for="filter-contributing">contributing</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="community" id="filter-community" type="checkbox"><label for="filter-community">community</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="license" id="filter-license" type="checkbox"><label for="filter-license">license</label></div>
+                            
+                              
+                              <div class="checkbox"><input value="support" id="filter-support" type="checkbox"><label for="filter-support">support</label></div>
+                            
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+        <div class="row">
+          <div class="container-cb-lg">
+            <div id="cb-doc-listings">
+              <div class="row equal">
+
+                <!-- Sidebar -->
+                
+                
+                <div class="col-md-2-5">
+  <div id="toc" class="cb-doc-sidebar js-scroll-with-user" data-scroll-after-selector=".cb-search-cmp" data-scroll-until-selector=".cb-doc-listing" data-nav-current-cat="" data-nav-current-page="documentation">
+    <div class="toc-toggle visible-xs visible-sm">
+      <button id="toc-toggle-open" class="toc-toggle__button"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button id="toc-toggle-close" class="toc-toggle__button"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+
+    
+    
+
+    
+      <div class="nav-doc-collection-link">
+        Documentation
+      </div>
+    
+
+    
+    
+
+
+
+
+  
+    <ul>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-getting-started-2352'
+            role='button'
+            aria-expanded='false'
+            aria-controls='getting-started-2352'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/#getting-started'>Getting Started</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-getting-started-2352' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-quick-start-2353'
+            role='button'
+            aria-expanded='false'
+            aria-controls='quick-start-2353'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/quick-start/'>Quick Start</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-quick-start-2353' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/quick-start/#introduction'>Introduction</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/quick-start/#keep-your-backend-configuration-dry'>Keep your backend configuration DRY</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/quick-start/#keep-your-terraform-cli-arguments-dry'>Keep your Terraform CLI arguments DRY</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/quick-start/#promote-immutable-versioned-terraform-modules-across-environments'>Promote immutable, versioned Terraform modules across environments</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/quick-start/#next-steps'>Next steps</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-install-2359'
+            role='button'
+            aria-expanded='false'
+            aria-controls='install-2359'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/install/'>Install</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-install-2359' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/install/#install-terragrunt'>Install Terragrunt</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/install/#windows'>Windows</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/install/#macos'>macOS</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/install/#linux'>Linux</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/install/#manual'>Manual</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-use-cases-2365'
+            role='button'
+            aria-expanded='false'
+            aria-controls='use-cases-2365'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases'>Use cases</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-use-cases-2365' class='collapse'>
+  
+
+
+  
+
+    
+      
+      
+      
+
+
+
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-keep-your-terraform-code-dry-2366'
+            role='button'
+            aria-expanded='false'
+            aria-controls='keep-your-terraform-code-dry-2366'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/'>Keep your Terraform code DRY</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-keep-your-terraform-code-dry-2366' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#motivation'>Motivation</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations'>Remote Terraform configurations</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#how-to-use-remote-configuration'>How to use remote configurations</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#achieve-dry-terraform-code-and-immutable-infrastructure'>Achieve DRY Terraform code and immutable infrastructure</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#working-locally'>Working locally</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#important-gotcha-working-with-relative-file-paths'>Important gotcha: working with relative file paths</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/#using-terragrunt-with-private-git-repos'>Using Terragrunt with private Git repos</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-keep-your-remote-state-configuration-dry-2374'
+            role='button'
+            aria-expanded='false'
+            aria-controls='keep-your-remote-state-configuration-dry-2374'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/'>Keep your remote state configuration DRY</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-keep-your-remote-state-configuration-dry-2374' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/#motivation'>Motivation</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/#filling-in-remote-state-settings-with-terragrunt'>Filling in remote state settings with Terragrunt</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/#rules-for-merging-parent-and-child-configurations'>Rules for merging parent and child configurations</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/#create-remote-state-and-locking-resources-automatically'>Create remote state and locking resources automatically</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/#s3-specific-remote-state-settings'>S3-specific remote state settings</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/#gcs-specific-remote-state-settings'>GCS-specific remote state settings</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-keep-your-cli-flags-dry-2381'
+            role='button'
+            aria-expanded='false'
+            aria-controls='keep-your-cli-flags-dry-2381'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/'>Keep your CLI flags DRY</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-keep-your-cli-flags-dry-2381' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/#keep-your-cli-flags-dry'>Keep your CLI flags DRY</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/#motivation'>Motivation</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks'>Multiple extra_arguments blocks</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/#extra_arguments-for-init'>extra_arguments for init</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/#required-and-optional-var-files'>Required and optional var-files</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/#handling-whitespace'>Handling whitespace</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-execute-terraform-commands-on-multiple-modules-at-once-2388'
+            role='button'
+            aria-expanded='false'
+            aria-controls='execute-terraform-commands-on-multiple-modules-at-once-2388'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/'>Execute Terraform commands on multiple modules at once</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-execute-terraform-commands-on-multiple-modules-at-once-2388' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#execute-terraform-commands-on-multiple-modules-at-once'>Execute Terraform commands on multiple modules at once</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#motivation'>Motivation</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#the-apply-all-destroy-all-output-all-and-plan-all-commands'>The apply-all, destroy-all, output-all and plan-all commands</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-passing-outputs-between-modules-2392'
+            role='button'
+            aria-expanded='false'
+            aria-controls='passing-outputs-between-modules-2392'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#passing-outputs-between-modules'>Passing outputs between modules</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-passing-outputs-between-modules-2392' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#unapplied-dependency-and-mock-outputs'>Unapplied dependency and mock outputs</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#dependencies-between-modules'>Dependencies between modules</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#testing-multiple-modules-locally'>Testing multiple modules locally</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-work-with-multiple-aws-accounts-2396'
+            role='button'
+            aria-expanded='false'
+            aria-controls='work-with-multiple-aws-accounts-2396'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/use-cases/work-with-multiple-aws-accounts/'>Work with multiple AWS accounts</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-work-with-multiple-aws-accounts-2396' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/work-with-multiple-aws-accounts/#work-with-multiple-aws-accounts'>Work with multiple AWS accounts</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/work-with-multiple-aws-accounts/#motivation'>Motivation</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/work-with-multiple-aws-accounts/#configuring-terragrunt-to-assume-an-iam-role'>Configuring Terragrunt to assume an IAM role</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+
+
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-cli-options-2400'
+            role='button'
+            aria-expanded='false'
+            aria-controls='cli-options-2400'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/cli-options/'>CLI options</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-cli-options-2400' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/cli-options/#cli-options'>CLI options</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-configuration-2402'
+            role='button'
+            aria-expanded='false'
+            aria-controls='configuration-2402'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/configuration/'>Configuration</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-configuration-2402' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/configuration/#terragrunt-configuration-file'>Terragrunt configuration file</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/configuration/#configuration-parsing-order'>Configuration parsing order</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/getting-started/configuration/#formatting-terragrunthcl'>Formatting terragrunt.hcl</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-features-2406'
+            role='button'
+            aria-expanded='false'
+            aria-controls='features-2406'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/#features'>Features</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-features-2406' class='collapse'>
+  
+
+
+  
+
+    
+      
+      
+      
+
+
+
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-terraform-code-dry/'>Keep your Terraform code DRY</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-remote-state-configuration-dry/'>Keep your remote state configuration DRY</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/keep-your-cli-flags-dry/'>Keep your CLI flags DRY</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/'>Execute Terraform commands on multiple modules at once</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/use-cases/work-with-multiple-aws-accounts/'>Work with multiple AWS accounts</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-inputs-2412'
+            role='button'
+            aria-expanded='false'
+            aria-controls='inputs-2412'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/inputs/'>Inputs</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-inputs-2412' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/inputs/#variable-precedence'>Variable precedence</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-locals-2414'
+            role='button'
+            aria-expanded='false'
+            aria-controls='locals-2414'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/locals/'>Locals</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-locals-2414' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/locals/#including-globally-defined-locals'>Including globally defined locals</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-built-in-functions-2416'
+            role='button'
+            aria-expanded='false'
+            aria-controls='built-in-functions-2416'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/'>Built-in Functions</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-built-in-functions-2416' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#terraform-built-in-functions'>Terraform built-in functions</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#find_in_parent_folders'>find_in_parent_folders</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#path_relative_to_include'>path_relative_to_include</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#path_relative_from_include'>path_relative_from_include</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_env'>get_env</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_terragrunt_dir'>get_terragrunt_dir</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_parent_terragrunt_dir'>get_parent_terragrunt_dir</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_terraform_commands_that_need_vars'>get_terraform_commands_that_need_vars</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_terraform_commands_that_need_input'>get_terraform_commands_that_need_input</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_terraform_commands_that_need_locking'>get_terraform_commands_that_need_locking</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_terraform_commands_that_need_parallelism'>get_terraform_commands_that_need_parallelism</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_aws_account_id'>get_aws_account_id</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_aws_caller_identity_arn'>get_aws_caller_identity_arn</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#get_aws_caller_identity_user_id'>get_aws_caller_identity_user_id</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/built-in-functions/#run_cmd'>run_cmd</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-before-and-after-hooks-2432'
+            role='button'
+            aria-expanded='false'
+            aria-controls='before-and-after-hooks-2432'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/before-and-after-hooks/'>Before and After Hooks</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-before-and-after-hooks-2432' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/before-and-after-hooks/#before-and-after-hooks'>Before and After Hooks</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-auto-init-2434'
+            role='button'
+            aria-expanded='false'
+            aria-controls='auto-init-2434'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/auto-init/'>Auto-init</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-auto-init-2434' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/auto-init/#auto-init'>Auto-init</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-auto-retry-2436'
+            role='button'
+            aria-expanded='false'
+            aria-controls='auto-retry-2436'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/auto-retry/'>Auto-retry</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-auto-retry-2436' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/auto-retry/#auto-retry'>Auto-retry</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-caching-2438'
+            role='button'
+            aria-expanded='false'
+            aria-controls='caching-2438'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/caching/'>Caching</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-caching-2438' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/caching/#clearing-the-terragrunt-cache'>Clearing the Terragrunt cache</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-aws-auth-2440'
+            role='button'
+            aria-expanded='false'
+            aria-controls='aws-auth-2440'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/aws-auth/'>AWS Auth</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-aws-auth-2440' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/aws-auth/#aws-credentials'>AWS credentials</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/aws-auth/#aws-iam-policies'>AWS IAM policies</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-terragrunt-settings-2443'
+            role='button'
+            aria-expanded='false'
+            aria-controls='terragrunt-settings-2443'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/features/terragrunt-settings/'>Terragrunt settings</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-terragrunt-settings-2443' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/terragrunt-settings/#prevent_destroy'>prevent_destroy</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/terragrunt-settings/#skip'>skip</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/terragrunt-settings/#terraform_binary'>terraform_binary</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/terragrunt-settings/#download_dir'>download_dir</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/features/terragrunt-settings/#terraform_version_constraint'>terraform_version_constraint</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-community-2449'
+            role='button'
+            aria-expanded='false'
+            aria-controls='community-2449'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/#community'>Community</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-community-2449' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-contributing-2450'
+            role='button'
+            aria-expanded='false'
+            aria-controls='contributing-2450'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/'>Contributing</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-contributing-2450' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#contributing'>Contributing</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-developing-terragrunt-2452'
+            role='button'
+            aria-expanded='false'
+            aria-controls='developing-terragrunt-2452'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#developing-terragrunt'>Developing Terragrunt</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-developing-terragrunt-2452' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#running-locally'>Running locally</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#dependencies'>Dependencies</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#running-tests'>Running tests</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#debug-logging'>Debug logging</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#error-handling'>Error handling</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#formatting'>Formatting</a>
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/contributing/#releasing-new-versions'>Releasing new versions</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-support-2460'
+            role='button'
+            aria-expanded='false'
+            aria-controls='support-2460'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/support'>Support</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-support-2460' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/support'>Support</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+    
+
+      
+      <li>
+
+        
+          <span
+            class='category-head collapsed'
+            data-toggle='collapse'
+            data-target='#cat-nav-id-license-2462'
+            role='button'
+            aria-expanded='false'
+            aria-controls='license-2462'>
+            <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
+          </span>
+        
+
+        <a href='/terragrunt/documentation/community/license/'>License</a>
+
+        
+          
+
+
+
+
+  
+    <ul id='cat-nav-id-license-2462' class='collapse'>
+  
+
+
+  
+
+    
+
+      
+      <li>
+
+        
+        <span
+          class='category-head no-collapsable'>
+          <span class='arrow-icon glyphicon glyphicon-chevron-right'></span>
+        </span>
+        
+
+        <a href='/terragrunt/documentation/community/license/#license'>License</a>
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+        
+
+
+      </li>
+    
+  
+
+
+  </ul>
+
+
+
+  </div>
+</div>
+
+
+                <!-- Listing -->
+                <div class="col-xs-12 col-md-7 col-lg-9">
+  <div class="row">
+    <div class="cb-doc-listing js-scroll-spy" data-scroll-spy-nav-selector="#toc">
+      
+        <h3 class="category-head">Getting started</h3>
+        
+        
+          <div class="cb-doc-card card-shadow" id="quick-start-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-quick-start" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/getting-started/quick-start/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Quick start</b></h5>
+            <p class="card-text">
+Learn how to start with Terragrunt.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="install-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-install" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/getting-started/install/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Install</b></h5>
+            <p class="card-text">
+Learn how to install Terragrunt on Windows, Mac OS, Linux and manually from source.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="use-cases-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-use-cases" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/getting-started/use-cases/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Use cases</b></h5>
+            <p class="card-text">
+Use cases
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="cli-options-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-cli-options" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/getting-started/cli-options/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>CLI options</b></h5>
+            <p class="card-text">
+Terragrunt forwards all arguments and options to Terraform. Learn more about CLI options in Terragrunt.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="configuration-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-configuration" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/getting-started/configuration/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Configuration</b></h5>
+            <p class="card-text">
+Learn how to configure Terragrunt.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+      
+        <h3 class="category-head">Features</h3>
+        
+        
+          <div class="cb-doc-card card-shadow" id="keep-your-terraform-code-dry-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-keep-your-terraform-code-dry" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/keep-your-terraform-code-dry/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Keep your Terraform code DRY</b></h5>
+            <p class="card-text">
+Learn how to achieve DRY Terraform code and immutable infrastructure.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="keep-your-remote-state-configuration-dry-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-keep-your-remote-state-configuration-dry" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/keep-your-remote-state-configuration-dry/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Keep your remote state configuration DRY</b></h5>
+            <p class="card-text">
+Learn how to create and manage remote state configuration.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="keep-your-cli-flags-dry-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-keep-your-cli-flags-dry" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/keep-your-cli-flags-dry/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Keep your CLI flags DRY</b></h5>
+            <p class="card-text">
+Learn how to keep CLI flags DRY with "extra_arguments" block in your "terragrunt.hcl".
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="execute-terraform-commands-on-multiple-modules-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-execute-terraform-commands-on-multiple-modules" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/execute-terraform-commands-on-multiple-modules/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Execute Terraform commands on multiple modules</b></h5>
+            <p class="card-text">
+Learn how to avoid tedious tasks of running commands on each module separately.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="work-with-multiple-aws-accounts-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-work-with-multiple-aws-accounts" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/work-with-multiple-aws-accounts/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Work with multiple AWS accounts</b></h5>
+            <p class="card-text">
+Learn how the Terragrunt may help you to work with mulitple AWS accounts.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="inputs-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-inputs" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/inputs/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Inputs</b></h5>
+            <p class="card-text">
+Learn how to use inputs.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="locals-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-locals" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/locals/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Locals</b></h5>
+            <p class="card-text">
+Learn how to use locals.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="built-in-functions-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-built-in-functions" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/built-in-functions/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Built-in functions</b></h5>
+            <p class="card-text">
+Terragrunt allows you to use built-in functions anywhere in terragrunt.hcl, just like Terraform.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="before-and-after-hooks-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-before-and-after-hooks" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/before-and-after-hooks/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Before and after hooks</b></h5>
+            <p class="card-text">
+Learn how to execute custom code before or after running Terraform.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="auto-init-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-auto-init" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/auto-init/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Auto-init</b></h5>
+            <p class="card-text">
+Auto-Init is a feature of Terragrunt that makes it so that terragrunt init does not need to be called explicitly before other terragrunt commands.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="auto-retry-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-auto-retry" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/auto-retry/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Auto-retry</b></h5>
+            <p class="card-text">
+Auto-Retry is a feature of terragrunt that will automatically address situations where a terraform command needs to be re-run.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="caching-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-caching" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/caching/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Caching</b></h5>
+            <p class="card-text">
+Learn more about caching in Terragrunt.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="aws-auth-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-aws-auth" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/aws-auth/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>AWS Auth</b></h5>
+            <p class="card-text">
+Learn how the Terragrunt works with AWS Credentials and AWS IAM policies.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="terragrunt-settings-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-terragrunt-settings" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/features/terragrunt-settings/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Terragrunt settings</b></h5>
+            <p class="card-text">
+Learn more about Terragrunt settings.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+      
+        <h3 class="category-head">Community</h3>
+        
+        
+          <div class="cb-doc-card card-shadow" id="contributing-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-contributing" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/community/contributing/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Contributing</b></h5>
+            <p class="card-text">
+Terragrunt is an open source project, and contributions from the community are very welcome!
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="support-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-support" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/community/support/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>Support</b></h5>
+            <p class="card-text">
+Need a help?
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+          <div class="cb-doc-card card-shadow" id="license-card">
+  <div class="card" ga-on="click" ga-event-category="cb-doc-license" ga-event-action="cb-doc-click">
+    <div class="row no-padding">
+
+      
+        <a href="/terragrunt/documentation/community/license/">
+          <div class="col-xs-12 card-body cb-doc-card-description float-right">
+            <h5 class="card-title"><b>License</b></h5>
+            <p class="card-text">
+This code is released under the MIT License. Read more here.
+</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+        
+      
+    </div>
+  </div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- No results -->
+      <div id="no-matches" class="cb-section-white container-fluid">
+    <div class="row text-center">
+        <div class="no-results no-results-space">
+            <div class="col-md-6 col-md-offset-3" >
+                <img src="/terragrunt/assets/img/no-search-results.png" alt="no search results" /><br />
+                <label>No Results Found</label>
+                <p>We couldn’t find any results matching your search.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+  </div>
+
+  <!-- CTA Section -->
+  <section>
+  <div class="built-by-cmp box-component">
+  <div class="box shadow">
+    <h2>Built by <strong>Gruntwork</strong></h2>
+    <p class="subtitle">Your entire infrastructure. Defined as code. In about a day.</p>
+    <a href="https://gruntwork.io/" target="_blank" class="btn btn-primary btn-lg">Explore Gruntwork.io</a>
+  </div>
+</div>
+
+  <div class="links-section-cmp section-colorful-bg">
+  <h2>Links</h2>
+  <div class="links">
+    <a href="/terragrunt/documentation/getting-started/install" class="link-tag-styled">
+      <img src='/terragrunt/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Install
+    </a>
+    <a href="/terragrunt/documentation/getting-started/quick-start" class="link-tag-styled">
+      <img src='/terragrunt/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Quick start
+    </a>
+    <a href="/terragrunt/documentation" class="link-tag-styled">
+      <img src='/terragrunt/assets/img/link-icon.svg' class='link-icon' alt='X' />
+      Full documentation
+    </a>
+  </div>
+  <img src="/terragrunt/assets/img/home/links-shapes-left.png" class="links-shapes-left" alt="shapes" />
+  <img src="/terragrunt/assets/img/home/links-shapes-right.png" class="links-shapes-right" alt="shapes" />
+</div>
+
+</section>
+
+
+
+  <script>
+      var cName = "bc_documentationEntries"
+      window[cName] = [
+          
+            
+              {
+                  "id"       : "cli-options-card",
+                  "title"    : "cli options",
+                  "category" : "getting-started",
+                  "excerpt" : "terragrunt forwards all arguments and options to terraform. learn more about cli options in terragrunt.",
+                  "content"  : "cli optionsterragrunt forwards all arguments and options to terraform. the only exceptions are --version, terragrunt-info and arguments that start with the prefix --terragrunt-. the currently available options are:--terragrunt-config: a custom path to the terragrunt.hcl file. may also be specified via the terragrunt_config environment variable. the default path is terragrunt.hcl in the current directory (see configuration for a slightly more nuanced explanation). this argument is not used with the apply-all, destroy-all, output-all, validate-all, and plan-all commands.--terragrunt-tfpath: a custom path to the terraform binary. may also be specified via the terragrunt_tfpath environment variable. the default is terraform in a directory on your path.--terragrunt-no-auto-init: don&#8217;t automatically run terraform init when other commands are run (e.g. terragrunt apply). useful if you want to pass custom arguments to terraform init that are specific to a user or execution environment, and therefore cannot be specified as extra_arguments. for example, -plugin-dir. you must run terragrunt init yourself in this case if needed. terragrunt will fail if it detects that init is needed, but auto init is disabled. see auto-init--terragrunt-no-auto-retry: don&#8217;t automatically retry commands which fail with transient errors. see auto-retry--terragrunt-non-interactive: don&#8217;t show interactive user prompts. this will default the answer for all prompts to 'yes'. useful if you need to run terragrunt in an automated setting (e.g. from a script). may also be specified with the tf_input environment variable.--terragrunt-working-dir: set the directory where terragrunt should execute the terraform command. default is the current working directory. note that for the apply-all, destroy-all, output-all, validate-all, and plan-all commands, this parameter has a different meaning: terragrunt will apply or destroy all the terraform modules in the subfolders of the terragrunt-working-dir, running terraform in the root of each module it finds.--terragrunt-download-dir: the path where to download terraform code when using remote terraform configurations. may also be specified via the terragrunt_download environment variable. default is .terragrunt-cache in the working directory. we recommend adding this folder to your .gitignore.--terragrunt-source: download terraform configurations from the specified source into a temporary folder, and run terraform in that temporary folder. may also be specified via the terragrunt_source environment variable. the source should use the same syntax as the terraform module source parameter. if you specify this argument for the apply-all, destroy-all, output-all, validate-all, or plan-all commands, terragrunt will assume this is the local file path for all of your terraform modules, and for each module processed by the xxx-all command, terragrunt will automatically append the path of source parameter in each module to the --terragrunt-source parameter you passed in.--terragrunt-source-update: delete the contents of the temporary folder before downloading terraform source code into it. can also be enabled by setting the terragrunt_source_update environment variable to true.--terragrunt-ignore-dependency-errors: *-all commands continue processing components even if a dependency fails--terragrunt-iam-role: assume the specified iam role arn before running terraform or aws commands. may also be specified via the terragrunt_iam_role environment variable. this is a convenient way to use terragrunt and terraform with multiple aws accounts.--terragrunt-exclude-dir: unix-style glob of directories to exclude when running *-all commands. modules under these directories will be excluded during execution of the commands. if a relative path is specified, it should be relative from --terragrunt-working-dir. flag can be specified multiple times. this will only exclude the module, not its dependencies.--terragrunt-include-dir: unix-style glob of directories to include when running *-all commands. only modules under these directories (and all dependent modules) will be included during execution of the commands. if a relative path is specified, it should be relative from --terragrunt-working-dir. flag can be specified multiple times.--terragrunt-ignore-dependency-order: ignore the depedencies between modules when running *-all commands.--terragrunt-ignore-external-dependencies: dont attempt to include any external dependencies when running *-all commands--terragrunt-include-external-dependencies: include any external dependencies when running *-all without asking.",
+                  "tags"     : "cli",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "configuration-card",
+                  "title"    : "configuration",
+                  "category" : "getting-started",
+                  "excerpt" : "learn how to configure terragrunt.",
+                  "content"  : "terragrunt configuration fileterragrunt configuration is defined in a terragrunt.hcl file. this uses the same hcl syntax as terraform itself.here&#8217;s an example:include {  path = find_in_parent_folders()}dependencies {  paths = [\"../vpc\", \"../mysql\", \"../redis\"]}terragrunt figures out the path to its config file according to the following rules:the value of the --terragrunt-config command-line option, if specified.the value of the terragrunt_config environment variable, if defined.a terragrunt.hcl file in the current working directory, if it exists.if none of these are found, exit with an error.configuration parsing orderit is important to be aware of the terragrunt configuration parsing order when using features like locals and dependency outputs, where you can reference attributes of other blocks in the config in your inputs. for example, because locals are evaluated before dependency blocks, you can not bind outputs from dependency into locals. on the other hand, for the same reason, you can use locals in the dependency blocks.currently terragrunt parses the config in the following order:include blocklocals blockdependencies blockdependency blocks, including calling terragrunt output on the dependent modules to retrieve the outputseverything elsethe config referenced by includea merge operation between the config referenced by include and the current config.blocks that are parsed earlier in the process will be made available for use in the parsing of later blocks. similarly, you cannot use blocks that are parsed later earlier in the process (e.g you can&#8217;t reference dependency in locals, include, or dependencies blocks).note that the parsing order is slightly different when using the -all flavors of the command. in the -all flavors of the command, terragrunt parses the configuration twice. in the first pass, it follows the following parsing order:include block of all configurations in the treelocals block of all configurations in the treedependency blocks of all configurations in the tree, but does not retrieve the outputsterraform block of all configurations in the treedependencies block of all configurations in the treethe results of this pass are then used to build the dependency graph of the modules in the tree. once the graph is constructed, terragrunt will loop through the modules and run the specified command. it will then revert to the single configuration parsing order specified above for each module as it runs the command.this allows terragrunt to avoid resolving dependency on modules that haven&#8217;t been applied yet when doing a clean deployment from scratch with apply-all.formatting terragrunt.hclyou can rewrite terragrunt.hcl files to a canonical format using the hclfmt command built into terragrunt. similar to terraform fmt, this command applies a subset of the terraform language style conventions, along with other minor adjustments for readability.this command will recursively search for terragrunt.hcl files and format all of them under a given directory tree. consider the following file structure:root├── terragrunt.hcl├── prod│   └── terragrunt.hcl├── dev│   └── terragrunt.hcl└── qa    └── terragrunt.hclif you run terragrunt hclfmt at the root, this will update:root/terragrunt.hclroot/prod/terragrunt.hclroot/dev/terragrunt.hclroot/qa/terragrunt.hcladditionally, there&#8217;s a flag --terragrunt-check. it allows to validating if files are properly formatted. it does not rewrite files and in case of invalid format, it will return an error with exit status 0.",
+                  "tags"     : "config, formatting",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "install-card",
+                  "title"    : "install",
+                  "category" : "getting-started",
+                  "excerpt" : "learn how to install terragrunt on windows, mac os, linux and manually from source.",
+                  "content"  : "install terragruntnote that third-party terragrunt packages may not be updated with the latest version, but are often close. please check your version against the latest available on the releases page.windowsyou can install terragrunt on windows using chocolatey: choco install terragrunt.macosyou can install terragrunt on macos using homebrew: brew install terragrunt.linuxyou can install terragrunt on linux using homebrew: brew install terragrunt.manualyou can install terragrunt manually by going to the releases page, downloading the binary for your os, renaming it to terragrunt, and adding it to your path.",
+                  "tags"     : "install",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "quick-start-card",
+                  "title"    : "quick start",
+                  "category" : "getting-started",
+                  "excerpt" : "learn how to start with terragrunt.",
+                  "content"  : "introductionterragrunt is a thin wrapper that provides extra tools for keeping your configurations dry, working with multiple terraform modules, and managing remote state.to use it, you:install terraform.install terragrunt.put your terragrunt configuration in a terragrunt.hcl file. you&#8217;ll see several example configurations shortly.now, instead of running terraform directly, you run the same commands with terragrunt:terragrunt planterragrunt applyterragrunt outputterragrunt destroyterragrunt will forward almost all commands, arguments, and options directly to terraform, but based on the settings in your terragrunt.hcl file, terragrunt can help you accomplish the following:keep your backend configuration drykeep your terraform cli arguments drypromote immutable, versioned terraform modules across environmentskeep your backend configuration dryterraform backends allow you to store terraform state in a shared location that everyone on your team can access, such as an s3 bucket, and provide locking around your state files to protect against race conditions. to use a terraform backend, you add a backend configuration to your terraform code:# stage/frontend-app/main.tfterraform {  backend \"s3\" {    bucket         = \"my-terraform-state\"    key            = \"stage/frontend-app/terraform.tfstate\"    region         = \"us-east-1\"    encrypt        = true    dynamodb_table = \"my-lock-table\"  }}the code above tells terraform to store the state for a frontend-app module in an s3 bucket called my-terraform-state under the path stage/frontend-app/terraform.tfstate, and to use a dynamodb table called my-lock-table for locking. this is a great feature that every single terraform team uses to collaborate, but it comes with one major gotcha: the backend configuration does not support variables or expressions of any sort. that is, the following will not work:# stage/frontend-app/main.tfterraform {  backend \"s3\" {    # using variables does not work here!    bucket         = var.terraform_state_bucket    key            = var.terraform_state_key    region         = var.terraform_state_region    encrypt        = var.terraform_state_encrypt    dynamodb_table = var.terraform_state_dynamodb_table  }}that means you have to copy/paste the same backend configuration into every one of your terraform modules. not only do you have to copy/paste, but you also have to very carefully not copy/paste the key value so that you don’t have two modules overwriting each other’s state files! e.g., the backend configuration for a database module would look nearly identical to the backend configuration of the frontend-app module, except for a different key value:# stage/mysql/main.tfterraform {  backend \"s3\" {    bucket         = \"my-terraform-state\"    key            = \"stage/mysql/terraform.tfstate\"    region         = \"us-east-1\"    encrypt        = true    dynamodb_table = \"my-lock-table\"  }}terragrunt allows you to keep your backend configuration dry (“don’t repeat yourself”) by defining it once in a root location and inheriting that configuration in all child modules. let’s say your terraform code has the following folder layout:stage├── frontend-app│   └── main.tf└── mysql    └── main.tfto use terragrunt, add a single terragrunt.hcl file to the root of your repo, in the stage folder, and one terragrunt.hcl file in each module folder:stage├── terragrunt.hcl├── frontend-app│   ├── main.tf│   └── terragrunt.hcl└── mysql    ├── main.tf    └── terragrunt.hclnext, in each of your terraform modules, remove the contents of the backend configuration:# stage/mysql/main.tfterraform {  # intentionally empty. will be filled by terragrunt.  backend \"s3\" {}}now you can define your backend configuration just once in the root terragrunt.hcl file:# stage/terragrunt.hclremote_state {  backend = \"s3\"  config = {    bucket = \"my-terraform-state\"    key = \"${path_relative_to_include()}/terraform.tfstate\"    region         = \"us-east-1\"    encrypt        = true    dynamodb_table = \"my-lock-table\"  }}the terragrunt.hcl files use the same configuration language as terraform (hcl) and the configuration is more or less the same as the backend configuration you had in each module, except that the key value is now using the path_relative_to_include() built-in function, which will automatically set key to the relative path between the root terragrunt.hcl and the child module (so your terraform state folder structure will match your terraform code folder structure, which makes it easy to go from one to the other).the final step is to update each of the child terragrunt.hcl files to tell them to include the configuration from the root terragrunt.hcl:# stage/mysql/terragrunt.hclinclude {  path = find_in_parent_folders()}the find_in_parent_folders() helper will automatically search up the directory tree to find the root terragrunt.hcl and inherit the remote_state configuration from it.now, install terragrunt, and run all the terraform commands you’re used to, but with terragrunt as the command name rather than terraform (e.g., terragrunt apply instead of terraform apply). to deploy the database module, you would run:$ cd stage/mysql$ terragrunt applyterragrunt will automatically find the mysql module’s terragrunt.hcl file, configure the backend using the settings from the root terragrunt.hcl file, and, thanks to the path_relative_to_include() function, will set the key to stage/mysql/terraform.tfstate. if you run terragrunt apply in stage/frontend-app, it’ll do the same, except it will set the key to stage/frontend-app/terraform.tfstate.you can now add as many child modules as you want, each with a terragrunt.hcl with the include { &#8230;&#8203; } block, and each of those modules will automatically inherit the proper backend configuration!keep your terraform cli arguments drycli flags are another common source of copy/paste in the terraform world. for example, a typical pattern with terraform is to define common account-level variables in an account.tfvars file:# account.tfvarsaccount_id     = \"123456789012\"account_bucket = \"my-terraform-bucket\"and to define common region-level variables in a region.tfvars file:# region.tfvarsaws_region = \"us-east-2\"foo        = \"bar\"you can tell terraform to use these variables using the -var-file argument:$ terraform apply \\    -var-file=../../common.tfvars \\    -var-file=../region.tfvarshaving to remember these -var-file arguments every time can be tedious and error prone. terragrunt allows you to keep your cli arguments dry by defining those arguments as code in your terragrunt.hcl configuration:# terragrunt.hclterraform {  extra_arguments \"common_vars\" {    commands = [\"plan\", \"apply\"]    arguments = [      \"-var-file=../../common.tfvars\",      \"-var-file=../region.tfvars\"    ]  }}now, when you run the plan or apply commands, terragrunt will automatically add those arguments:$ terragrunt applyrunning command: terraform with arguments[apply -var-file=../../common.tfvars -var-file=../region.tfvars]you can even use the get_terraform_commands_that_need_vars() built-in function to automatically get the list of all commands that accept -var-file and -var arguments:# terragrunt.hclterraform {  extra_arguments \"common_vars\" {    commands = get_terraform_commands_that_need_vars()    arguments = [      \"-var-file=../../common.tfvars\",      \"-var-file=../region.tfvars\"    ]  }}promote immutable, versioned terraform modules across environmentsone of the most important lessons we’ve learned from writing hundreds of thousands of lines of infrastructure code is that large modules should be considered harmful. that is, it is a bad idea to define all of your environments (dev, stage, prod, etc), or even a large amount of infrastructure (servers, databases, load balancers, dns, etc), in a single terraform module. large modules are slow, insecure, hard to update, hard to code review, hard to test, and brittle (i.e., you have all your eggs in one basket).therefore, you typically want to break up your infrastructure across multiple modules:├── prod│   ├── app│   │   ├── main.tf│   │   └── outputs.tf│   ├── mysql│   │   ├── main.tf│   │   └── outputs.tf│   └── vpc│       ├── main.tf│       └── outputs.tf├── qa│   ├── app│   │   ├── main.tf│   │   └── outputs.tf│   ├── mysql│   │   ├── main.tf│   │   └── outputs.tf│   └── vpc│       ├── main.tf│       └── outputs.tf└── stage    ├── app    │   ├── main.tf    │   └── outputs.tf    ├── mysql    │   ├── main.tf    │   └── outputs.tf    └── vpc        ├── main.tf        └── outputs.tfthe folder structure above shows how to separate the code for each environment (prod, qa, stage) and for each type of infrastructure (apps, databases, vpcs). however, the downside is that it isn’t dry. the .tf files will contain a lot of duplication. you can reduce it somewhat by defining all the infrastructure in reusable terraform modules, but even the code to instantiate a module—including configuring the provider, backend, the module’s input variables, and output variables—means you still end up with dozens or hundreds of lines of copy/paste for every module in every environment:# prod/app/main.tfprovider \"aws\" {  region = \"us-east-1\"  # ... other provider settings ...}terraform {  backend \"s3\" {}}module \"app\" {  source = \"../../../app\"  instance_type  = \"m4.large\"  instance_count = 10  # ... other app settings ...}# prod/app/outputs.tfoutput \"url\" {  value = module.app.url}# ... and so on!terragrunt allows you to define your terraform code once and to promote a versioned, immutable “artifact” of that exact same code from environment to environment. here’s a quick overview of how.first, create a git repo called infrastructure-modules that has your terraform code (.tf files). this is the exact same terraform code you just saw above, except that any variables that will differ between environments should be exposed as input variables:# infrastructure-modules/app/main.tfprovider \"aws\" {  region = \"us-east-1\"  # ... other provider settings ...}terraform {  backend \"s3\" {}}module \"app\" {  source = \"../../../app\"  instance_type  = var.instance_type  instance_count = var.instance_count  # ... other app settings ...}# infrastructure-modules/app/outputs.tfoutput \"url\" {  value = module.app.url}# infrastructure-modules/app/variables.tfvariable \"instance_type\" {}variable \"instance_count\" {}once this is in place, you can release a new version of this module by creating a git tag:$ git tag -a \"v0.0.1\" -m \"first release of app module\"$ git push --follow-tagsnow, in another git repo called infrastructure-live, you create the same folder structure you had before for all of your environments, but instead of lots of copy/pasted .tf files for each module, you have just a single terragrunt.hcl file:# infrastructure-live├── prod│   ├── app│   │   └── terragrunt.hcl│   ├── mysql│   │   └── terragrunt.hcl│   └── vpc│       └── terragrunt.hcl├── qa│   ├── app│   │   └── terragrunt.hcl│   ├── mysql│   │   └── terragrunt.hcl│   └── vpc│       └── terragrunt.hcl└── stage    ├── app    │   └── terragrunt.hcl    ├── mysql    │   └── terragrunt.hcl    └── vpc        └── terragrunt.hclthe contents of each terragrunt.hcl file look something like this:# infrastructure-live/prod/app/terragrunt.hclterraform {  source =    \"github.com:foo/infrastructure-modules.git//app?ref=v0.0.1\"}inputs = {  instance_count = 10  instance_type  = \"m4.large\"}the terragrunt.hcl file above sets the source parameter to point at the app module you just created in your infrastructure-modules repo, using the ref parameter to specify version v0.0.1 of that repo. it also configures the variables for this module for the prod environment in the inputs = {&#8230;&#8203;} block.the terragrunt.hcl file in the stage environment will look similar, but it will configure smaller/fewer instances in the inputs = {&#8230;&#8203;} block to save money:# infrastructure-live/stage/app/terragrunt.hclterraform {  source =    \"github.com:foo/infrastructure-modules.git//app?ref=v0.0.1\"}inputs = {  instance_count = 3  instance_type  = \"t2.micro\"}when you run terragrunt apply, terragrunt will download your app module into a temporary folder, run terraform apply in that folder, passing the module the input variables you specified in the inputs = {&#8230;&#8203;} block:$ terragrunt applydownloading terraform configurations from github.com:foo/infrastructure-modules.git...running command: terraform with arguments [apply]...this way, each module in each environment is defined by a single terragrunt.hcl file that solely specifies the terraform module to deploy and the input variables specific to that environment. this is about as dry as you can get!moreover, you can specify a different version of the module to deploy in each environment! for example, after making some changes to the app module in the infrastructure-modules repo, you could create a v0.0.2 tag, and update just the qa environment to run this new version:# infrastructure-live/qa/app/terragrunt.hclterraform {  source =    \"github.com:foo/infrastructure-modules.git//app?ref=v0.0.2\"}inputs = {  instance_count = 3  instance_type  = \"t2.micro\"}if it works well in the qa environment, you could promote the exact same code to the stage environment by updating its terragrunt.hcl file to run v0.0.2. and finally, if that code works well in stage, you could again promote the exact same code to prod by updating that terragrunt.hcl file to use v0.0.2 as well.figure 1. using terragrunt to promote immutable terraform code across environmentsif at any point you hit a problem, it will only affect the one environment, and you can roll back by deploying a previous version number. that’s immutable infrastructure at work!next stepsnow that you&#8217;ve seen the basics of terragrunt, here is some further reading to learn more:use cases: learn about the core use cases terragrunt supports.documentation: check out the detailed terragrunt documentation.terraform: up &amp; running: this book is the fastest way to get up and running with terraform! terragrunt is a direct implementation of many of the ideas from this book.",
+                  "tags"     : "quick start, dry, backend, cli",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "use-cases-card",
+                  "title"    : "use cases",
+                  "category" : "getting-started",
+                  "excerpt" : "use cases",
+                  "content"  : "",
+                  "tags"     : "use cases",
+                  "cloud"     : ""
+              },
+            
+            ,
+          
+            
+              {
+                  "id"       : "auto-init-card",
+                  "title"    : "auto-init",
+                  "category" : "features",
+                  "excerpt" : "auto-init is a feature of terragrunt that makes it so that terragrunt init does not need to be called explicitly before other terragrunt commands.",
+                  "content"  : "auto-initauto-init is a feature of terragrunt that makes it so that terragrunt init does not need to be called explicitly before other terragrunt commands.when auto-init is enabled (the default), terragrunt will automatically call terraform init during other commands (e.g. terragrunt plan) when terragrunt detects that:terraform init has never been called, orsource needs to be downloaded, orthe modules or remote state used by the module have changed since the previous call to terraform init.as mentioned above, extra_arguments can be configured to allow customization of the terraform init command.note that there might be cases where terragrunt does not properly detect that terraform init needs be called. in this case, terraform would fail. running terragrunt init again corrects this situation.for some use cases, it might be desirable to disable auto-init. for example, if each user wants to specify a different -plugin-dir option to terraform init (and therefore it cannot be put in extra_arguments). to disable auto-init, use the --terragrunt-no-auto-init command line option or set the terragrunt_auto_init environment variable to false.disabling auto-init means that you must explicitly call terragrunt init prior to any other terragrunt commands for a particular configuration. if auto-init is disabled, and terragrunt detects that terraform init needs to be called, then terragrunt will fail.",
+                  "tags"     : "cli",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "auto-retry-card",
+                  "title"    : "auto-retry",
+                  "category" : "features",
+                  "excerpt" : "auto-retry is a feature of terragrunt that will automatically address situations where a terraform command needs to be re-run.",
+                  "content"  : "auto-retryauto-retry is a feature of terragrunt that will automatically address situations where a terraform command needs to be re-run.terraform can fail with transient errors which can be addressed by simply retrying the command again. in the event terragrunt finds one of these errors, the command will be re-run again automatically.example$ terragrunt apply...initializing provider plugins...- checking for available provider plugins on https://releases.hashicorp.com...error installing provider \"template\": error fetching checksums: get https://releases.hashicorp.com/terraform-provider-template/1.0.0/terraform-provider-template_1.0.0_sha256sums: net/http: tls handshake timeout.terragrunt sees this error, and knows it is a transient error that can addressed by re-running the apply command.auto-retry will try a maximum of three times to re-run the command, at which point it will deem the error as not transient, and accept the terraform failure. retries will occur when the error is encountered, pausing for 5 seconds between retries.known errors that auto-retry will rerun, are maintained in the terragruntoptions.retryableerrors array. future upgrades to terragrunt may include the ability to configure auto-retry by specifying additional error strings and configuring max retries and retry intervals the terragrunt config (prs welcome!).to disable auto-retry, use the --terragrunt-no-auto-retry command line option or set the terragrunt_auto_retry environment variable to false.",
+                  "tags"     : "cli",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "aws-auth-card",
+                  "title"    : "aws auth",
+                  "category" : "features",
+                  "excerpt" : "learn how the terragrunt works with aws credentials and aws iam policies.",
+                  "content"  : "aws credentialsterragrunt uses the official aws sdk for go, which means that it will automatically load credentials using the aws standard approach. if you need help configuring your credentials, please refer to the terraform docs.aws iam policiesyour aws user must have an iam policy which grants permissions for interacting with dynamodb and s3. terragrunt will automatically create the configured dynamodb tables and s3 buckets for storing remote state if they do not already exist.the following is an example iam policy for use with terragrunt. the policy grants the following permissions:all dynamodb permissions in all regions for tables used by terragruntall s3 permissions for buckets used by terragruntbefore using this policy, make sure to replace 1234567890 with your aws account id and terragrunt* with your organization&#8217;s naming convention for aws resources for terraform remote state.{    \"version\": \"2012-10-17\",    \"statement\": [        {            \"sid\": \"allowalldynamodbactionsonallterragrunttables\",            \"effect\": \"allow\",            \"action\": \"dynamodb:*\",            \"resource\": [                \"arn:aws:dynamodb:*:1234567890:table/terragrunt*\"            ]        },        {            \"sid\": \"allowalls3actionsonterragruntbuckets\",            \"effect\": \"allow\",            \"action\": \"s3:*\",            \"resource\": [                \"arn:aws:s3:::terragrunt*\",                \"arn:aws:s3:::terragrunt*/*\"            ]        }    ]}for a more minimal policy, for example when using a single bucket and dynamodb table for multiple terragrunt users, you can use the following. be sure to replace bucket_name and table_name with the s3 bucket name and dynamodb table name respectively.{    \"version\": \"2012-10-17\",    \"statement\": [        {            \"sid\": \"allowcreateandlists3actionsonspecifiedterragruntbucket\",            \"effect\": \"allow\",            \"action\": [                \"s3:listbucket\",                \"s3:getbucketversioning\",                \"s3:createbucket\"            ],            \"resource\": \"arn:aws:s3:::bucket_name\"        },        {            \"sid\": \"allowgetandputs3actionsonspecifiedterragruntbucketpath\",            \"effect\": \"allow\",            \"action\": [                \"s3:putobject\",                \"s3:getobject\"            ],            \"resource\": \"arn:aws:s3:::bucket_name/some/path/here\"        },        {            \"sid\": \"allowcreateandupdatedynamodbactionsonspecifiedterragrunttable\",            \"effect\": \"allow\",            \"action\": [                \"dynamodb:putitem\",                \"dynamodb:getitem\",                \"dynamodb:describetable\",                \"dynamodb:deleteitem\",                \"dynamodb:createtable\"            ],            \"resource\": \"arn:aws:dynamodb:*:*:table/table_name\"        }    ]}when the above is applied to an iam user it will restrict them to creating the dynamodb table if it doesn&#8217;t already exist and allow updating records for state locking, and for the s3 bucket will allow creating the bucket if it doesn&#8217;t already exist and only write files to the specified path.if you are only given access to an externally created bucket you will need at least this iam policy to be granted to your account:{    \"version\": \"2012-10-17\",    \"statement\": [        {            \"action\": [                \"s3:getbucketlocation\",                \"s3:list*\"            ],            \"resource\": [                \"arn:aws:s3:::&lt;bucketname&gt;\"            ],            \"effect\": \"allow\"        },        {            \"action\": [                \"s3:deleteobject\",                \"s3:getobject\",                \"s3:putobject\",                \"s3:listbucket\"            ],            \"resource\": [                \"arn:aws:s3:::&lt;bucketname&gt;/*\"            ],            \"effect\": \"allow\"        }    ]}and you will need to set the flag skip_bucket_versioning to true (only bucket owners can check versioning status on an s3 bucket)",
+                  "tags"     : "aws",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "before-and-after-hooks-card",
+                  "title"    : "before and after hooks",
+                  "category" : "features",
+                  "excerpt" : "learn how to execute custom code before or after running terraform.",
+                  "content"  : "before and after hooksbefore hooks or after hooks are a feature of terragrunt that make it possible to define custom actions that will be called either before or after execution of the terraform command.here&#8217;s an example:terraform {  before_hook \"before_hook_1\" {    commands     = [\"apply\", \"plan\"]    execute      = [\"echo\", \"foo\"]    run_on_error = true  }  before_hook \"before_hook_2\" {    commands     = [\"apply\"]    execute      = [\"echo\", \"bar\"]    run_on_error = false  }  before_hook \"interpolation_hook_1\" {    commands     = [\"apply\", \"plan\"]    execute      = [\"echo\", get_env(\"home\", \"helloworld\")]    run_on_error = false  }  after_hook \"after_hook_1\" {    commands     = [\"apply\", \"plan\"]    execute      = [\"echo\", \"baz\"]    run_on_error = true  }  after_hook \"init_from_module\" {    commands = [\"init-from-module\"]    execute  = [\"cp\", \"${get_parent_terragrunt_dir()}/foo.tf\", \".\"]  }}hooks support the following arguments:commands (required): the terraform commands that will trigger the execution of the hook.execute (required): the shell command to execute.run_on_error (optional): if set to true, this hook will run even if a previous hook hit an error, or in the case of \"after\" hooks, if the terraform command hit an error. default is false.init_from_module and init: this is not an argument, but a special name you can use for hooks that run during initialization. there are two stages of initialization: one is to download remote configurations using go-getter; the other is auto-init, which configures the backend and downloads provider plugins and modules. if you wish to execute a hook when terragrunt is using go-getter to download remote configurations, name the hook init_from_module. if you wish to execute a hook when terragrunt is using terraform init for auto-init, name the hook init.",
+                  "tags"     : "hooks",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "built-in-functions-card",
+                  "title"    : "built-in functions",
+                  "category" : "features",
+                  "excerpt" : "terragrunt allows you to use built-in functions anywhere in terragrunt.hcl, just like terraform.",
+                  "content"  : "built-in functionsterragrunt allows you to use built-in functions anywhere in terragrunt.hcl, just like terraform! the functions currently available are:all terraform built-in functionsfind_in_parent_folders()path_relative_to_include()path_relative_from_include()get_env(name, default)get_terragrunt_dir()get_parent_terragrunt_dir()get_terraform_commands_that_need_vars()get_terraform_commands_that_need_input()get_terraform_commands_that_need_locking()get_terraform_commands_that_need_parallelism()get_aws_account_id()get_aws_caller_identity_arn()get_aws_caller_identity_user_id()run_cmd()terraform built-in functionsall terraform built-in functions are supported in terragrunt config files:terraform {  source = \"../modules/${basename(get_terragrunt_dir())}\"}remote_state {  backend = \"s3\"  config = {    bucket = trimspace(\"   my-terraform-bucket     \")    region = join(\"-\", [\"us\", \"east\", \"1\"])    key    = format(\"%s/terraform.tfstate\", path_relative_to_include())  }}note: any file* functions (file, fileexists, filebase64, etc) are relative to the directory containing the terragrunt.hcl file they&#8217;re used in.given the following structure:└── terragrunt  └── common.tfvars  ├── assets  |  └── mysql  |     └── assets.txt  └── terragrunt.hclthen assets.txt could be read with the following function call:file(\"assets/mysql/assets.txt\")find_in_parent_foldersfind_in_parent_folders() searches up the directory tree from the current terragrunt.hcl file and returns the relative path to the first terragrunt.hcl in a parent folder or exit with an error if no such file is found. this is primarily useful in an include block to automatically find the path to a parent terragrunt.hcl file:include {  path = find_in_parent_folders()}the function takes an optional name parameter that allows you to specify a different filename to search for:include {  path = find_in_parent_folders(\"some-other-file-name.hcl\")}you can also pass an optional second fallback parameter which causes the function to return the fallback value (instead of exiting with an error) if the file in the name parameter cannot be found:include {  path = find_in_parent_folders(\"some-other-file-name.tfvars\", \"fallback.tfvars\")}path_relative_to_includepath_relative_to_include() returns the relative path between the current terragrunt.hcl file and the path specified in its include block. for example, consider the following folder structure:├── terragrunt.hcl└── prod    └── mysql        └── terragrunt.hcl└── stage    └── mysql        └── terragrunt.hclimagine prod/mysql/terragrunt.hcl and stage/mysql/terragrunt.hcl include all settings from the root terragrunt.hcl file:include {  path = find_in_parent_folders()}the root terragrunt.hcl can use the path_relative_to_include() in its remote_state configuration to ensure each child stores its remote state at a different key:remote_state {  backend = \"s3\"  config = {    bucket = \"my-terraform-bucket\"    region = \"us-east-1\"    key    = \"${path_relative_to_include()}/terraform.tfstate\"  }}the resulting key will be prod/mysql/terraform.tfstate for the prod mysql module and stage/mysql/terraform.tfstate for the stage mysql module.path_relative_from_includepath_relative_from_include() returns the relative path between the path specified in its include block and the current terragrunt.hcl file (it is the counterpart of path_relative_to_include()). for example, consider the following folder structure:├── sources|  ├── mysql|  |  └── *.tf|  └── secrets|     └── mysql|         └── *.tf└── terragrunt  └── common.tfvars  ├── mysql  |  └── terragrunt.hcl  ├── secrets  |  └── mysql  |     └── terragrunt.hcl  └── terragrunt.hclimagine terragrunt/mysql/terragrunt.hcl and terragrunt/secrets/mysql/terragrunt.hcl include all settings from the root terragrunt.hcl file:include {  path = find_in_parent_folders()}the root terragrunt.hcl can use the path_relative_from_include() in combination with path_relative_to_include() in its source configuration to retrieve the relative terraform source code from the terragrunt configuration file:terraform {  source = \"${path_relative_from_include()}/../sources//${path_relative_to_include()}\"}the resulting source will be ../../sources//mysql for mysql module and ../../../sources//secrets/mysql for secrets/mysql module.another use case would be to add extra argument to include the common.tfvars file for all subdirectories:  terraform {    extra_arguments \"common_var\" {      commands = [        \"apply\",        \"plan\",        \"import\",        \"push\",        \"refresh\"      ]      arguments = [        \"-var-file=${get_terragrunt_dir()}/${path_relative_from_include()}/common.tfvars\",      ]    }  }this allows proper retrieval of the common.tfvars from whatever the level of subdirectories we have.get_envget_env(name, default) returns the value of the environment variable named name or default if that environment variable is not set. example:remote_state {  backend = \"s3\"  config = {    bucket = get_env(\"bucket\", \"my-terraform-bucket\")  }}note that terraform will read environment variables that start with the prefix tf_var_, so one way to share a variable named foo between terraform and terragrunt is to set its value as the environment variable tf_var_foo and to read that value in using this get_env() built-in function.get_terragrunt_dirget_terragrunt_dir() returns the directory where the terragrunt configuration file (by default terragrunt.hcl) lives. this is useful when you need to use relative paths with remote terraform configurations and you want those paths relative to your terragrunt configuration file and not relative to the temporary directory where terragrunt downloads the code.for example, imagine you have the following file structure:/terraform-code├── common.tfvars├── frontend-app│   └── terragrunt.hclinside of /terraform-code/frontend-app/terragrunt.hcl you might try to write code that looks like this:terraform {  source = \"git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3\"  extra_arguments \"custom_vars\" {    commands = [      \"apply\",      \"plan\",      \"import\",      \"push\",      \"refresh\"    ]    arguments = [      \"-var-file=../common.tfvars\" # note: this relative path will not work correctly!    ]  }}note how the source parameter is set, so terragrunt will download the frontend-app code from the modules repo into a temporary folder and run terraform in that temporary folder. note also that there is an extra_arguments block that is trying to allow the frontend-app to read some shared variables from a common.tfvars file. unfortunately, the relative path (../common.tfvars) won&#8217;t work, as it will be relative to the temporary folder! moreover, you can&#8217;t use an absolute path, or the code won&#8217;t work on any of your teammates' computers.to make the relative path work, you need to use get_terragrunt_dir() to combine the path with the folder where the terragrunt.hcl file lives:terraform {  source = \"git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3\"  extra_arguments \"custom_vars\" {    commands = [      \"apply\",      \"plan\",      \"import\",      \"push\",      \"refresh\"    ]    # with the get_terragrunt_dir() function, you can use relative paths!    arguments = [      \"-var-file=${get_terragrunt_dir()}/../common.tfvars\"    ]  }}for the example above, this path will resolve to /terraform-code/frontend-app/../common.tfvars, which is exactly what you want.get_parent_terragrunt_dirget_parent_terragrunt_dir() returns the absolute directory where the terragrunt parent configuration file (by default terragrunt.hcl) lives. this is useful when you need to use relative paths with remote terraform configurations and you want those paths relative to your parent terragrunt configuration file and not relative to the temporary directory where terragrunt downloads the code.this function is very similar to get_terragrunt_dir() except it returns the root instead of the leaf of your terragrunt configuration folder./terraform-code├── terragrunt.hcl├── common.tfvars├── app1│   └── terragrunt.hcl├── tests│   ├── app2│   |   └── terragrunt.hcl│   └── app3│       └── terragrunt.hclterraform {  extra_arguments \"common_vars\" {    commands = [      \"apply\",      \"plan\",      \"import\",      \"push\",      \"refresh\"    ]    arguments = [      \"-var-file=${get_parent_terragrunt_dir()}/common.tfvars\"    ]  }}the common.tfvars located in the terraform root folder will be included by all applications, whatever their relative location to the root.get_terraform_commands_that_need_varsget_terraform_commands_that_need_vars() returns the list of terraform commands that accept -var and -var-file parameters. this function is used when defining extra_arguments.terraform {  extra_arguments \"common_var\" {    commands  = get_terraform_commands_that_need_vars()    arguments = [\"-var-file=${get_aws_account_id()}.tfvars\"]  }}get_terraform_commands_that_need_inputget_terraform_commands_that_need_input() returns the list of terraform commands that accept the -input=(true or false) parameter. this function is used when defining extra_arguments.terraform {  # force terraform to not ask for input value if some variables are undefined.  extra_arguments \"disable_input\" {    commands  = get_terraform_commands_that_need_input()    arguments = [\"-input=false\"]  }}get_terraform_commands_that_need_lockingget_terraform_commands_that_need_locking() returns the list of terraform commands that accept the -lock-timeout parameter. this function is used when defining extra_arguments.terraform {  # force terraform to keep trying to acquire a lock for up to 20 minutes if someone else already has the lock  extra_arguments \"retry_lock\" {    commands  = get_terraform_commands_that_need_locking()    arguments = [\"-lock-timeout=20m\"]  }}get_terraform_commands_that_need_parallelismget_terraform_commands_that_need_parallelism() returns the list of terraform commands that accept the -parallelism parameter. this function is used when defining extra_arguments.terraform {  # force terraform to run with reduced parallelism  extra_arguments \"parallelism\" {    commands  = get_terraform_commands_that_need_parallelism()    arguments = [\"-parallelism=5\"]  }}get_aws_account_idget_aws_account_id() returns the aws account id associated with the current set of credentials. example:remote_state {  backend = \"s3\"  config = {    bucket = \"mycompany-${get_aws_account_id()}\"  }}get_aws_caller_identity_arnget_aws_caller_identity_arn() returns the arn of the aws identity associated with the current set of credentials. example:inputs = {  caller_arn = get_aws_caller_identity_arn()}get_aws_caller_identity_user_idget_aws_caller_identity_user_id() returns the userid of the aws identity associated with the current set of credentials. example:inputs = {  caller_user_id = get_aws_caller_identity_user_id()}this allows uniqueness of the storage bucket per aws account (since bucket name must be globally unique).it is also possible to configure variables specifically based on the account used:terraform {  extra_arguments \"common_var\" {    commands = get_terraform_commands_that_need_vars()    arguments = [\"-var-file=${get_aws_account_id()}.tfvars\"]  }}run_cmdrun_cmd(command, arg1, arg2&#8230;&#8203;) runs a shell command and returns the stdout as the result of the interpolation. the command is executed at the same folder as the terragrunt.hcl file. this is useful whenever you want to dynamically fill in arbitrary information in your terragrunt configuration.as an example, you could write a script that determines the bucket and dynamodb table name based on the aws account, instead of hardcoding the name of every account:remote_state {  backend = \"s3\"  config = {    bucket         = run_cmd(\"./get_names.sh\", \"bucket\")    dynamodb_table = run_cmd(\"./get_names.sh\", \"dynamodb\")  }}if the command you are running has the potential to output sensitive values, you may wish to redact the output from appearing in the terminal. to do so, use the special --terragrunt-quiet argument which must be passed as the first argument to run_cmd():super_secret_value = run_cmd(\"--terragrunt-quiet\", \"./decrypt_secret.sh\", \"foo\")note: this will prevent terragrunt from displaying the output from the command in its output. however, the value could still be displayed in the terraform output if terraform does not treat it as a sensitive value.",
+                  "tags"     : "functions",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "caching-card",
+                  "title"    : "caching",
+                  "category" : "features",
+                  "excerpt" : "learn more about caching in terragrunt.",
+                  "content"  : "clearing the terragrunt cacheterragrunt creates a .terragrunt-cache folder in the current working directory as its scratch directory. it downloads your remote terraform configurations into this folder, runs your terraform commands in this folder, and any modules and providers those commands download also get stored in this folder. you can safely delete this folder any time and terragrunt will recreate it as necessary.if you need to clean up a lot of these folders (e.g., after terragrunt apply-all), you can use the following commands on mac and linux:recursively find all the .terragrunt-cache folders that are children of the current folder:find . -type d -name \".terragrunt-cache\"if you are absolutely sure you want to delete all the folders that come up in the previous command, you can recursively delete all of them as follows:find . -type d -name \".terragrunt-cache\" -prune -exec rm -rf {} \\;also consider setting the terragrunt_download environment variable if you wish to place the cache directories somewhere else.",
+                  "tags"     : "caching",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "execute-terraform-commands-on-multiple-modules-card",
+                  "title"    : "execute terraform commands on multiple modules",
+                  "category" : "features",
+                  "excerpt" : "learn how to avoid tedious tasks of running commands on each module separately.",
+                  "content"  : "",
+                  "tags"     : "dry, modules, use cases",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "inputs-card",
+                  "title"    : "inputs",
+                  "category" : "features",
+                  "excerpt" : "learn how to use inputs.",
+                  "content"  : "inputsyou can set values for your module&#8217;s input parameters by specifying an inputs block in terragrunt.hcl:inputs = {  instance_type  = \"t2.micro\"  instance_count = 10  tags = {    name = \"example-app\"  }}whenever you run a terragrunt command, terragrunt will set any inputs you pass in as environment variables. for example, with the terragrunt.hcl file above, running terragrunt apply is roughly equivalent to:$ terragrunt apply# roughly equivalent to:tf_var_instance_type=\"t2.micro\" \\tf_var_instance_count=10 \\tf_var_tags='{\"name\":\"example-app\"}' \\terraform applynote that terragrunt will respect any tf_var_xxx variables you&#8217;ve manually set in your environment, ensuring that anything in inputs will not be override anything you&#8217;ve already set in your environment.variable precedenceterragrunt follows the same variable precedence as terraform.if the same variable is assigned multiple values, terraform will use the last value it finds overriding any previous values.variables are loaded in the following order:environment variables.terraform.tfvars file, if present.terraform.tfvars.json file, if present.any .auto.tfvars/.auto.tfvars.json files, processed in order of their filenames.any -var/-var-file options on the command line, in the order they are provided.",
+                  "tags"     : "inputs",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "keep-your-cli-flags-dry-card",
+                  "title"    : "keep your cli flags dry",
+                  "category" : "features",
+                  "excerpt" : "learn how to keep cli flags dry with &quot;extra_arguments&quot; block in your &quot;terragrunt.hcl&quot;.",
+                  "content"  : "",
+                  "tags"     : "dry, use cases",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "keep-your-remote-state-configuration-dry-card",
+                  "title"    : "keep your remote state configuration dry",
+                  "category" : "features",
+                  "excerpt" : "learn how to create and manage remote state configuration.",
+                  "content"  : "",
+                  "tags"     : "dry, use cases",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "keep-your-terraform-code-dry-card",
+                  "title"    : "keep your terraform code dry",
+                  "category" : "features",
+                  "excerpt" : "learn how to achieve dry terraform code and immutable infrastructure.",
+                  "content"  : "",
+                  "tags"     : "dry, use cases",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "locals-card",
+                  "title"    : "locals",
+                  "category" : "features",
+                  "excerpt" : "learn how to use locals.",
+                  "content"  : "localsyou can use locals to bind a name to an expression, so you can reuse that expression without having to repeat it multiple times (keeping your terragrunt configuration dry).config. for example, suppose that you need to use the aws region in multiple inputs. you can bind the name aws_regionusing locals:locals {  aws_region = \"us-east-1\"}inputs = {  aws_region  = local.aws_region  s3_endpoint = \"com.amazonaws.${local.aws_region}.s3\"}you can use any valid terragrunt expression in the locals configuration. the locals block also supports referencing other locals:locals {  x = 2  y = 40  answer = local.x + local.y}including globally defined localscurrently you can only reference locals defined in the same config file. terragrunt does not automatically includelocals defined in the parent config of an include block into the current context. if you wish to reuse variablesglobally, consider using yaml or json files that are included and merged using the terraform built in functionsavailable to terragrunt.for example, suppose you had the following directory tree:.├── terragrunt.hcl├── mysql│   └── terragrunt.hcl└── vpc    └── terragrunt.hclinstead of adding the locals block to the parent terragrunt.hcl file, you can define a file common_vars.yamlthat contains the global variables you wish to pull in:.├── terragrunt.hcl├── common_vars.yaml├── mysql│   └── terragrunt.hcl└── vpc    └── terragrunt.hclyou can then include them into the locals block of the child terragrunt config using yamldecode and file:# child terragrunt.hcllocals {  common_vars = yamldecode(file(\"${get_terragrunt_dir()}/${find_in_parent_folders(\"common_vars.yaml\")}\")),  region = \"us-east-1\"}this configuration will load in the common_vars.yaml file and bind it to the attribute common_vars so that it is availablein the current context. note that because locals is a block, there currently is a way to merge the map into the toplevel.",
+                  "tags"     : "locals",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "terragrunt-settings-card",
+                  "title"    : "terragrunt settings",
+                  "category" : "features",
+                  "excerpt" : "learn more about terragrunt settings.",
+                  "content"  : "prevent_destroyterragrunt prevent_destroy boolean flag allows you to protect selected terraform module. it will prevent destroy or destroy-all command to actually destroy resources of the protected module. this is useful for modules you want to carefully protect, such as a database, or a module that provides auth.example:terraform {  source = \"git::git@github.com:foo/modules.git//app?ref=v0.0.3\"}prevent_destroy = trueskipthe terragrunt skip boolean flag can be used to protect modules you don&#8217;t want any changes to or just to skip modules that don&#8217;t define any infrastructure by themselves. when set to true, all terragrunt commands will skip the selected module.consider the following file structure:root├── terragrunt.hcl├── prod│   └── terragrunt.hcl├── dev│   └── terragrunt.hcl└── qa    └── terragrunt.hclin some cases, the root level terragrunt.hcl file is solely used to dry up your terraform configuration by being included in the other terragrunt.hcl files. in this case, you do not want the xxx-all commands to process the root level terragrunt.hcl since it does not define any infrastructure by itself. to make the xxx-all commands skip the root level terragrunt.hcl file, you can set skip = true:skip = truethe skip flag must be set explicitly in terragrunt modules that should be skipped. if you set skip = true in a terragrunt.hcl file that is included by another terragrunt.hcl file, only the terragrunt.hcl file that explicitly set skip = true will be skipped.terraform_binarythe terragrunt terraform_binary string option can be used to override the default terraform binary path (which is terraform).the precedence is as follows: --terragrunt-tfpath command line option &#8594; terragrunt_tfpath env variable &#8594; terragrunt.hcl in the module directory &#8594; included terragrunt.hcldownload_dirthe terragrunt download_dir string option can be used to override the default download directory.the precedence is as follows: --terragrunt-download-dir command line option &#8594; terragrunt_download env variable &#8594; terragrunt.hcl in the module directory &#8594; included terragrunt.hclit supports all terragrunt functions, i.e. path_relative_from_include().terraform_version_constraintthe terragrunt terraform_version_constraint string overrides the default minimum supported version of terraform. terragrunt only officially supports the latest version of terraform, however in some cases an old terraform is needed.for example:terraform_version_constraint = \"&gt;= 0.11\"",
+                  "tags"     : "aws, settings",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "work-with-multiple-aws-accounts-card",
+                  "title"    : "work with multiple aws accounts",
+                  "category" : "features",
+                  "excerpt" : "learn how the terragrunt may help you to work with mulitple aws accounts.",
+                  "content"  : "",
+                  "tags"     : "aws, use cases",
+                  "cloud"     : ""
+              },
+            
+            ,
+          
+            
+              {
+                  "id"       : "contributing-card",
+                  "title"    : "contributing",
+                  "category" : "community",
+                  "excerpt" : "terragrunt is an open source project, and contributions from the community are very welcome!",
+                  "content"  : "contributingterragrunt is an open source project, and contributions from the community are very welcome! please check out the contribution guidelines and developing terragrunt for instructions.developing terragruntrunning locallyto run terragrunt locally, use the go run command:go run main.go plandependenciesterragrunt uses dep, a vendor package management tool for golang. see the dep repo for installation instructions.running testsnote: the tests in the dynamodb folder for terragrunt run against a real aws account and will add and remove real data from dynamodb. do not hit ctrl+c while the tests are running, as this will prevent them from cleaning up temporary tables and data in dynamodb. we are not responsible for any charges you may incur.before running the tests, you must configure your aws credentials and aws iam policies.to run all the tests:go test -v ./...to run only the tests in a specific package, such as the package remote:cd remotego test -vand to run a specific test, such as testtoterraformremoteconfigargsnobackendconfigs in package remote:cd remotego test -v -run testtoterraformremoteconfigargsnobackendconfigsdebug loggingif you set the terragrunt_debug environment variable to \"true\", the stack trace for any error will be printed to stdout when you run the app.additionally, newer features introduced in v0.19.0 (such as locals and dependency blocks) can output more verbose logging if you set the tg_log environment variable to debug.error handlingin this project, we try to ensure that:every error has a stacktrace. this makes debugging easier.every error generated by our own code (as opposed to errors from go built-in functions or errors from 3rd party libraries) has a custom type. this makes error handling more precise, as we can decide to handle different types of errors differently.to accomplish these two goals, we have created an errors package that has several helper methods, such as errors.withstacktrace(err error), which wraps the given error in an error object that contains a stacktrace. under the hood, the errors package is using the go-errors library, but this may change in the future, so the rest of the code should not depend on go-errors directly.here is how the errors package should be used:any time you want to create your own error, create a custom type for it, and when instantiating that type, wrap it with a call to errors.withstacktrace. that way, any time you call a method defined in the terragrunt code, you know the error it returns already has a stacktrace and you don&#8217;t have to wrap it yourself.any time you get back an error object from a function built into go or a 3rd party library, immediately wrap it with errors.withstacktrace. this gives us a stacktrace as close to the source as possible.if you need to get back the underlying error, you can use the errors.iserror and errors.unwrap functions.formattingevery source file in this project should be formatted with go fmt. there are few helper scripts and targets in the makefile that can help with this (mostly taken from the terraform repo):make fmtcheck checks to see if all source files are formatted. exits 1 if there are unformatted files.make fmt formats all source files with gofmt.make install-pre-commit-hookinstalls a git pre-commit hook that will run all of the source files through gofmt.to ensure that your changes get properly formatted, please install the git pre-commit hook with make install-pre-commit-hook.releasing new versionsto release a new version, just go to the releases page and create a new release. the circleci job for this repo has been configured to:automatically detect new tags.build binaries for every os using that tag as a version number.upload the binaries to the release in github.see .circleci/config.yml for details.",
+                  "tags"     : "contributing, community",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "license-card",
+                  "title"    : "license",
+                  "category" : "community",
+                  "excerpt" : "this code is released under the mit license. read more here.",
+                  "content"  : "licensethis code is released under the mit license. see license.txt.",
+                  "tags"     : "license",
+                  "cloud"     : ""
+              },
+            
+              {
+                  "id"       : "support-card",
+                  "title"    : "support",
+                  "category" : "community",
+                  "excerpt" : "need a help?",
+                  "content"  : "",
+                  "tags"     : "support",
+                  "cloud"     : ""
+              },
+            
+            
+          
+      ];
+  </script>
+
+
+        <footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="terragrunt-logo">
+  <a class="logo-terragrunt" href="/terragrunt/">Terragrunt</a>
+  <a class="gruntwork" href="https://gruntwork.io/" target="_blank">by <strong>Gruntwork.io</strong></a>
+</div>
+
+        <p class="subtitle">Your entire infrastructure. Defined as code. In about a day.</p>
+        <a href="https://gruntwork.io" target="_blank" class="btn btn-primary">Discover Gruntwork.io</a>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 learn-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/terragrunt/documentation/getting-started/install">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation">Documentation</a></li>
+          <li><a href="/terragrunt/use-cases">Use cases</a></li>
+        </ul>
+        <h4>Website</h4>
+        <ul>
+          <li><a href="/terragrunt/cookie-policy">Cookie Policy</a></li>
+          <li><a href="/terragrunt/support">Support</a></li>
+        </ul>
+        <div class="footer__copyright">
+          &copy; 2019 Gruntwork, Inc. All rights reserved.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+        <script src="/terragrunt/assets/js/main.js"></script>
+
+  
+    <script src='/terragrunt/assets/js/collection-browser_scroll.js' type="text/javascript"></script>
+  
+    <script src='/terragrunt/assets/js/collection-browser_search.js' type="text/javascript"></script>
+  
+    <script src='/terragrunt/assets/js/collection-browser_toc.js' type="text/javascript"></script>
+  
+
+
+<!-- Add here more: Google Analytics etc. -->
+
+
+<script>
+  window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+  ga('create', 'UA-76462621-6', 'auto');
+  ga('require', 'eventTracker');
+  ga('require', 'maxScrollTracker');
+  ga('require', 'outboundFormTracker');
+  ga('require', 'outboundLinkTracker');
+  ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+
+<script src="/terragrunt/assets/js/cookie.js" async></script>
+
+
+
+    </body>
+</html>

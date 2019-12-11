@@ -1,0 +1,32 @@
+---
+layout: collection-browser-doc
+title: License
+categories:
+  - Community
+excerpt: >-
+  This code is released under the MIT License. Read more here.
+tags: ["license"]
+order: 302
+nav_title: Documentation
+nav_title_link: /documentation/
+---
+:page-type: documentation
+:page-layout: documentation
+
+:toc:
+:toc-placement!:
+
+// GitHub specific settings. See https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74 for details.
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+toc::[]
+endif::[]
+
+
+== License
+
+This code is released under the MIT License. See link:https://github.com/gruntwork-io/terragrunt/blob/master/LICENSE.txt[LICENSE.txt,window=_blank].
