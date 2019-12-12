@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Locals</title>
 <meta name="description" content="Learn how to use locals.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/features/locals/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/features/locals/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Locals" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/features/locals/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/locals/
 " />
 <meta name="twitter:description" content="Learn how to use locals." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Locals"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/features/locals/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/locals/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn how to use locals."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-locals-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-locals-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-locals-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-locals-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-locals-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-locals-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-locals-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-locals-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,94 +3165,73 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="locals">Locals</h2>
-<div class="sectionbody">
-<div class="paragraph">
+            <h2 id="locals">Locals</h2>
+
 <p>You can use locals to bind a name to an expression, so you can reuse that expression without having to repeat it multiple times (keeping your Terragrunt configuration DRY).
-config. For example, suppose that you need to use the AWS region in multiple inputs. You can bind the name <code>aws_region</code>
+config. For example, suppose that you need to use the AWS region in multiple inputs. You can bind the name <code class="language-plaintext highlighter-rouge">aws_region</code>
 using locals:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>locals {
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
   aws_region = "us-east-1"
 }
 
 inputs = {
   aws_region  = local.aws_region
   s3_endpoint = "com.amazonaws.${local.aws_region}.s3"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can use any valid terragrunt expression in the <code>locals</code> configuration. The <code>locals</code> block also supports referencing other <code>locals</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>locals {
+}
+</code></pre></div></div>
+
+<p>You can use any valid terragrunt expression in the <code class="language-plaintext highlighter-rouge">locals</code> configuration. The <code class="language-plaintext highlighter-rouge">locals</code> block also supports referencing other <code class="language-plaintext highlighter-rouge">locals</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
   x = 2
   y = 40
   answer = local.x + local.y
-}</code></pre>
-</div>
-</div>
-<div class="sect2">
+}
+</code></pre></div></div>
+
 <h3 id="including-globally-defined-locals">Including globally defined locals</h3>
-<div class="paragraph">
-<p>Currently you can only reference <code>locals</code> defined in the same config file. <code>terragrunt</code> does not automatically include
-<code>locals</code> defined in the parent config of an <code>include</code> block into the current context. If you wish to reuse variables
-globally, consider using <code>yaml</code> or <code>json</code> files that are included and merged using the <code>terraform</code> built in functions
-available to <code>terragrunt</code>.</p>
-</div>
-<div class="paragraph">
+
+<p>Currently you can only reference <code class="language-plaintext highlighter-rouge">locals</code> defined in the same config file. <code class="language-plaintext highlighter-rouge">terragrunt</code> does not automatically include
+<code class="language-plaintext highlighter-rouge">locals</code> defined in the parent config of an <code class="language-plaintext highlighter-rouge">include</code> block into the current context. If you wish to reuse variables
+globally, consider using <code class="language-plaintext highlighter-rouge">yaml</code> or <code class="language-plaintext highlighter-rouge">json</code> files that are included and merged using the <code class="language-plaintext highlighter-rouge">terraform</code> built in functions
+available to <code class="language-plaintext highlighter-rouge">terragrunt</code>.</p>
+
 <p>For example, suppose you had the following directory tree:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>.
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 ├── terragrunt.hcl
 ├── mysql
 │   └── terragrunt.hcl
 └── vpc
-    └── terragrunt.hcl</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Instead of adding the <code>locals</code> block to the parent <code>terragrunt.hcl</code> file, you can define a file <code>common_vars.yaml</code>
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Instead of adding the <code class="language-plaintext highlighter-rouge">locals</code> block to the parent <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file, you can define a file <code class="language-plaintext highlighter-rouge">common_vars.yaml</code>
 that contains the global variables you wish to pull in:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>.
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 ├── terragrunt.hcl
 ├── common_vars.yaml
 ├── mysql
 │   └── terragrunt.hcl
 └── vpc
-    └── terragrunt.hcl</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can then include them into the <code>locals</code> block of the child terragrunt config using <code>yamldecode</code> and <code>file</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code># child terragrunt.hcl
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>You can then include them into the <code class="language-plaintext highlighter-rouge">locals</code> block of the child terragrunt config using <code class="language-plaintext highlighter-rouge">yamldecode</code> and <code class="language-plaintext highlighter-rouge">file</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># child terragrunt.hcl
 locals {
   common_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("common_vars.yaml")}")),
   region = "us-east-1"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This configuration will load in the <code>common_vars.yaml</code> file and bind it to the attribute <code>common_vars</code> so that it is available
-in the current context. Note that because <code>locals</code> is a block, there currently is a way to merge the map into the top
+}
+</code></pre></div></div>
+
+<p>This configuration will load in the <code class="language-plaintext highlighter-rouge">common_vars.yaml</code> file and bind it to the attribute <code class="language-plaintext highlighter-rouge">common_vars</code> so that it is available
+in the current context. Note that because <code class="language-plaintext highlighter-rouge">locals</code> is a block, there currently is a way to merge the map into the top
 level.</p>
-</div>
-</div>
-</div>
-</div>
+
         </div>
       </div>
     </div>

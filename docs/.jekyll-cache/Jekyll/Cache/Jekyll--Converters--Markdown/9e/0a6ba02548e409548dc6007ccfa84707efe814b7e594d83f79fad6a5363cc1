@@ -1,0 +1,59 @@
+I"�<h2 id="prevent_destroy">prevent_destroy</h2>
+
+<p>Terragrunt <code class="highlighter-rouge">prevent_destroy</code> boolean flag allows you to protect selected Terraform module. It will prevent <code class="highlighter-rouge">destroy</code> or <code class="highlighter-rouge">destroy-all</code> command to actually destroy resources of the protected module. This is useful for modules you want to carefully protect, such as a database, or a module that provides auth.</p>
+
+<p>Example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:foo/modules.git//app?ref=v0.0.3"</span>
+<span class="p">}</span>
+
+<span class="nx">prevent_destroy</span> <span class="err">=</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<h2 id="skip">skip</h2>
+
+<p>The terragrunt <code class="highlighter-rouge">skip</code> boolean flag can be used to protect modules you don’t want any changes to or just to skip modules that don’t define any infrastructure by themselves. When set to true, all terragrunt commands will skip the selected module.</p>
+
+<p>Consider the following file structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+├── terragrunt.hcl
+├── prod
+│   └── terragrunt.hcl
+├── dev
+│   └── terragrunt.hcl
+└── qa
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>In some cases, the root level <code class="highlighter-rouge">terragrunt.hcl</code> file is solely used to DRY up your Terraform configuration by being included in the other <code class="highlighter-rouge">terragrunt.hcl</code> files. In this case, you do not want the <code class="highlighter-rouge">xxx-all</code> commands to process the root level <code class="highlighter-rouge">terragrunt.hcl</code> since it does not define any infrastructure by itself. To make the <code class="highlighter-rouge">xxx-all</code> commands skip the root level <code class="highlighter-rouge">terragrunt.hcl</code> file, you can set <code class="highlighter-rouge">skip = true</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">skip</span> <span class="err">=</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">skip</code> flag must be set explicitly in terragrunt modules that should be skipped. If you set <code class="highlighter-rouge">skip = true</code> in a <code class="highlighter-rouge">terragrunt.hcl</code> file that is included by another <code class="highlighter-rouge">terragrunt.hcl</code> file, only the <code class="highlighter-rouge">terragrunt.hcl</code> file that explicitly set <code class="highlighter-rouge">skip = true</code> will be skipped.</p>
+
+<h2 id="terraform_binary">terraform_binary</h2>
+
+<p>The terragrunt <code class="highlighter-rouge">terraform_binary</code> string option can be used to override the default terraform binary path (which is <code class="highlighter-rouge">terraform</code>).</p>
+
+<p>The precedence is as follows: <code class="highlighter-rouge">--terragrunt-tfpath</code> command line option → <code class="highlighter-rouge">TERRAGRUNT_TFPATH</code> env variable → <code class="highlighter-rouge">terragrunt.hcl</code> in the module directory → included <code class="highlighter-rouge">terragrunt.hcl</code></p>
+
+<h2 id="download_dir">download_dir</h2>
+
+<p>The terragrunt <code class="highlighter-rouge">download_dir</code> string option can be used to override the default download directory.</p>
+
+<p>The precedence is as follows: <code class="highlighter-rouge">--terragrunt-download-dir</code> command line option → <code class="highlighter-rouge">TERRAGRUNT_DOWNLOAD</code> env variable → <code class="highlighter-rouge">terragrunt.hcl</code> in the module directory → included <code class="highlighter-rouge">terragrunt.hcl</code></p>
+
+<p>It supports all terragrunt functions, i.e. <code class="highlighter-rouge">path_relative_from_include()</code>.</p>
+
+<h2 id="terraform_version_constraint">terraform_version_constraint</h2>
+
+<p>The terragrunt <code class="highlighter-rouge">terraform_version_constraint</code> string overrides the default minimum supported version of terraform. Terragrunt only officially supports the latest version of terraform, however in some cases an old terraform is needed.</p>
+
+<p>For example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform_version_constraint</span> <span class="err">=</span> <span class="s2">"&gt;= 0.11"</span>
+</code></pre></div></div>
+:ET

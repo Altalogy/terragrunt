@@ -1,0 +1,23 @@
+I"Û<h2 id="auto-retry">Auto-Retry</h2>
+
+<p><em>Auto-Retry</em> is a feature of <code class="highlighter-rouge">terragrunt</code> that will automatically address situations where a <code class="highlighter-rouge">terraform</code> command needs to be re-run.</p>
+
+<p>Terraform can fail with transient errors which can be addressed by simply retrying the command again. In the event <code class="highlighter-rouge">terragrunt</code> finds one of these errors, the command will be re-run again automatically.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
+...
+Initializing provider plugins...
+- Checking for available provider plugins on https://releases.hashicorp.com...
+Error installing provider "template": error fetching checksums: Get https://releases.hashicorp.com/terraform-provider-template/1.0.0/terraform-provider-template_1.0.0_SHA256SUMS: net/http: TLS handshake timeout.
+</code></pre></div></div>
+
+<p>Terragrunt sees this error, and knows it is a transient error that can addressed by re-running the <code class="highlighter-rouge">apply</code> command.</p>
+
+<p><code class="highlighter-rouge">auto-retry</code> will try a maximum of three times to re-run the command, at which point it will deem the error as not transient, and accept the terraform failure. Retries will occur when the error is encountered, pausing for 5 seconds between retries.</p>
+
+<p>Known errors that <code class="highlighter-rouge">auto-retry</code> will rerun, are maintained in the <code class="highlighter-rouge">TerragruntOptions.RetryableErrors</code> array. Future upgrades to <code class="highlighter-rouge">terragrunt</code> may include the ability to configure <code class="highlighter-rouge">auto-retry</code> by specifying additional error strings and configuring max retries and retry intervals the <code class="highlighter-rouge">terragrunt</code> config (PRs welcome!).</p>
+
+<p>To disable <code class="highlighter-rouge">auto-retry</code>, use the <code class="highlighter-rouge">--terragrunt-no-auto-retry</code> command line option or set the <code class="highlighter-rouge">TERRAGRUNT_AUTO_RETRY</code> environment variable to <code class="highlighter-rouge">false</code>.</p>
+:ET

@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Configuration</title>
 <meta name="description" content="Learn how to configure Terragrunt.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/getting-started/configuration/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/getting-started/configuration/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Configuration" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/getting-started/configuration/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/getting-started/configuration/
 " />
 <meta name="twitter:description" content="Learn how to configure Terragrunt." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Configuration"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/getting-started/configuration/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/getting-started/configuration/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn how to configure Terragrunt."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-configuration-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3170,159 +3170,129 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="terragrunt-configuration-file">Terragrunt configuration file</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Terragrunt configuration is defined in a <code>terragrunt.hcl</code> file. This uses the same HCL syntax as Terraform itself.</p>
-</div>
-<div class="paragraph">
-<p>Here&#8217;s an example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders()
-}
+            <h2 id="terragrunt-configuration-file">Terragrunt configuration file</h2>
 
-dependencies {
-  paths = ["../vpc", "../mysql", "../redis"]
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
+<p>Terragrunt configuration is defined in a <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file. This uses the same HCL syntax as Terraform itself.</p>
+
+<p>Here’s an example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+
+<span class="nx">dependencies</span> <span class="p">{</span>
+  <span class="nx">paths</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"../vpc"</span><span class="p">,</span> <span class="s2">"../mysql"</span><span class="p">,</span> <span class="s2">"../redis"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <p>Terragrunt figures out the path to its config file according to the following rules:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The value of the <code>--terragrunt-config</code> command-line option, if specified.</p>
-</li>
-<li>
-<p>The value of the <code>TERRAGRUNT_CONFIG</code> environment variable, if defined.</p>
-</li>
-<li>
-<p>A <code>terragrunt.hcl</code> file in the current working directory, if it exists.</p>
-</li>
-<li>
-<p>If none of these are found, exit with an error.</p>
-</li>
+
+<ol>
+  <li>
+    <p>The value of the <code class="language-plaintext highlighter-rouge">--terragrunt-config</code> command-line option, if specified.</p>
+  </li>
+  <li>
+    <p>The value of the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_CONFIG</code> environment variable, if defined.</p>
+  </li>
+  <li>
+    <p>A <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file in the current working directory, if it exists.</p>
+  </li>
+  <li>
+    <p>If none of these are found, exit with an error.</p>
+  </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
+
 <h2 id="configuration-parsing-order">Configuration parsing order</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It is important to be aware of the terragrunt configuration parsing order when using features like <a href="#locals">locals</a> and <a href="#passing-outputs-between-modules">dependency outputs</a>, where you can reference attributes of other blocks in the config in your <code>inputs</code>. For example, because <code>locals</code> are evaluated before <code>dependency</code> blocks, you can not bind outputs from <code>dependency</code> into <code>locals</code>. On the other hand, for the same reason, you can use <code>locals</code> in the <code>dependency</code> blocks.</p>
-</div>
-<div class="paragraph">
+
+<p>It is important to be aware of the terragrunt configuration parsing order when using features like <a href="/terragrunt/documentation/features/locals/#locals">locals</a> and <a href="/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#passing-outputs-between-modules">dependency outputs</a>, where you can reference attributes of other blocks in the config in your <code class="language-plaintext highlighter-rouge">inputs</code>. For example, because <code class="language-plaintext highlighter-rouge">locals</code> are evaluated before <code class="language-plaintext highlighter-rouge">dependency</code> blocks, you can not bind outputs from <code class="language-plaintext highlighter-rouge">dependency</code> into <code class="language-plaintext highlighter-rouge">locals</code>. On the other hand, for the same reason, you can use <code class="language-plaintext highlighter-rouge">locals</code> in the <code class="language-plaintext highlighter-rouge">dependency</code> blocks.</p>
+
 <p>Currently terragrunt parses the config in the following order:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>include</code> block</p>
-</li>
-<li>
-<p><code>locals</code> block</p>
-</li>
-<li>
-<p><code>dependencies</code> block</p>
-</li>
-<li>
-<p><code>dependency</code> blocks, including calling <code>terragrunt output</code> on the dependent modules to retrieve the outputs</p>
-</li>
-<li>
-<p>Everything else</p>
-</li>
-<li>
-<p>The config referenced by <code>include</code></p>
-</li>
-<li>
-<p>A merge operation between the config referenced by <code>include</code> and the current config.</p>
-</li>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">include</code> block</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">locals</code> block</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">dependencies</code> block</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">dependency</code> blocks, including calling <code class="language-plaintext highlighter-rouge">terragrunt output</code> on the dependent modules to retrieve the outputs</p>
+  </li>
+  <li>
+    <p>Everything else</p>
+  </li>
+  <li>
+    <p>The config referenced by <code class="language-plaintext highlighter-rouge">include</code></p>
+  </li>
+  <li>
+    <p>A merge operation between the config referenced by <code class="language-plaintext highlighter-rouge">include</code> and the current config.</p>
+  </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>Blocks that are parsed earlier in the process will be made available for use in the parsing of later blocks. Similarly, you cannot use blocks that are parsed later earlier in the process (e.g you can&#8217;t reference <code>dependency</code> in <code>locals</code>, <code>include</code>, or <code>dependencies</code> blocks).</p>
-</div>
-<div class="paragraph">
-<p>Note that the parsing order is slightly different when using the <code>-all</code> flavors of the command. In the <code>-all</code> flavors of the command, Terragrunt parses the configuration twice. In the first pass, it follows the following parsing order:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>include</code> block of all configurations in the tree</p>
-</li>
-<li>
-<p><code>locals</code> block of all configurations in the tree</p>
-</li>
-<li>
-<p><code>dependency</code> blocks of all configurations in the tree, but does NOT retrieve the outputs</p>
-</li>
-<li>
-<p><code>terraform</code> block of all configurations in the tree</p>
-</li>
-<li>
-<p><code>dependencies</code> block of all configurations in the tree</p>
-</li>
+
+<p>Blocks that are parsed earlier in the process will be made available for use in the parsing of later blocks. Similarly, you cannot use blocks that are parsed later earlier in the process (e.g you can’t reference <code class="language-plaintext highlighter-rouge">dependency</code> in <code class="language-plaintext highlighter-rouge">locals</code>, <code class="language-plaintext highlighter-rouge">include</code>, or <code class="language-plaintext highlighter-rouge">dependencies</code> blocks).</p>
+
+<p>Note that the parsing order is slightly different when using the <code class="language-plaintext highlighter-rouge">-all</code> flavors of the command. In the <code class="language-plaintext highlighter-rouge">-all</code> flavors of the command, Terragrunt parses the configuration twice. In the first pass, it follows the following parsing order:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">include</code> block of all configurations in the tree</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">locals</code> block of all configurations in the tree</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">dependency</code> blocks of all configurations in the tree, but does NOT retrieve the outputs</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">terraform</code> block of all configurations in the tree</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">dependencies</code> block of all configurations in the tree</p>
+  </li>
 </ol>
-</div>
-<div class="paragraph">
+
 <p>The results of this pass are then used to build the dependency graph of the modules in the tree. Once the graph is constructed, Terragrunt will loop through the modules and run the specified command. It will then revert to the single configuration parsing order specified above for each module as it runs the command.</p>
-</div>
-<div class="paragraph">
-<p>This allows Terragrunt to avoid resolving <code>dependency</code> on modules that haven&#8217;t been applied yet when doing a clean deployment from scratch with <code>apply-all</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
+
+<p>This allows Terragrunt to avoid resolving <code class="language-plaintext highlighter-rouge">dependency</code> on modules that haven’t been applied yet when doing a clean deployment from scratch with <code class="language-plaintext highlighter-rouge">apply-all</code>.</p>
+
 <h2 id="formatting-terragrunthcl">Formatting terragrunt.hcl</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You can rewrite <code>terragrunt.hcl</code> files to a canonical format using the <code>hclfmt</code> command built into <code>terragrunt</code>. Similar to <code>terraform fmt</code>, this command applies a subset of <a href="https://www.terraform.io/docs/configuration/style.html">the Terraform language style conventions</a>, along with other minor adjustments for readability.</p>
-</div>
-<div class="paragraph">
-<p>This command will recursively search for <code>terragrunt.hcl</code> files and format all of them under a given directory tree. Consider the following file structure:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>root
+
+<p>You can rewrite <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> files to a canonical format using the <code class="language-plaintext highlighter-rouge">hclfmt</code> command built into <code class="language-plaintext highlighter-rouge">terragrunt</code>. Similar to <code class="language-plaintext highlighter-rouge">terraform fmt</code>, this command applies a subset of <a href="https://www.terraform.io/docs/configuration/style.html">the Terraform language style conventions</a>, along with other minor adjustments for readability.</p>
+
+<p>This command will recursively search for <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> files and format all of them under a given directory tree. Consider the following file structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
 ├── terragrunt.hcl
 ├── prod
 │   └── terragrunt.hcl
 ├── dev
 │   └── terragrunt.hcl
 └── qa
-    └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you run <code>terragrunt hclfmt</code> at the <code>root</code>, this will update:</p>
-</div>
-<div class="ulist">
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">terragrunt hclfmt</code> at the <code class="language-plaintext highlighter-rouge">root</code>, this will update:</p>
+
 <ul>
-<li>
-<p><code>root/terragrunt.hcl</code></p>
-</li>
-<li>
-<p><code>root/prod/terragrunt.hcl</code></p>
-</li>
-<li>
-<p><code>root/dev/terragrunt.hcl</code></p>
-</li>
-<li>
-<p><code>root/qa/terragrunt.hcl</code></p>
-</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">root/terragrunt.hcl</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">root/prod/terragrunt.hcl</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">root/dev/terragrunt.hcl</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">root/qa/terragrunt.hcl</code></p>
+  </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Additionally, there&#8217;s a flag <code>--terragrunt-check</code>. It allows to validating if files are properly formatted. It does not rewrite files and in case of invalid format, it will return an error with exit status 0.</p>
-</div>
-</div>
-</div>
+
+<p>Additionally, there’s a flag <code class="language-plaintext highlighter-rouge">--terragrunt-check</code>. It allows to validating if files are properly formatted. It does not rewrite files and in case of invalid format, it will return an error with exit status 0.</p>
+
         </div>
       </div>
     </div>

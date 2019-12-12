@@ -15,8 +15,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <title>Built-in functions</title>
-<meta name="description" content="Terragrunt allows you to use built-in functions anywhere in terragrunt.hcl, just like Terraform.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/features/built-in-functions/
+<meta name="description" content="Terragrunt allows you to use built-in functions anywhere in `terragrunt.hcl`, just like Terraform.">
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/features/built-in-functions/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Built-in functions" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/features/built-in-functions/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/built-in-functions/
 " />
-<meta name="twitter:description" content="Terragrunt allows you to use built-in functions anywhere in terragrunt.hcl, just like Terraform." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:description" content="Terragrunt allows you to use built-in functions anywhere in `terragrunt.hcl`, just like Terraform." />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Built-in functions"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/features/built-in-functions/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/built-in-functions/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
-<meta property="og:description" content="Terragrunt allows you to use built-in functions anywhere in terragrunt.hcl, just like Terraform."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:description" content="Terragrunt allows you to use built-in functions anywhere in `terragrunt.hcl`, just like Terraform."/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-built-in-functions-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,193 +3165,155 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="built-in-functions">Built-in Functions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Terragrunt allows you to use built-in functions anywhere in <code>terragrunt.hcl</code>, just like Terraform! The functions currently available are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#terraform-built-in-functions">All Terraform built-in functions</a></p>
-</li>
-<li>
-<p><a href="#find_in_parent_folders">find_in_parent_folders()</a></p>
-</li>
-<li>
-<p><a href="#path_relative_to_include">path_relative_to_include()</a></p>
-</li>
-<li>
-<p><a href="#path_relative_from_include">path_relative_from_include()</a></p>
-</li>
-<li>
-<p><a href="#get_env">get_env(NAME, DEFAULT)</a></p>
-</li>
-<li>
-<p><a href="#get_terragrunt_dir">get_terragrunt_dir()</a></p>
-</li>
-<li>
-<p><a href="#get_parent_terragrunt_dir">get_parent_terragrunt_dir()</a></p>
-</li>
-<li>
-<p><a href="#get_terraform_commands_that_need_vars">get_terraform_commands_that_need_vars()</a></p>
-</li>
-<li>
-<p><a href="#get_terraform_commands_that_need_input">get_terraform_commands_that_need_input()</a></p>
-</li>
-<li>
-<p><a href="#get_terraform_commands_that_need_locking">get_terraform_commands_that_need_locking()</a></p>
-</li>
-<li>
-<p><a href="#get_terraform_commands_that_need_parallelism">get_terraform_commands_that_need_parallelism()</a></p>
-</li>
-<li>
-<p><a href="#get_aws_account_id">get_aws_account_id()</a></p>
-</li>
-<li>
-<p><a href="#get_aws_caller_identity_arn">get_aws_caller_identity_arn()</a></p>
-</li>
-<li>
-<p><a href="#get_aws_caller_identity_user_id">get_aws_caller_identity_user_id()</a></p>
-</li>
-<li>
-<p><a href="#run_cmd">run_cmd()</a></p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="terraform-built-in-functions">Terraform built-in functions</h3>
-<div class="paragraph">
-<p>All <a href="https://www.terraform.io/docs/configuration/functions.html">Terraform built-in functions</a> are supported in Terragrunt config files:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  source = "../modules/${basename(get_terragrunt_dir())}"
-}
+            <h2 id="built-in-functions">Built-in Functions</h2>
 
-remote_state {
-  backend = "s3"
-  config = {
-    bucket = trimspace("   my-terraform-bucket     ")
-    region = join("-", ["us", "east", "1"])
-    key    = format("%s/terraform.tfstate", path_relative_to_include())
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note: Any <code>file*</code> functions (<code>file</code>, <code>fileexists</code>, <code>filebase64</code>, etc) are relative to the directory containing the <code>terragrunt.hcl</code> file they&#8217;re used in.</p>
-</div>
-<div class="paragraph">
+<p>Terragrunt allows you to use built-in functions anywhere in <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>, just like Terraform! The functions currently available are:</p>
+
+<ul>
+  <li>
+    <p><a href="#terraform-built-in-functions">All Terraform built-in functions</a></p>
+  </li>
+  <li>
+    <p><a href="#find_in_parent_folders">find_in_parent_folders()</a></p>
+  </li>
+  <li>
+    <p><a href="#path_relative_to_include">path_relative_to_include()</a></p>
+  </li>
+  <li>
+    <p><a href="#path_relative_from_include">path_relative_from_include()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_env">get_env(NAME, DEFAULT)</a></p>
+  </li>
+  <li>
+    <p><a href="#get_terragrunt_dir">get_terragrunt_dir()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_parent_terragrunt_dir">get_parent_terragrunt_dir()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_terraform_commands_that_need_vars">get_terraform_commands_that_need_vars()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_terraform_commands_that_need_input">get_terraform_commands_that_need_input()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_terraform_commands_that_need_locking">get_terraform_commands_that_need_locking()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_terraform_commands_that_need_parallelism">get_terraform_commands_that_need_parallelism()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_aws_account_id">get_aws_account_id()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_aws_caller_identity_arn">get_aws_caller_identity_arn()</a></p>
+  </li>
+  <li>
+    <p><a href="#get_aws_caller_identity_user_id">get_aws_caller_identity_user_id()</a></p>
+  </li>
+  <li>
+    <p><a href="#run_cmd">run_cmd()</a></p>
+  </li>
+</ul>
+
+<h3 id="terraform-built-in-functions">Terraform built-in functions</h3>
+
+<p>All <a href="https://www.terraform.io/docs/configuration/functions.html">Terraform built-in functions</a> are supported in Terragrunt config files:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"../modules/${basename(get_terragrunt_dir())}"</span>
+<span class="p">}</span>
+
+<span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="p">=</span> <span class="nx">trimspace</span><span class="err">(</span><span class="s2">"   my-terraform-bucket     "</span><span class="err">)</span>
+    <span class="nx">region</span> <span class="p">=</span> <span class="nx">join</span><span class="err">(</span><span class="s2">"-"</span><span class="err">,</span> <span class="p">[</span><span class="s2">"us"</span><span class="p">,</span> <span class="s2">"east"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">]</span><span class="err">)</span>
+    <span class="nx">key</span>    <span class="p">=</span> <span class="nx">format</span><span class="err">(</span><span class="s2">"%s/terraform.tfstate"</span><span class="err">,</span> <span class="nx">path_relative_to_include</span><span class="err">())</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note: Any <code class="language-plaintext highlighter-rouge">file*</code> functions (<code class="language-plaintext highlighter-rouge">file</code>, <code class="language-plaintext highlighter-rouge">fileexists</code>, <code class="language-plaintext highlighter-rouge">filebase64</code>, etc) are relative to the directory containing the <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file they’re used in.</p>
+
 <p>Given the following structure:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>└── terragrunt
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└── terragrunt
   └── common.tfvars
   ├── assets
   |  └── mysql
   |     └── assets.txt
-  └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then <code>assets.txt</code> could be read with the following function call:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">file("assets/mysql/assets.txt")</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+  └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Then <code class="language-plaintext highlighter-rouge">assets.txt</code> could be read with the following function call:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">file</span><span class="err">(</span><span class="s2">"assets/mysql/assets.txt"</span><span class="err">)</span>
+</code></pre></div></div>
+
 <h3 id="find_in_parent_folders">find_in_parent_folders</h3>
-<div class="paragraph">
-<p><code>find_in_parent_folders()</code> searches up the directory tree from the current <code>terragrunt.hcl</code> file and returns the relative path to the first <code>terragrunt.hcl</code> in a parent folder or exit with an error if no such file is found. This is primarily useful in an <code>include</code> block to automatically find the path to a parent <code>terragrunt.hcl</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The function takes an optional <code>name</code> parameter that allows you to specify a different filename to search for:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders("some-other-file-name.hcl")
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can also pass an optional second <code>fallback</code> parameter which causes the function to return the fallback value (instead of exiting with an error) if the file in the <code>name</code> parameter cannot be found:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders("some-other-file-name.tfvars", "fallback.tfvars")
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">find_in_parent_folders()</code> searches up the directory tree from the current <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file and returns the relative path to the first <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> in a parent folder or exit with an error if no such file is found. This is primarily useful in an <code class="language-plaintext highlighter-rouge">include</code> block to automatically find the path to a parent <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The function takes an optional <code class="language-plaintext highlighter-rouge">name</code> parameter that allows you to specify a different filename to search for:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">(</span><span class="s2">"some-other-file-name.hcl"</span><span class="err">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can also pass an optional second <code class="language-plaintext highlighter-rouge">fallback</code> parameter which causes the function to return the fallback value (instead of exiting with an error) if the file in the <code class="language-plaintext highlighter-rouge">name</code> parameter cannot be found:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">(</span><span class="s2">"some-other-file-name.tfvars"</span><span class="err">,</span> <span class="s2">"fallback.tfvars"</span><span class="err">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="path_relative_to_include">path_relative_to_include</h3>
-<div class="paragraph">
-<p><code>path_relative_to_include()</code> returns the relative path between the current <code>terragrunt.hcl</code> file and the <code>path</code> specified in its <code>include</code> block. For example, consider the following folder structure:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>├── terragrunt.hcl
+
+<p><code class="language-plaintext highlighter-rouge">path_relative_to_include()</code> returns the relative path between the current <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file and the <code class="language-plaintext highlighter-rouge">path</code> specified in its <code class="language-plaintext highlighter-rouge">include</code> block. For example, consider the following folder structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── terragrunt.hcl
 └── prod
     └── mysql
         └── terragrunt.hcl
 └── stage
     └── mysql
-        └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Imagine <code>prod/mysql/terragrunt.hcl</code> and <code>stage/mysql/terragrunt.hcl</code> include all settings from the root <code>terragrunt.hcl</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The root <code>terragrunt.hcl</code> can use the <code>path_relative_to_include()</code> in its <code>remote_state</code> configuration to ensure each child stores its remote state at a different <code>key</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  backend = "s3"
-  config = {
-    bucket = "my-terraform-bucket"
-    region = "us-east-1"
-    key    = "${path_relative_to_include()}/terraform.tfstate"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The resulting <code>key</code> will be <code>prod/mysql/terraform.tfstate</code> for the prod <code>mysql</code> module and <code>stage/mysql/terraform.tfstate</code> for the stage <code>mysql</code> module.</p>
-</div>
-</div>
-<div class="sect2">
+        └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Imagine <code class="language-plaintext highlighter-rouge">prod/mysql/terragrunt.hcl</code> and <code class="language-plaintext highlighter-rouge">stage/mysql/terragrunt.hcl</code> include all settings from the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> can use the <code class="language-plaintext highlighter-rouge">path_relative_to_include()</code> in its <code class="language-plaintext highlighter-rouge">remote_state</code> configuration to ensure each child stores its remote state at a different <code class="language-plaintext highlighter-rouge">key</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="p">=</span> <span class="s2">"my-terraform-bucket"</span>
+    <span class="nx">region</span> <span class="p">=</span> <span class="s2">"us-east-1"</span>
+    <span class="nx">key</span>    <span class="p">=</span> <span class="s2">"${path_relative_to_include()}/terraform.tfstate"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The resulting <code class="language-plaintext highlighter-rouge">key</code> will be <code class="language-plaintext highlighter-rouge">prod/mysql/terraform.tfstate</code> for the prod <code class="language-plaintext highlighter-rouge">mysql</code> module and <code class="language-plaintext highlighter-rouge">stage/mysql/terraform.tfstate</code> for the stage <code class="language-plaintext highlighter-rouge">mysql</code> module.</p>
+
 <h3 id="path_relative_from_include">path_relative_from_include</h3>
-<div class="paragraph">
-<p><code>path_relative_from_include()</code> returns the relative path between the <code>path</code> specified in its <code>include</code> block and the current <code>terragrunt.hcl</code> file (it is the counterpart of <code>path_relative_to_include()</code>). For example, consider the following folder structure:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>├── sources
+
+<p><code class="language-plaintext highlighter-rouge">path_relative_from_include()</code> returns the relative path between the <code class="language-plaintext highlighter-rouge">path</code> specified in its <code class="language-plaintext highlighter-rouge">include</code> block and the current <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file (it is the counterpart of <code class="language-plaintext highlighter-rouge">path_relative_to_include()</code>). For example, consider the following folder structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── sources
 |  ├── mysql
 |  |  └── *.tf
 |  └── secrets
@@ -3364,160 +3326,126 @@ remote_state {
   ├── secrets
   |  └── mysql
   |     └── terragrunt.hcl
-  └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Imagine <code>terragrunt/mysql/terragrunt.hcl</code> and <code>terragrunt/secrets/mysql/terragrunt.hcl</code> include all settings from the root <code>terragrunt.hcl</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The root <code>terragrunt.hcl</code> can use the <code>path_relative_from_include()</code> in combination with <code>path_relative_to_include()</code> in its <code>source</code> configuration to retrieve the relative terraform source code from the terragrunt configuration file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  source = "${path_relative_from_include()}/../sources//${path_relative_to_include()}"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The resulting <code>source</code> will be <code>../../sources//mysql</code> for <code>mysql</code> module and <code>../../../sources//secrets/mysql</code> for <code>secrets/mysql</code> module.</p>
-</div>
-<div class="paragraph">
-<p>Another use case would be to add extra argument to include the <code>common.tfvars</code> file for all subdirectories:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">  terraform {
-    extra_arguments "common_var" {
-      commands = [
-        "apply",
-        "plan",
-        "import",
-        "push",
-        "refresh"
-      ]
+  └── terragrunt.hcl
+</code></pre></div></div>
 
-      arguments = [
-        "-var-file=${get_terragrunt_dir()}/${path_relative_from_include()}/common.tfvars",
-      ]
-    }
-  }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This allows proper retrieval of the <code>common.tfvars</code> from whatever the level of subdirectories we have.</p>
-</div>
-</div>
-<div class="sect2">
+<p>Imagine <code class="language-plaintext highlighter-rouge">terragrunt/mysql/terragrunt.hcl</code> and <code class="language-plaintext highlighter-rouge">terragrunt/secrets/mysql/terragrunt.hcl</code> include all settings from the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> can use the <code class="language-plaintext highlighter-rouge">path_relative_from_include()</code> in combination with <code class="language-plaintext highlighter-rouge">path_relative_to_include()</code> in its <code class="language-plaintext highlighter-rouge">source</code> configuration to retrieve the relative terraform source code from the terragrunt configuration file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"${path_relative_from_include()}/../sources//${path_relative_to_include()}"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The resulting <code class="language-plaintext highlighter-rouge">source</code> will be <code class="language-plaintext highlighter-rouge">../../sources//mysql</code> for <code class="language-plaintext highlighter-rouge">mysql</code> module and <code class="language-plaintext highlighter-rouge">../../../sources//secrets/mysql</code> for <code class="language-plaintext highlighter-rouge">secrets/mysql</code> module.</p>
+
+<p>Another use case would be to add extra argument to include the <code class="language-plaintext highlighter-rouge">common.tfvars</code> file for all subdirectories:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">terraform</span> <span class="p">{</span>
+    <span class="nx">extra_arguments</span> <span class="s2">"common_var"</span> <span class="p">{</span>
+      <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+        <span class="s2">"apply"</span><span class="p">,</span>
+        <span class="s2">"plan"</span><span class="p">,</span>
+        <span class="s2">"import"</span><span class="p">,</span>
+        <span class="s2">"push"</span><span class="p">,</span>
+        <span class="s2">"refresh"</span>
+      <span class="p">]</span>
+
+      <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+        <span class="s2">"-var-file=${get_terragrunt_dir()}/${path_relative_from_include()}/common.tfvars"</span><span class="p">,</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>This allows proper retrieval of the <code class="language-plaintext highlighter-rouge">common.tfvars</code> from whatever the level of subdirectories we have.</p>
+
 <h3 id="get_env">get_env</h3>
-<div class="paragraph">
-<p><code>get_env(NAME, DEFAULT)</code> returns the value of the environment variable named <code>NAME</code> or <code>DEFAULT</code> if that environment variable is not set. Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  backend = "s3"
-  config = {
-    bucket = get_env("BUCKET", "my-terraform-bucket")
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note that <a href="https://www.terraform.io/docs/configuration/environment-variables.html#tf_var_name">Terraform will read environment variables</a> that start with the prefix <code>TF_VAR_</code>, so one way to share a variable named <code>foo</code> between Terraform and Terragrunt is to set its value as the environment variable <code>TF_VAR_foo</code> and to read that value in using this <code>get_env()</code> built-in function.</p>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_env(NAME, DEFAULT)</code> returns the value of the environment variable named <code class="language-plaintext highlighter-rouge">NAME</code> or <code class="language-plaintext highlighter-rouge">DEFAULT</code> if that environment variable is not set. Example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="p">=</span> <span class="nx">get_env</span><span class="err">(</span><span class="s2">"BUCKET"</span><span class="err">,</span> <span class="s2">"my-terraform-bucket"</span><span class="err">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that <a href="https://www.terraform.io/docs/configuration/environment-variables.html#tf_var_name">Terraform will read environment variables</a> that start with the prefix <code class="language-plaintext highlighter-rouge">TF_VAR_</code>, so one way to share a variable named <code class="language-plaintext highlighter-rouge">foo</code> between Terraform and Terragrunt is to set its value as the environment variable <code class="language-plaintext highlighter-rouge">TF_VAR_foo</code> and to read that value in using this <code class="language-plaintext highlighter-rouge">get_env()</code> built-in function.</p>
+
 <h3 id="get_terragrunt_dir">get_terragrunt_dir</h3>
-<div class="paragraph">
-<p><code>get_terragrunt_dir()</code> returns the directory where the Terragrunt configuration file (by default <code>terragrunt.hcl</code>) lives. This is useful when you need to use relative paths with <a href="/terragrunt/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations">remote Terraform configurations</a> and you want those paths relative to your Terragrunt configuration file and not relative to the temporary directory where Terragrunt downloads the code.</p>
-</div>
-<div class="paragraph">
+
+<p><code class="language-plaintext highlighter-rouge">get_terragrunt_dir()</code> returns the directory where the Terragrunt configuration file (by default <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>) lives. This is useful when you need to use relative paths with <a href="/terragrunt/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations">remote Terraform configurations</a> and you want those paths relative to your Terragrunt configuration file and not relative to the temporary directory where Terragrunt downloads the code.</p>
+
 <p>For example, imagine you have the following file structure:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/terraform-code
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/terraform-code
 ├── common.tfvars
 ├── frontend-app
-│   └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Inside of <code>/terraform-code/frontend-app/terragrunt.hcl</code> you might try to write code that looks like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  source = "git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3"
+│   └── terragrunt.hcl
+</code></pre></div></div>
 
-  extra_arguments "custom_vars" {
-    commands = [
-      "apply",
-      "plan",
-      "import",
-      "push",
-      "refresh"
-    ]
+<p>Inside of <code class="language-plaintext highlighter-rouge">/terraform-code/frontend-app/terragrunt.hcl</code> you might try to write code that looks like this:</p>
 
-    arguments = [
-      "-var-file=../common.tfvars" # Note: This relative path will NOT work correctly!
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note how the <code>source</code> parameter is set, so Terragrunt will download the <code>frontend-app</code> code from the <code>modules</code> repo into a temporary folder and run <code>terraform</code> in that temporary folder. Note also that there is an <code>extra_arguments</code> block that is trying to allow the <code>frontend-app</code> to read some shared variables from a <code>common.tfvars</code> file. Unfortunately, the relative path (<code>../common.tfvars</code>) won&#8217;t work, as it will be relative to the temporary folder! Moreover, you can&#8217;t use an absolute path, or the code won&#8217;t work on any of your teammates' computers.</p>
-</div>
-<div class="paragraph">
-<p>To make the relative path work, you need to use <code>get_terragrunt_dir()</code> to combine the path with the folder where the <code>terragrunt.hcl</code> file lives:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  source = "git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3"
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3"</span>
 
-  extra_arguments "custom_vars" {
-    commands = [
-      "apply",
-      "plan",
-      "import",
-      "push",
-      "refresh"
-    ]
+  <span class="nx">extra_arguments</span> <span class="s2">"custom_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
 
-    # With the get_terragrunt_dir() function, you can use relative paths!
-    arguments = [
-      "-var-file=${get_terragrunt_dir()}/../common.tfvars"
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For the example above, this path will resolve to <code>/terraform-code/frontend-app/../common.tfvars</code>, which is exactly what you want.</p>
-</div>
-</div>
-<div class="sect2">
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var-file=../common.tfvars"</span> <span class="c1"># Note: This relative path will NOT work correctly!</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note how the <code class="language-plaintext highlighter-rouge">source</code> parameter is set, so Terragrunt will download the <code class="language-plaintext highlighter-rouge">frontend-app</code> code from the <code class="language-plaintext highlighter-rouge">modules</code> repo into a temporary folder and run <code class="language-plaintext highlighter-rouge">terraform</code> in that temporary folder. Note also that there is an <code class="language-plaintext highlighter-rouge">extra_arguments</code> block that is trying to allow the <code class="language-plaintext highlighter-rouge">frontend-app</code> to read some shared variables from a <code class="language-plaintext highlighter-rouge">common.tfvars</code> file. Unfortunately, the relative path (<code class="language-plaintext highlighter-rouge">../common.tfvars</code>) won’t work, as it will be relative to the temporary folder! Moreover, you can’t use an absolute path, or the code won’t work on any of your teammates’ computers.</p>
+
+<p>To make the relative path work, you need to use <code class="language-plaintext highlighter-rouge">get_terragrunt_dir()</code> to combine the path with the folder where the <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file lives:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3"</span>
+
+  <span class="nx">extra_arguments</span> <span class="s2">"custom_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
+
+    <span class="c1"># With the get_terragrunt_dir() function, you can use relative paths!</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var-file=${get_terragrunt_dir()}/../common.tfvars"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>For the example above, this path will resolve to <code class="language-plaintext highlighter-rouge">/terraform-code/frontend-app/../common.tfvars</code>, which is exactly what you want.</p>
+
 <h3 id="get_parent_terragrunt_dir">get_parent_terragrunt_dir</h3>
-<div class="paragraph">
-<p><code>get_parent_terragrunt_dir()</code> returns the absolute directory where the Terragrunt parent configuration file (by default <code>terragrunt.hcl</code>) lives. This is useful when you need to use relative paths with <a href="/terragrunt/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations">remote Terraform configurations</a> and you want those paths relative to your parent Terragrunt configuration file and not relative to the temporary directory where Terragrunt downloads the code.</p>
-</div>
-<div class="paragraph">
+
+<p><code class="language-plaintext highlighter-rouge">get_parent_terragrunt_dir()</code> returns the absolute directory where the Terragrunt parent configuration file (by default <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>) lives. This is useful when you need to use relative paths with <a href="/terragrunt/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations">remote Terraform configurations</a> and you want those paths relative to your parent Terragrunt configuration file and not relative to the temporary directory where Terragrunt downloads the code.</p>
+
 <p>This function is very similar to <a href="#get_terragrunt_dir">get_terragrunt_dir()</a> except it returns the root instead of the leaf of your terragrunt configuration folder.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/terraform-code
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/terraform-code
 ├── terragrunt.hcl
 ├── common.tfvars
 ├── app1
@@ -3526,190 +3454,143 @@ remote_state {
 │   ├── app2
 │   |   └── terragrunt.hcl
 │   └── app3
-│       └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  extra_arguments "common_vars" {
-    commands = [
-      "apply",
-      "plan",
-      "import",
-      "push",
-      "refresh"
-    ]
+│       └── terragrunt.hcl
+</code></pre></div></div>
 
-    arguments = [
-      "-var-file=${get_parent_terragrunt_dir()}/common.tfvars"
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"common_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
+
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var-file=${get_parent_terragrunt_dir()}/common.tfvars"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <p>The common.tfvars located in the terraform root folder will be included by all applications, whatever their relative location to the root.</p>
-</div>
-</div>
-<div class="sect2">
+
 <h3 id="get_terraform_commands_that_need_vars">get_terraform_commands_that_need_vars</h3>
-<div class="paragraph">
-<p><code>get_terraform_commands_that_need_vars()</code> returns the list of terraform commands that accept <code>-var</code> and <code>-var-file</code> parameters. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  extra_arguments "common_var" {
-    commands  = get_terraform_commands_that_need_vars()
-    arguments = ["-var-file=${get_aws_account_id()}.tfvars"]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_terraform_commands_that_need_vars()</code> returns the list of terraform commands that accept <code class="language-plaintext highlighter-rouge">-var</code> and <code class="language-plaintext highlighter-rouge">-var-file</code> parameters. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"common_var"</span> <span class="p">{</span>
+    <span class="nx">commands</span>  <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_vars</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-var-file=${get_aws_account_id()}.tfvars"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="get_terraform_commands_that_need_input">get_terraform_commands_that_need_input</h3>
-<div class="paragraph">
-<p><code>get_terraform_commands_that_need_input()</code> returns the list of terraform commands that accept the <code>-input=(true or false)</code> parameter. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # Force Terraform to not ask for input value if some variables are undefined.
-  extra_arguments "disable_input" {
-    commands  = get_terraform_commands_that_need_input()
-    arguments = ["-input=false"]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_terraform_commands_that_need_input()</code> returns the list of terraform commands that accept the <code class="language-plaintext highlighter-rouge">-input=(true or false)</code> parameter. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Force Terraform to not ask for input value if some variables are undefined.</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"disable_input"</span> <span class="p">{</span>
+    <span class="nx">commands</span>  <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_input</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-input=false"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="get_terraform_commands_that_need_locking">get_terraform_commands_that_need_locking</h3>
-<div class="paragraph">
-<p><code>get_terraform_commands_that_need_locking()</code> returns the list of terraform commands that accept the <code>-lock-timeout</code> parameter. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # Force Terraform to keep trying to acquire a lock for up to 20 minutes if someone else already has the lock
-  extra_arguments "retry_lock" {
-    commands  = get_terraform_commands_that_need_locking()
-    arguments = ["-lock-timeout=20m"]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_terraform_commands_that_need_locking()</code> returns the list of terraform commands that accept the <code class="language-plaintext highlighter-rouge">-lock-timeout</code> parameter. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Force Terraform to keep trying to acquire a lock for up to 20 minutes if someone else already has the lock</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"retry_lock"</span> <span class="p">{</span>
+    <span class="nx">commands</span>  <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_locking</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-lock-timeout=20m"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="get_terraform_commands_that_need_parallelism">get_terraform_commands_that_need_parallelism</h3>
-<div class="paragraph">
-<p><code>get_terraform_commands_that_need_parallelism()</code> returns the list of terraform commands that accept the <code>-parallelism</code> parameter. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # Force Terraform to run with reduced parallelism
-  extra_arguments "parallelism" {
-    commands  = get_terraform_commands_that_need_parallelism()
-    arguments = ["-parallelism=5"]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_terraform_commands_that_need_parallelism()</code> returns the list of terraform commands that accept the <code class="language-plaintext highlighter-rouge">-parallelism</code> parameter. This function is used when defining <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#multiple-extra_arguments-blocks">extra_arguments</a>.</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Force Terraform to run with reduced parallelism</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"parallelism"</span> <span class="p">{</span>
+    <span class="nx">commands</span>  <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_parallelism</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-parallelism=5"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="get_aws_account_id">get_aws_account_id</h3>
-<div class="paragraph">
-<p><code>get_aws_account_id()</code> returns the AWS account id associated with the current set of credentials. Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  backend = "s3"
-  config = {
-    bucket = "mycompany-${get_aws_account_id()}"
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_aws_account_id()</code> returns the AWS account id associated with the current set of credentials. Example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="p">=</span> <span class="s2">"mycompany-${get_aws_account_id()}"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="get_aws_caller_identity_arn">get_aws_caller_identity_arn</h3>
-<div class="paragraph">
-<p><code>get_aws_caller_identity_arn()</code> returns the ARN of the AWS identity associated with the current set of credentials. Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">inputs = {
-  caller_arn = get_aws_caller_identity_arn()
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p><code class="language-plaintext highlighter-rouge">get_aws_caller_identity_arn()</code> returns the ARN of the AWS identity associated with the current set of credentials. Example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">caller_arn</span> <span class="p">=</span> <span class="nx">get_aws_caller_identity_arn</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="get_aws_caller_identity_user_id">get_aws_caller_identity_user_id</h3>
-<div class="paragraph">
-<p><code>get_aws_caller_identity_user_id()</code> returns the UserId of the AWS identity associated with the current set of credentials. Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">inputs = {
-  caller_user_id = get_aws_caller_identity_user_id()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
+
+<p><code class="language-plaintext highlighter-rouge">get_aws_caller_identity_user_id()</code> returns the UserId of the AWS identity associated with the current set of credentials. Example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">caller_user_id</span> <span class="p">=</span> <span class="nx">get_aws_caller_identity_user_id</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <p>This allows uniqueness of the storage bucket per AWS account (since bucket name must be globally unique).</p>
-</div>
-<div class="paragraph">
+
 <p>It is also possible to configure variables specifically based on the account used:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  extra_arguments "common_var" {
-    commands = get_terraform_commands_that_need_vars()
-    arguments = ["-var-file=${get_aws_account_id()}.tfvars"]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"common_var"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_vars</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-var-file=${get_aws_account_id()}.tfvars"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="run_cmd">run_cmd</h3>
-<div class="paragraph">
-<p><code>run_cmd(command, arg1, arg2&#8230;&#8203;)</code> runs a shell command and returns the stdout as the result of the interpolation. The command is executed at the same folder as the <code>terragrunt.hcl</code> file. This is useful whenever you want to dynamically fill in arbitrary information in your Terragrunt configuration.</p>
-</div>
-<div class="paragraph">
+
+<p><code class="language-plaintext highlighter-rouge">run_cmd(command, arg1, arg2…​)</code> runs a shell command and returns the stdout as the result of the interpolation. The command is executed at the same folder as the <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file. This is useful whenever you want to dynamically fill in arbitrary information in your Terragrunt configuration.</p>
+
 <p>As an example, you could write a script that determines the bucket and DynamoDB table name based on the AWS account, instead of hardcoding the name of every account:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  backend = "s3"
-  config = {
-    bucket         = run_cmd("./get_names.sh", "bucket")
-    dynamodb_table = run_cmd("./get_names.sh", "dynamodb")
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If the command you are running has the potential to output sensitive values, you may wish to redact the output from appearing in the terminal. To do so, use the special <code>--terragrunt-quiet</code> argument which must be passed as the first argument to <code>run_cmd()</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">super_secret_value = run_cmd("--terragrunt-quiet", "./decrypt_secret.sh", "foo")</code></pre>
-</div>
-</div>
-<div class="paragraph">
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span>         <span class="p">=</span> <span class="nx">run_cmd</span><span class="err">(</span><span class="s2">"./get_names.sh"</span><span class="err">,</span> <span class="s2">"bucket"</span><span class="err">)</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="nx">run_cmd</span><span class="err">(</span><span class="s2">"./get_names.sh"</span><span class="err">,</span> <span class="s2">"dynamodb"</span><span class="err">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If the command you are running has the potential to output sensitive values, you may wish to redact the output from appearing in the terminal. To do so, use the special <code class="language-plaintext highlighter-rouge">--terragrunt-quiet</code> argument which must be passed as the first argument to <code class="language-plaintext highlighter-rouge">run_cmd()</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">super_secret_value</span> <span class="err">=</span> <span class="nx">run_cmd</span><span class="err">(</span><span class="s2">"--terragrunt-quiet"</span><span class="err">,</span> <span class="s2">"./decrypt_secret.sh"</span><span class="err">,</span> <span class="s2">"foo"</span><span class="err">)</span>
+</code></pre></div></div>
+
 <p><strong>Note:</strong> This will prevent terragrunt from displaying the output from the command in its output. However, the value could still be displayed in the Terraform output if Terraform does not treat it as a <a href="https://www.terraform.io/docs/configuration/outputs.html#sensitive-suppressing-values-in-cli-output">sensitive value</a>.</p>
-</div>
-</div>
-</div>
-</div>
+
         </div>
       </div>
     </div>

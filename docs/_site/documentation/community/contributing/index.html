@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Contributing</title>
 <meta name="description" content="Terragrunt is an open source project, and contributions from the community are very welcome!">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/community/contributing/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/community/contributing/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Contributing" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/community/contributing/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/community/contributing/
 " />
 <meta name="twitter:description" content="Terragrunt is an open source project, and contributions from the community are very welcome!" />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Contributing"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/community/contributing/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/community/contributing/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Terragrunt is an open source project, and contributions from the community are very welcome!"/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-03-community-contributing-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3170,166 +3170,121 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="contributing">Contributing</h2>
-<div class="sectionbody">
-<div class="paragraph">
+            <h2 id="contributing">Contributing</h2>
+
 <p>Terragrunt is an open source project, and contributions from the community are very welcome! Please check out the <a href="https://github.com/gruntwork-io/terragrunt/blob/master/CONTRIBUTING.md">Contribution Guidelines</a> and <a href="#developing-terragrunt">Developing Terragrunt</a> for instructions.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
+
 <h2 id="developing-terragrunt">Developing Terragrunt</h2>
-<div class="sectionbody">
-<div class="sect2">
+
 <h3 id="running-locally">Running locally</h3>
-<div class="paragraph">
-<p>To run Terragrunt locally, use the <code>go run</code> command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">go run main.go plan</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<p>To run Terragrunt locally, use the <code class="language-plaintext highlighter-rouge">go run</code> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go run main.go plan
+</code></pre></div></div>
+
 <h3 id="dependencies">Dependencies</h3>
-<div class="ulist">
+
 <ul>
-<li>
-<p>Terragrunt uses <code>dep</code>, a vendor package management tool for golang. See the dep repo for <a href="https://github.com/golang/dep">installation instructions</a>.</p>
-</li>
+  <li>Terragrunt uses <code class="language-plaintext highlighter-rouge">dep</code>, a vendor package management tool for golang. See the dep repo for <a href="https://github.com/golang/dep">installation instructions</a>.</li>
 </ul>
-</div>
-</div>
-<div class="sect2">
+
 <h3 id="running-tests">Running tests</h3>
-<div class="paragraph">
-<p><strong>Note</strong>: The tests in the <code>dynamodb</code> folder for Terragrunt run against a real AWS account and will add and remove real data from DynamoDB. DO NOT hit <code>CTRL+C</code> while the tests are running, as this will prevent them from cleaning up temporary tables and data in DynamoDB. We are not responsible for any charges you may incur.</p>
-</div>
-<div class="paragraph">
+
+<p><strong>Note</strong>: The tests in the <code class="language-plaintext highlighter-rouge">dynamodb</code> folder for Terragrunt run against a real AWS account and will add and remove real data from DynamoDB. DO NOT hit <code class="language-plaintext highlighter-rouge">CTRL+C</code> while the tests are running, as this will prevent them from cleaning up temporary tables and data in DynamoDB. We are not responsible for any charges you may incur.</p>
+
 <p>Before running the tests, you must configure your <a href="/terragrunt/documentation/features/aws-auth/#aws-credentials">AWS credentials</a> and <a href="/terragrunt/documentation/features/aws-auth/#aws-iam-policies">AWS IAM policies</a>.</p>
-</div>
-<div class="paragraph">
+
 <p>To run all the tests:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">go test -v ./...</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To run only the tests in a specific package, such as the package <code>remote</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cd remote
-go test -v</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And to run a specific test, such as <code>TestToTerraformRemoteConfigArgsNoBackendConfigs</code> in package <code>remote</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cd remote
-go test -v -run TestToTerraformRemoteConfigArgsNoBackendConfigs</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go <span class="nb">test</span> <span class="nt">-v</span> ./...
+</code></pre></div></div>
+
+<p>To run only the tests in a specific package, such as the package <code class="language-plaintext highlighter-rouge">remote</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>remote
+go <span class="nb">test</span> <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>And to run a specific test, such as <code class="language-plaintext highlighter-rouge">TestToTerraformRemoteConfigArgsNoBackendConfigs</code> in package <code class="language-plaintext highlighter-rouge">remote</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>remote
+go <span class="nb">test</span> <span class="nt">-v</span> <span class="nt">-run</span> TestToTerraformRemoteConfigArgsNoBackendConfigs
+</code></pre></div></div>
+
 <h3 id="debug-logging">Debug logging</h3>
-<div class="paragraph">
-<p>If you set the <code>TERRAGRUNT_DEBUG</code> environment variable to "true", the stack trace for any error will be printed to stdout when you run the app.</p>
-</div>
-<div class="paragraph">
-<p>Additionally, newer features introduced in v0.19.0 (such as <code>locals</code> and <code>dependency</code> blocks) can output more verbose logging if you set the <code>TG_LOG</code> environment variable to <code>debug</code>.</p>
-</div>
-</div>
-<div class="sect2">
+
+<p>If you set the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_DEBUG</code> environment variable to “true”, the stack trace for any error will be printed to stdout when you run the app.</p>
+
+<p>Additionally, newer features introduced in v0.19.0 (such as <code class="language-plaintext highlighter-rouge">locals</code> and <code class="language-plaintext highlighter-rouge">dependency</code> blocks) can output more verbose logging if you set the <code class="language-plaintext highlighter-rouge">TG_LOG</code> environment variable to <code class="language-plaintext highlighter-rouge">debug</code>.</p>
+
 <h3 id="error-handling">Error handling</h3>
-<div class="paragraph">
+
 <p>In this project, we try to ensure that:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Every error has a stacktrace. This makes debugging easier.</p>
-</li>
-<li>
-<p>Every error generated by our own code (as opposed to errors from Go built-in functions or errors from 3rd party libraries) has a custom type. This makes error handling more precise, as we can decide to handle different types of errors differently.</p>
-</li>
+
+<ol>
+  <li>
+    <p>Every error has a stacktrace. This makes debugging easier.</p>
+  </li>
+  <li>
+    <p>Every error generated by our own code (as opposed to errors from Go built-in functions or errors from 3rd party libraries) has a custom type. This makes error handling more precise, as we can decide to handle different types of errors differently.</p>
+  </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>To accomplish these two goals, we have created an <code>errors</code> package that has several helper methods, such as <code>errors.WithStackTrace(err error)</code>, which wraps the given <code>error</code> in an Error object that contains a stacktrace. Under the hood, the <code>errors</code> package is using the <a href="https://github.com/go-errors/errors">go-errors</a> library, but this may change in the future, so the rest of the code should not depend on <code>go-errors</code> directly.</p>
-</div>
-<div class="paragraph">
-<p>Here is how the <code>errors</code> package should be used:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Any time you want to create your own error, create a custom type for it, and when instantiating that type, wrap it with a call to <code>errors.WithStackTrace</code>. That way, any time you call a method defined in the Terragrunt code, you know the error it returns already has a stacktrace and you don&#8217;t have to wrap it yourself.</p>
-</li>
-<li>
-<p>Any time you get back an error object from a function built into Go or a 3rd party library, immediately wrap it with <code>errors.WithStackTrace</code>. This gives us a stacktrace as close to the source as possible.</p>
-</li>
-<li>
-<p>If you need to get back the underlying error, you can use the <code>errors.IsError</code> and <code>errors.Unwrap</code> functions.</p>
-</li>
+
+<p>To accomplish these two goals, we have created an <code class="language-plaintext highlighter-rouge">errors</code> package that has several helper methods, such as <code class="language-plaintext highlighter-rouge">errors.WithStackTrace(err error)</code>, which wraps the given <code class="language-plaintext highlighter-rouge">error</code> in an Error object that contains a stacktrace. Under the hood, the <code class="language-plaintext highlighter-rouge">errors</code> package is using the <a href="https://github.com/go-errors/errors">go-errors</a> library, but this may change in the future, so the rest of the code should not depend on <code class="language-plaintext highlighter-rouge">go-errors</code> directly.</p>
+
+<p>Here is how the <code class="language-plaintext highlighter-rouge">errors</code> package should be used:</p>
+
+<ol>
+  <li>
+    <p>Any time you want to create your own error, create a custom type for it, and when instantiating that type, wrap it with a call to <code class="language-plaintext highlighter-rouge">errors.WithStackTrace</code>. That way, any time you call a method defined in the Terragrunt code, you know the error it returns already has a stacktrace and you don’t have to wrap it yourself.</p>
+  </li>
+  <li>
+    <p>Any time you get back an error object from a function built into Go or a 3rd party library, immediately wrap it with <code class="language-plaintext highlighter-rouge">errors.WithStackTrace</code>. This gives us a stacktrace as close to the source as possible.</p>
+  </li>
+  <li>
+    <p>If you need to get back the underlying error, you can use the <code class="language-plaintext highlighter-rouge">errors.IsError</code> and <code class="language-plaintext highlighter-rouge">errors.Unwrap</code> functions.</p>
+  </li>
 </ol>
-</div>
-</div>
-<div class="sect2">
+
 <h3 id="formatting">Formatting</h3>
-<div class="paragraph">
-<p>Every source file in this project should be formatted with <code>go fmt</code>. There are few helper scripts and targets in the Makefile that can help with this (mostly taken from the <a href="https://github.com/hashicorp/terraform/">terraform repo</a>):</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>make fmtcheck</code> Checks to see if all source files are formatted. Exits 1 if there are unformatted files.</p>
-</li>
-<li>
-<p><code>make fmt</code> Formats all source files with <code>gofmt</code>.</p>
-</li>
-<li>
-<p><code>make install-pre-commit-hook</code></p>
-<div class="paragraph">
-<p>Installs a git pre-commit hook that will run all of the source files through <code>gofmt</code>.</p>
-</div>
-</li>
+
+<p>Every source file in this project should be formatted with <code class="language-plaintext highlighter-rouge">go fmt</code>. There are few helper scripts and targets in the Makefile that can help with this (mostly taken from the <a href="https://github.com/hashicorp/terraform/">terraform repo</a>):</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">make fmtcheck</code> Checks to see if all source files are formatted. Exits 1 if there are unformatted files.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">make fmt</code> Formats all source files with <code class="language-plaintext highlighter-rouge">gofmt</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">make install-pre-commit-hook</code></p>
+
+    <p>Installs a git pre-commit hook that will run all of the source files through <code class="language-plaintext highlighter-rouge">gofmt</code>.</p>
+  </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>To ensure that your changes get properly formatted, please install the git pre-commit hook with <code>make install-pre-commit-hook</code>.</p>
-</div>
-</div>
-<div class="sect2">
+
+<p>To ensure that your changes get properly formatted, please install the git pre-commit hook with <code class="language-plaintext highlighter-rouge">make install-pre-commit-hook</code>.</p>
+
 <h3 id="releasing-new-versions">Releasing new versions</h3>
-<div class="paragraph">
+
 <p>To release a new version, just go to the <a href="https://github.com/gruntwork-io/terragrunt/releases">Releases Page</a> and create a new release. The CircleCI job for this repo has been configured to:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Automatically detect new tags.</p>
-</li>
-<li>
-<p>Build binaries for every OS using that tag as a version number.</p>
-</li>
-<li>
-<p>Upload the binaries to the release in GitHub.</p>
-</li>
+
+<ol>
+  <li>
+    <p>Automatically detect new tags.</p>
+  </li>
+  <li>
+    <p>Build binaries for every OS using that tag as a version number.</p>
+  </li>
+  <li>
+    <p>Upload the binaries to the release in GitHub.</p>
+  </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>See <code>.circleci/config.yml</code> for details.</p>
-</div>
-</div>
-</div>
-</div>
+
+<p>See <code class="language-plaintext highlighter-rouge">.circleci/config.yml</code> for details.</p>
+
         </div>
       </div>
     </div>

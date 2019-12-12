@@ -16,7 +16,7 @@
 <![endif]-->
 <title>CLI options</title>
 <meta name="description" content="Terragrunt forwards all arguments and options to Terraform. Learn more about CLI options in Terragrunt.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/getting-started/cli-options/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/getting-started/cli-options/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="CLI options" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/getting-started/cli-options/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/getting-started/cli-options/
 " />
 <meta name="twitter:description" content="Terragrunt forwards all arguments and options to Terraform. Learn more about CLI options in Terragrunt." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="CLI options"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/getting-started/cli-options/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/getting-started/cli-options/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Terragrunt forwards all arguments and options to Terraform. Learn more about CLI options in Terragrunt."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-cli-options-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,66 +3165,61 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="cli-options">CLI Options</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Terragrunt forwards all arguments and options to Terraform. The only exceptions are <code>--version</code>, <code>terragrunt-info</code> and arguments that start with the prefix <code>--terragrunt-</code>. The currently available options are:</p>
-</div>
-<div class="ulist">
+            <h2 id="cli-options">CLI Options</h2>
+
+<p>Terragrunt forwards all arguments and options to Terraform. The only exceptions are <code class="language-plaintext highlighter-rouge">--version</code>, <code class="language-plaintext highlighter-rouge">terragrunt-info</code> and arguments that start with the prefix <code class="language-plaintext highlighter-rouge">--terragrunt-</code>. The currently available options are:</p>
+
 <ul>
-<li>
-<p><code>--terragrunt-config</code>: A custom path to the <code>terragrunt.hcl</code> file. May also be specified via the <code>TERRAGRUNT_CONFIG</code> environment variable. The default path is <code>terragrunt.hcl</code> in the current directory (see <a href="/terragrunt/documentation/getting-started/configuration/#configuration">Configuration</a> for a slightly more nuanced explanation). This argument is not used with the <code>apply-all</code>, <code>destroy-all</code>, <code>output-all</code>, <code>validate-all</code>, and <code>plan-all</code> commands.</p>
-</li>
-<li>
-<p><code>--terragrunt-tfpath</code>: A custom path to the Terraform binary. May also be specified via the <code>TERRAGRUNT_TFPATH</code> environment variable. The default is <code>terraform</code> in a directory on your PATH.</p>
-</li>
-<li>
-<p><code>--terragrunt-no-auto-init</code>: Don&#8217;t automatically run <code>terraform init</code> when other commands are run (e.g. <code>terragrunt apply</code>). Useful if you want to pass custom arguments to <code>terraform init</code> that are specific to a user or execution environment, and therefore cannot be specified as <code>extra_arguments</code>. For example, <code>-plugin-dir</code>. You must run <code>terragrunt init</code> yourself in this case if needed. <code>terragrunt</code> will fail if it detects that <code>init</code> is needed, but auto init is disabled. See <a href="/terragrunt/documentation/features/auto-init#auto-init">Auto-Init</a></p>
-</li>
-<li>
-<p><code>--terragrunt-no-auto-retry</code>: Don&#8217;t automatically retry commands which fail with transient errors. See <a href="/terragrunt/documentation/features/auto-retry#auto-retry">Auto-Retry</a></p>
-</li>
-<li>
-<p><code>--terragrunt-non-interactive</code>: Don&#8217;t show interactive user prompts. This will default the answer for all prompts to 'yes'. Useful if you need to run Terragrunt in an automated setting (e.g. from a script). May also be specified with the <a href="https://www.terraform.io/docs/configuration/environment-variables.html#tf_input">TF_INPUT</a> environment variable.</p>
-</li>
-<li>
-<p><code>--terragrunt-working-dir</code>: Set the directory where Terragrunt should execute the <code>terraform</code> command. Default is the current working directory. Note that for the <code>apply-all</code>, <code>destroy-all</code>, <code>output-all</code>, <code>validate-all</code>, and <code>plan-all</code> commands, this parameter has a different meaning: Terragrunt will apply or destroy all the Terraform modules in the subfolders of the <code>terragrunt-working-dir</code>, running <code>terraform</code> in the root of each module it finds.</p>
-</li>
-<li>
-<p><code>--terragrunt-download-dir</code>: The path where to download Terraform code when using <a href="https://blog.gruntwork.io/terragrunt-how-to-keep-your-terraform-code-dry-and-maintainable-f61ae06959d8">remote Terraform configurations</a>. May also be specified via the <code>TERRAGRUNT_DOWNLOAD</code> environment variable. Default is <code>.terragrunt-cache</code> in the working directory. We recommend adding this folder to your <code>.gitignore</code>.</p>
-</li>
-<li>
-<p><code>--terragrunt-source</code>: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. May also be specified via the <code>TERRAGRUNT_SOURCE</code> environment variable. The source should use the same syntax as the <a href="https://www.terraform.io/docs/modules/sources.html">Terraform module source</a> parameter. If you specify this argument for the <code>apply-all</code>, <code>destroy-all</code>, <code>output-all</code>, <code>validate-all</code>, or <code>plan-all</code> commands, Terragrunt will assume this is the local file path for all of your Terraform modules, and for each module processed by the <code>xxx-all</code> command, Terragrunt will automatically append the path of <code>source</code> parameter in each module to the <code>--terragrunt-source</code> parameter you passed in.</p>
-</li>
-<li>
-<p><code>--terragrunt-source-update</code>: Delete the contents of the temporary folder before downloading Terraform source code into it. Can also be enabled by setting the <code>TERRAGRUNT_SOURCE_UPDATE</code> environment variable to <code>true</code>.</p>
-</li>
-<li>
-<p><code>--terragrunt-ignore-dependency-errors</code>: <code>*-all</code> commands continue processing components even if a dependency fails</p>
-</li>
-<li>
-<p><code>--terragrunt-iam-role</code>: Assume the specified IAM role ARN before running Terraform or AWS commands. May also be specified via the <code>TERRAGRUNT_IAM_ROLE</code> environment variable. This is a convenient way to use Terragrunt and Terraform with multiple AWS accounts.</p>
-</li>
-<li>
-<p><code>--terragrunt-exclude-dir</code>: Unix-style glob of directories to exclude when running <code>*-all</code> commands. Modules under these directories will be excluded during execution of the commands. If a relative path is specified, it should be relative from <code>--terragrunt-working-dir</code>. Flag can be specified multiple times. This will only exclude the module, not its dependencies.</p>
-</li>
-<li>
-<p><code>--terragrunt-include-dir</code>: Unix-style glob of directories to include when running <code>*-all</code> commands. Only modules under these directories (and all dependent modules) will be included during execution of the commands. If a relative path is specified, it should be relative from <code>--terragrunt-working-dir</code>. Flag can be specified multiple times.</p>
-</li>
-<li>
-<p><code>--terragrunt-ignore-dependency-order</code>: Ignore the depedencies between modules when running <code>*-all</code> commands.</p>
-</li>
-<li>
-<p><code>--terragrunt-ignore-external-dependencies</code>: Dont attempt to include any external dependencies when running <code>*-all</code> commands</p>
-</li>
-<li>
-<p><code>--terragrunt-include-external-dependencies</code>: Include any external dependencies when running <code>*-all</code> without asking.</p>
-</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-config</code>: A custom path to the <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file. May also be specified via the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_CONFIG</code> environment variable. The default path is <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> in the current directory (see <a href="/terragrunt/documentation/getting-started/configuration/#configuration">Configuration</a> for a slightly more nuanced explanation). This argument is not used with the <code class="language-plaintext highlighter-rouge">apply-all</code>, <code class="language-plaintext highlighter-rouge">destroy-all</code>, <code class="language-plaintext highlighter-rouge">output-all</code>, <code class="language-plaintext highlighter-rouge">validate-all</code>, and <code class="language-plaintext highlighter-rouge">plan-all</code> commands.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-tfpath</code>: A custom path to the Terraform binary. May also be specified via the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_TFPATH</code> environment variable. The default is <code class="language-plaintext highlighter-rouge">terraform</code> in a directory on your PATH.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-no-auto-init</code>: Don’t automatically run <code class="language-plaintext highlighter-rouge">terraform init</code> when other commands are run (e.g. <code class="language-plaintext highlighter-rouge">terragrunt apply</code>). Useful if you want to pass custom arguments to <code class="language-plaintext highlighter-rouge">terraform init</code> that are specific to a user or execution environment, and therefore cannot be specified as <code class="language-plaintext highlighter-rouge">extra_arguments</code>. For example, <code class="language-plaintext highlighter-rouge">-plugin-dir</code>. You must run <code class="language-plaintext highlighter-rouge">terragrunt init</code> yourself in this case if needed. <code class="language-plaintext highlighter-rouge">terragrunt</code> will fail if it detects that <code class="language-plaintext highlighter-rouge">init</code> is needed, but auto init is disabled. See <a href="/terragrunt/documentation/features/auto-init#auto-init">Auto-Init</a></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-no-auto-retry</code>: Don’t automatically retry commands which fail with transient errors. See <a href="/terragrunt/documentation/features/auto-retry#auto-retry">Auto-Retry</a></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-non-interactive</code>: Don’t show interactive user prompts. This will default the answer for all prompts to ‘yes’. Useful if you need to run Terragrunt in an automated setting (e.g. from a script). May also be specified with the <a href="https://www.terraform.io/docs/configuration/environment-variables.html#tf_input">TF_INPUT</a> environment variable.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-working-dir</code>: Set the directory where Terragrunt should execute the <code class="language-plaintext highlighter-rouge">terraform</code> command. Default is the current working directory. Note that for the <code class="language-plaintext highlighter-rouge">apply-all</code>, <code class="language-plaintext highlighter-rouge">destroy-all</code>, <code class="language-plaintext highlighter-rouge">output-all</code>, <code class="language-plaintext highlighter-rouge">validate-all</code>, and <code class="language-plaintext highlighter-rouge">plan-all</code> commands, this parameter has a different meaning: Terragrunt will apply or destroy all the Terraform modules in the subfolders of the <code class="language-plaintext highlighter-rouge">terragrunt-working-dir</code>, running <code class="language-plaintext highlighter-rouge">terraform</code> in the root of each module it finds.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-download-dir</code>: The path where to download Terraform code when using <a href="https://blog.gruntwork.io/terragrunt-how-to-keep-your-terraform-code-dry-and-maintainable-f61ae06959d8">remote Terraform configurations</a>. May also be specified via the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_DOWNLOAD</code> environment variable. Default is <code class="language-plaintext highlighter-rouge">.terragrunt-cache</code> in the working directory. We recommend adding this folder to your <code class="language-plaintext highlighter-rouge">.gitignore</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-source</code>: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. May also be specified via the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_SOURCE</code> environment variable. The source should use the same syntax as the <a href="https://www.terraform.io/docs/modules/sources.html">Terraform module source</a> parameter. If you specify this argument for the <code class="language-plaintext highlighter-rouge">apply-all</code>, <code class="language-plaintext highlighter-rouge">destroy-all</code>, <code class="language-plaintext highlighter-rouge">output-all</code>, <code class="language-plaintext highlighter-rouge">validate-all</code>, or <code class="language-plaintext highlighter-rouge">plan-all</code> commands, Terragrunt will assume this is the local file path for all of your Terraform modules, and for each module processed by the <code class="language-plaintext highlighter-rouge">xxx-all</code> command, Terragrunt will automatically append the path of <code class="language-plaintext highlighter-rouge">source</code> parameter in each module to the <code class="language-plaintext highlighter-rouge">--terragrunt-source</code> parameter you passed in.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-source-update</code>: Delete the contents of the temporary folder before downloading Terraform source code into it. Can also be enabled by setting the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_SOURCE_UPDATE</code> environment variable to <code class="language-plaintext highlighter-rouge">true</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-ignore-dependency-errors</code>: <code class="language-plaintext highlighter-rouge">*-all</code> commands continue processing components even if a dependency fails</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-iam-role</code>: Assume the specified IAM role ARN before running Terraform or AWS commands. May also be specified via the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_IAM_ROLE</code> environment variable. This is a convenient way to use Terragrunt and Terraform with multiple AWS accounts.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-exclude-dir</code>: Unix-style glob of directories to exclude when running <code class="language-plaintext highlighter-rouge">*-all</code> commands. Modules under these directories will be excluded during execution of the commands. If a relative path is specified, it should be relative from <code class="language-plaintext highlighter-rouge">--terragrunt-working-dir</code>. Flag can be specified multiple times. This will only exclude the module, not its dependencies.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-include-dir</code>: Unix-style glob of directories to include when running <code class="language-plaintext highlighter-rouge">*-all</code> commands. Only modules under these directories (and all dependent modules) will be included during execution of the commands. If a relative path is specified, it should be relative from <code class="language-plaintext highlighter-rouge">--terragrunt-working-dir</code>. Flag can be specified multiple times.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-ignore-dependency-order</code>: Ignore the depedencies between modules when running <code class="language-plaintext highlighter-rouge">*-all</code> commands.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-ignore-external-dependencies</code>: Dont attempt to include any external dependencies when running <code class="language-plaintext highlighter-rouge">*-all</code> commands</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--terragrunt-include-external-dependencies</code>: Include any external dependencies when running <code class="language-plaintext highlighter-rouge">*-all</code> without asking.</p>
+  </li>
 </ul>
-</div>
-</div>
-</div>
+
         </div>
       </div>
     </div>

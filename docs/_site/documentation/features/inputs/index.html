@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Inputs</title>
 <meta name="description" content="Learn how to use inputs.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/features/inputs/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/features/inputs/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Inputs" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/features/inputs/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/inputs/
 " />
 <meta name="twitter:description" content="Learn how to use inputs." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Inputs"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/features/inputs/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/inputs/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn how to use inputs."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-inputs-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,75 +3165,60 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="inputs">Inputs</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You can set values for your module&#8217;s input parameters by specifying an <code>inputs</code> block in <code>terragrunt.hcl</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">inputs = {
-  instance_type  = "t2.micro"
-  instance_count = 10
+            <h2 id="inputs">Inputs</h2>
 
-  tags = {
-    Name = "example-app"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Whenever you run a Terragrunt command, Terragrunt will set any inputs you pass in as environment variables. For example, with the <code>terragrunt.hcl</code> file above, running <code>terragrunt apply</code> is roughly equivalent to:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ terragrunt apply
+<p>You can set values for your module’s input parameters by specifying an <code class="language-plaintext highlighter-rouge">inputs</code> block in <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"t2.micro"</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">10</span>
+
+  <span class="nx">tags</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">Name</span> <span class="p">=</span> <span class="s2">"example-app"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Whenever you run a Terragrunt command, Terragrunt will set any inputs you pass in as environment variables. For example, with the <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file above, running <code class="language-plaintext highlighter-rouge">terragrunt apply</code> is roughly equivalent to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
 
 # Roughly equivalent to:
 
 TF_VAR_instance_type="t2.micro" \
 TF_VAR_instance_count=10 \
 TF_VAR_tags='{"Name":"example-app"}' \
-terraform apply</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note that Terragrunt will respect any <code>TF_VAR_xxx</code> variables you&#8217;ve manually set in your environment, ensuring that anything in <code>inputs</code> will NOT be override anything you&#8217;ve already set in your environment.</p>
-</div>
-<div class="sect2">
+terraform apply
+</code></pre></div></div>
+
+<p>Note that Terragrunt will respect any <code class="language-plaintext highlighter-rouge">TF_VAR_xxx</code> variables you’ve manually set in your environment, ensuring that anything in <code class="language-plaintext highlighter-rouge">inputs</code> will NOT be override anything you’ve already set in your environment.</p>
+
 <h3 id="variable-precedence">Variable precedence</h3>
-<div class="paragraph">
+
 <p>Terragrunt follows the same variable precedence as <a href="https://www.terraform.io/docs/configuration/variables.html#variable-definition-precedence">terraform</a>.</p>
-</div>
-<div class="paragraph">
+
 <p>If the same variable is assigned multiple values, Terraform will use the <strong>last</strong> value it finds overriding any previous values.</p>
-</div>
-<div class="paragraph">
+
 <p>Variables are loaded in the following order:</p>
-</div>
-<div class="ulist">
+
 <ul>
-<li>
-<p>Environment variables.</p>
-</li>
-<li>
-<p><code>terraform.tfvars</code> file, if present.</p>
-</li>
-<li>
-<p><code>terraform.tfvars.json</code> file, if present.</p>
-</li>
-<li>
-<p>Any <code><strong>.auto.tfvars</code>/<code></strong>.auto.tfvars.json</code> files, processed in order of their filenames.</p>
-</li>
-<li>
-<p>Any <code>-var</code>/<code>-var-file</code> options on the command line, in the order they are provided.</p>
-</li>
+  <li>
+    <p>Environment variables.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">terraform.tfvars</code> file, if present.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">terraform.tfvars.json</code> file, if present.</p>
+  </li>
+  <li>
+    <p>Any <code class="language-plaintext highlighter-rouge">.auto.tfvars</code>/<code class="language-plaintext highlighter-rouge">&lt;/emphasis&gt;.auto.tfvars.json</code> files, processed in order of their filenames.</p>
+  </li>
+  <li>
+    <p>Any <code class="language-plaintext highlighter-rouge">-var</code>/<code class="language-plaintext highlighter-rouge">-var-file</code> options on the command line, in the order they are provided.</p>
+  </li>
 </ul>
-</div>
-</div>
-</div>
-</div>
+
         </div>
       </div>
     </div>

@@ -18,7 +18,6 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap', '1.4.0'
   gem 'therubyracer', '0.12.3'
   gem 'less', '2.6.0'
-  gem 'jekyll-asciidoc'
   gem 'jekyll-toc'
   gem 'jekyll-redirect-from'
 end

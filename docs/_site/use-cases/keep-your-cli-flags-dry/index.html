@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Keep your CLI flags DRY</title>
 <meta name="description" content="Learn how to keep CLI flags DRY with "extra_arguments" block in your "terragrunt.hcl".">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/use-cases/keep-your-cli-flags-dry/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/use-cases/keep-your-cli-flags-dry/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Keep your CLI flags DRY" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/use-cases/keep-your-cli-flags-dry/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/use-cases/keep-your-cli-flags-dry/
 " />
 <meta name="twitter:description" content="Learn how to keep CLI flags DRY with "extra_arguments" block in your "terragrunt.hcl"." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Keep your CLI flags DRY"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/use-cases/keep-your-cli-flags-dry/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/use-cases/keep-your-cli-flags-dry/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn how to keep CLI flags DRY with "extra_arguments" block in your "terragrunt.hcl"."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-use-cases-keep-your-cli-flags-dry-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3166,173 +3166,143 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="keep-your-cli-flags-dry">Keep your CLI flags DRY</h2>
-<div class="sectionbody">
-<div class="ulist">
+            <h2 id="keep-your-cli-flags-dry">Keep your CLI flags DRY</h2>
+
 <ul>
-<li>
-<p><a href="#motivation">Motivation</a></p>
-</li>
-<li>
-<p><a href="#multiple-extra_arguments-blocks">Multiple extra_arguments blocks</a></p>
-</li>
-<li>
-<p><a href="#extra_arguments-for-init">extra_arguments for init</a></p>
-</li>
-<li>
-<p><a href="#required-and-optional-var-files">Required and optional var-files</a></p>
-</li>
-<li>
-<p><a href="#handling-whitespace">Handling whitespace</a></p>
-</li>
+  <li>
+    <p><a href="#motivation">Motivation</a></p>
+  </li>
+  <li>
+    <p><a href="#multiple-extra_arguments-blocks">Multiple extra_arguments blocks</a></p>
+  </li>
+  <li>
+    <p><a href="#extra_arguments-for-init">extra_arguments for init</a></p>
+  </li>
+  <li>
+    <p><a href="#required-and-optional-var-files">Required and optional var-files</a></p>
+  </li>
+  <li>
+    <p><a href="#handling-whitespace">Handling whitespace</a></p>
+  </li>
 </ul>
-</div>
-<div class="sect2">
+
 <h3 id="motivation">Motivation</h3>
-<div class="paragraph">
-<p>Sometimes you may need to pass extra CLI arguments every time you run certain <code>terraform</code> commands. For example, you may want to set the <code>lock-timeout</code> setting to 20 minutes for all commands that may modify remote state so that Terraform will keep trying to acquire a lock for up to 20 minutes if someone else already has the lock rather than immediately exiting with an error.</p>
-</div>
-<div class="paragraph">
-<p>You can configure Terragrunt to pass specific CLI arguments for specific commands using an <code>extra_arguments</code> block in your <code>terragrunt.hcl</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # Force Terraform to keep trying to acquire a lock for
-  # up to 20 minutes if someone else already has the lock
-  extra_arguments "retry_lock" {
-    commands = [
-      "init",
-      "apply",
-      "refresh",
-      "import",
-      "plan",
-      "taint",
-      "untaint"
-    ]
 
-    arguments = [
-      "-lock-timeout=20m"
-    ]
+<p>Sometimes you may need to pass extra CLI arguments every time you run certain <code class="language-plaintext highlighter-rouge">terraform</code> commands. For example, you may want to set the <code class="language-plaintext highlighter-rouge">lock-timeout</code> setting to 20 minutes for all commands that may modify remote state so that Terraform will keep trying to acquire a lock for up to 20 minutes if someone else already has the lock rather than immediately exiting with an error.</p>
 
-    env_vars = {
-      TF_VAR_var_from_environment = "value"
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Each <code>extra_arguments</code> block includes an arbitrary name (in the example above, <code>retry_lock</code>), a list of <code>commands</code> to which the extra arguments should be added, and a list of <code>arguments</code> or <code>required_var_files</code> or <code>optional_var_files</code> to add. You can also pass custom environment variables using <code>env_vars</code> block, which stores environment variables in key value pairs. With the configuration above, when you run <code>terragrunt apply</code>, Terragrunt will call Terraform as follows:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ terragrunt apply
+<p>You can configure Terragrunt to pass specific CLI arguments for specific commands using an <code class="language-plaintext highlighter-rouge">extra_arguments</code> block in your <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
 
-terraform apply -lock-timeout=20m</pre>
-</div>
-</div>
-<div class="paragraph">
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Force Terraform to keep trying to acquire a lock for</span>
+  <span class="c1"># up to 20 minutes if someone else already has the lock</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"retry_lock"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"init"</span><span class="p">,</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"taint"</span><span class="p">,</span>
+      <span class="s2">"untaint"</span>
+    <span class="p">]</span>
+
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-lock-timeout=20m"</span>
+    <span class="p">]</span>
+
+    <span class="nx">env_vars</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">TF_VAR_var_from_environment</span> <span class="p">=</span> <span class="s2">"value"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Each <code class="language-plaintext highlighter-rouge">extra_arguments</code> block includes an arbitrary name (in the example above, <code class="language-plaintext highlighter-rouge">retry_lock</code>), a list of <code class="language-plaintext highlighter-rouge">commands</code> to which the extra arguments should be added, and a list of <code class="language-plaintext highlighter-rouge">arguments</code> or <code class="language-plaintext highlighter-rouge">required_var_files</code> or <code class="language-plaintext highlighter-rouge">optional_var_files</code> to add. You can also pass custom environment variables using <code class="language-plaintext highlighter-rouge">env_vars</code> block, which stores environment variables in key value pairs. With the configuration above, when you run <code class="language-plaintext highlighter-rouge">terragrunt apply</code>, Terragrunt will call Terraform as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
+
+terraform apply -lock-timeout=20m
+</code></pre></div></div>
+
 <p>You can even use built-in functions such as <a href="/terragrunt/documentation/features/built-in-functions/#get_terraform_commands_that_need_locking">get_terraform_commands_that_need_locking</a> to automatically populate the lsit of Terraform commands that need locking:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # Force Terraform to keep trying to acquire a lock for up to 20 minutes if someone else already has the lock
-  extra_arguments "retry_lock" {
-    commands  = get_terraform_commands_that_need_locking()
-    arguments = ["-lock-timeout=20m"]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Force Terraform to keep trying to acquire a lock for up to 20 minutes if someone else already has the lock</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"retry_lock"</span> <span class="p">{</span>
+    <span class="nx">commands</span>  <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_locking</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-lock-timeout=20m"</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="multiple-extra_arguments-blocks">Multiple extra_arguments blocks</h3>
-<div class="paragraph">
-<p>You can specify one or more <code>extra_arguments</code> blocks. The <code>arguments</code> in each block will be applied any time you call <code>terragrunt</code> with one of the commands in the <code>commands</code> list. If more than one <code>extra_arguments</code> block matches a command, the arguments will be added in the order of appearance in the configuration. For example, in addition to lock settings, you may also want to pass custom <code>-var-file</code> arguments to several commands:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # Force Terraform to keep trying to acquire a lock for
-  # up to 20 minutes if someone else already has the lock
-  extra_arguments "retry_lock" {
-    commands  = get_terraform_commands_that_need_locking()
-    arguments = ["-lock-timeout=20m"]
-  }
 
-  # Pass custom var files to Terraform
-  extra_arguments "custom_vars" {
-    commands = [
-      "apply",
-      "plan",
-      "import",
-      "push",
-      "refresh"
-    ]
+<p>You can specify one or more <code class="language-plaintext highlighter-rouge">extra_arguments</code> blocks. The <code class="language-plaintext highlighter-rouge">arguments</code> in each block will be applied any time you call <code class="language-plaintext highlighter-rouge">terragrunt</code> with one of the commands in the <code class="language-plaintext highlighter-rouge">commands</code> list. If more than one <code class="language-plaintext highlighter-rouge">extra_arguments</code> block matches a command, the arguments will be added in the order of appearance in the configuration. For example, in addition to lock settings, you may also want to pass custom <code class="language-plaintext highlighter-rouge">-var-file</code> arguments to several commands:</p>
 
-    arguments = [
-      "-var", "foo=bar",
-      "-var", "region=us-west-1"
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>With the configuration above, when you run <code>terragrunt apply</code>, Terragrunt will call Terraform as follows:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ terragrunt apply
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Force Terraform to keep trying to acquire a lock for</span>
+  <span class="c1"># up to 20 minutes if someone else already has the lock</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"retry_lock"</span> <span class="p">{</span>
+    <span class="nx">commands</span>  <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_locking</span><span class="err">()</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"-lock-timeout=20m"</span><span class="p">]</span>
+  <span class="p">}</span>
 
-terraform apply -lock-timeout=20m -var foo=bar -var region=us-west-1</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="extra_arguments-for-init"><code>extra_arguments</code> for <code>init</code></h3>
-<div class="paragraph">
-<p>Extra arguments for the <code>init</code> command have some additional behavior and constraints.</p>
-</div>
-<div class="paragraph">
-<p>In addition to being appended to the <code>terraform init</code> command that is run when you explicitly run <code>terragrunt init</code>, <code>extra_arguments</code> for <code>init</code> will also be appended to the <code>init</code> commands that are automatically run during other commands (see <a href="/terragrunt/documentation/features/auto-init">Auto-Init</a>).</p>
-</div>
-<div class="paragraph">
-<p>You must <em>not</em> specify the <code>-from-module</code> option (aka. the <code>SOURCE</code> argument for terraform &lt; 0.10.0) or the <code>DIR</code> argument in the <code>extra_arguments</code> for <code>init</code>. This option and argument will be provided automatically by terragrunt.</p>
-</div>
-<div class="paragraph">
-<p>Here&#8217;s an example of configuring <code>extra_arguments</code> for <code>init</code> in an environment in which terraform plugins are manually installed, rather than relying on terraform to automatically download them.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # ...
+  <span class="c1"># Pass custom var files to Terraform</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"custom_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
 
-  extra_arguments "init_args" {
-    commands = [
-      "init"
-    ]
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var"</span><span class="p">,</span> <span class="s2">"foo=bar"</span><span class="p">,</span>
+      <span class="s2">"-var"</span><span class="p">,</span> <span class="s2">"region=us-west-1"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-    arguments = [
-      "-get-plugins=false",
-      "-plugin-dir=/my/terraform/plugin/dir",
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+<p>With the configuration above, when you run <code class="language-plaintext highlighter-rouge">terragrunt apply</code>, Terragrunt will call Terraform as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
+
+terraform apply -lock-timeout=20m -var foo=bar -var region=us-west-1
+</code></pre></div></div>
+
+<h3 id="extra_arguments-for-init"><code class="language-plaintext highlighter-rouge">extra_arguments</code> for <code class="language-plaintext highlighter-rouge">init</code></h3>
+
+<p>Extra arguments for the <code class="language-plaintext highlighter-rouge">init</code> command have some additional behavior and constraints.</p>
+
+<p>In addition to being appended to the <code class="language-plaintext highlighter-rouge">terraform init</code> command that is run when you explicitly run <code class="language-plaintext highlighter-rouge">terragrunt init</code>, <code class="language-plaintext highlighter-rouge">extra_arguments</code> for <code class="language-plaintext highlighter-rouge">init</code> will also be appended to the <code class="language-plaintext highlighter-rouge">init</code> commands that are automatically run during other commands (see <a href="/terragrunt/documentation/features/auto-init">Auto-Init</a>).</p>
+
+<p>You must <em>not</em> specify the <code class="language-plaintext highlighter-rouge">-from-module</code> option (aka. the <code class="language-plaintext highlighter-rouge">SOURCE</code> argument for terraform &lt; 0.10.0) or the <code class="language-plaintext highlighter-rouge">DIR</code> argument in the <code class="language-plaintext highlighter-rouge">extra_arguments</code> for <code class="language-plaintext highlighter-rouge">init</code>. This option and argument will be provided automatically by terragrunt.</p>
+
+<p>Here’s an example of configuring <code class="language-plaintext highlighter-rouge">extra_arguments</code> for <code class="language-plaintext highlighter-rouge">init</code> in an environment in which terraform plugins are manually installed, rather than relying on terraform to automatically download them.</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+
+  <span class="nx">extra_arguments</span> <span class="s2">"init_args"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"init"</span>
+    <span class="p">]</span>
+
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-get-plugins=false"</span><span class="p">,</span>
+      <span class="s2">"-plugin-dir=/my/terraform/plugin/dir"</span><span class="p">,</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="required-and-optional-var-files">Required and optional var-files</h3>
-<div class="paragraph">
-<p>One common usage of extra_arguments is to include tfvars files. Instead of using arguments, it is simpler to use either <code>required_var_files</code> or <code>optional_var_files</code>. Both options require only to provide the list of file to include. The only difference is that <code>required_var_files</code> will add the extra argument <code>-var-file=&lt;your file&gt;</code> for each file specified and if they don&#8217;t exist, exit with an error. <code>optional_var_files</code>, on the other hand, will skip over files that don&#8217;t exists. This allows many conditional configurations based on environment variables as you can see in the following example:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/my/tf
+
+<p>One common usage of extra_arguments is to include tfvars files. Instead of using arguments, it is simpler to use either <code class="language-plaintext highlighter-rouge">required_var_files</code> or <code class="language-plaintext highlighter-rouge">optional_var_files</code>. Both options require only to provide the list of file to include. The only difference is that <code class="language-plaintext highlighter-rouge">required_var_files</code> will add the extra argument <code class="language-plaintext highlighter-rouge">-var-file=&lt;your file&gt;</code> for each file specified and if they don’t exist, exit with an error. <code class="language-plaintext highlighter-rouge">optional_var_files</code>, on the other hand, will skip over files that don’t exists. This allows many conditional configurations based on environment variables as you can see in the following example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/my/tf
 ├── terragrunt.hcl
 ├── prod.tfvars
 ├── us-west-2.tfvars
@@ -3343,43 +3313,37 @@ terraform apply -lock-timeout=20m -var foo=bar -var region=us-west-1</pre>
 ├── frontend-app
 │   ├── main.tf
 │   ├── us-east-1.tfvars
-│   └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  extra_arguments "conditional_vars" {
-    commands = [
-      "apply",
-      "plan",
-      "import",
-      "push",
-      "refresh"
-    ]
+│   └── terragrunt.hcl
+</code></pre></div></div>
 
-    required_var_files = [
-      "${get_parent_terragrunt_dir()}/terraform.tfvars"
-    ]
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"conditional_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
 
-    optional_var_files = [
-      "${get_parent_terragrunt_dir()}/${get_env("TF_VAR_env", "dev")}.tfvars",
-      "${get_parent_terragrunt_dir()}/${get_env("TF_VAR_region", "us-east-1")}.tfvars",
-      "${get_terragrunt_dir()}/${get_env("TF_VAR_env", "dev")}.tfvars",
-      "${get_terragrunt_dir()}/${get_env("TF_VAR_region", "us-east-1")}.tfvars"
-    ]
-  }</code></pre>
-</div>
-</div>
-<div class="paragraph">
+    <span class="nx">required_var_files</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"${get_parent_terragrunt_dir()}/terraform.tfvars"</span>
+    <span class="p">]</span>
+
+    <span class="nx">optional_var_files</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"${get_parent_terragrunt_dir()}/${get_env("</span><span class="nx">TF_VAR_env</span><span class="s2">", "</span><span class="nx">dev</span><span class="s2">")}.tfvars"</span><span class="p">,</span>
+      <span class="s2">"${get_parent_terragrunt_dir()}/${get_env("</span><span class="nx">TF_VAR_region</span><span class="s2">", "</span><span class="nx">us</span><span class="err">-</span><span class="nx">east</span><span class="err">-</span><span class="mi">1</span><span class="s2">")}.tfvars"</span><span class="p">,</span>
+      <span class="s2">"${get_terragrunt_dir()}/${get_env("</span><span class="nx">TF_VAR_env</span><span class="s2">", "</span><span class="nx">dev</span><span class="s2">")}.tfvars"</span><span class="p">,</span>
+      <span class="s2">"${get_terragrunt_dir()}/${get_env("</span><span class="nx">TF_VAR_region</span><span class="s2">", "</span><span class="nx">us</span><span class="err">-</span><span class="nx">east</span><span class="err">-</span><span class="mi">1</span><span class="s2">")}.tfvars"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
 <p>See the <a href="/terragrunt/documentation/features/built-in-functions/#get_terragrunt_dir">get_terragrunt_dir()</a> and <a href="/terragrunt/documentation/features/built-in-functions/#get_parent_terragrunt_dir">get_parent_terragrunt_dir()</a> documentation for more details.</p>
-</div>
-<div class="paragraph">
-<p>With the configuration above, when you run <code>terragrunt apply-all</code>, Terragrunt will call Terraform as follows:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ terragrunt apply-all
+
+<p>With the configuration above, when you run <code class="language-plaintext highlighter-rouge">terragrunt apply-all</code>, Terragrunt will call Terraform as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply-all
 [backend-app]  terraform apply -var-file=/my/tf/terraform.tfvars -var-file=/my/tf/backend-app/dev.tfvars
 [frontend-app] terraform apply -var-file=/my/tf/terraform.tfvars -var-file=/my/tf/frontend-app/us-east-1.tfvars
 
@@ -3389,47 +3353,37 @@ $ TF_VAR_env=prod terragrunt apply-all
 
 $ TF_VAR_env=prod TF_VAR_region=us-west-2 terragrunt apply-all
 [backend-app]  terraform apply -var-file=/my/tf/terraform.tfvars -var-file=/my/tf/prod.tfvars -var-file=/my/tf/us-west-2.tfvars
-[frontend-app] terraform apply -var-file=/my/tf/terraform.tfvars -var-file=/my/tf/prod.tfvars -var-file=/my/tf/us-west-2.tfvars</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+[frontend-app] terraform apply -var-file=/my/tf/terraform.tfvars -var-file=/my/tf/prod.tfvars -var-file=/my/tf/us-west-2.tfvars
+</code></pre></div></div>
+
 <h3 id="handling-whitespace">Handling whitespace</h3>
-<div class="paragraph">
-<p>The list of arguments cannot include whitespaces, so if you need to pass command line arguments that include spaces (e.g. <code>-var bucket=example.bucket.name</code>), then each of the arguments will need to be a separate item in the <code>arguments</code> list:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  extra_arguments "bucket" {
-    commands = [
-      "apply",
-      "plan",
-      "import",
-      "push",
-      "refresh"
-    ]
 
-    arguments = [
-      "-var", "bucket=example.bucket.name",
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>With the configuration above, when you run <code>terragrunt apply</code>, Terragrunt will call Terraform as follows:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ terragrunt apply
+<p>The list of arguments cannot include whitespaces, so if you need to pass command line arguments that include spaces (e.g. <code class="language-plaintext highlighter-rouge">-var bucket=example.bucket.name</code>), then each of the arguments will need to be a separate item in the <code class="language-plaintext highlighter-rouge">arguments</code> list:</p>
 
-terraform apply -var bucket=example.bucket.name</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"bucket"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
+
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var"</span><span class="p">,</span> <span class="s2">"bucket=example.bucket.name"</span><span class="p">,</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With the configuration above, when you run <code class="language-plaintext highlighter-rouge">terragrunt apply</code>, Terragrunt will call Terraform as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
+
+terraform apply -var bucket=example.bucket.name
+</code></pre></div></div>
+
         </div>
       </div>
     </div>

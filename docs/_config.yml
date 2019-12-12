@@ -42,7 +42,6 @@ ga_tracker: UA-76462621-6
 theme: null
 
 plugins:
-  - jekyll-asciidoc
   - jekyll-toc
   - jekyll-redirect-from
   - jekyll-sitemap
@@ -53,13 +52,6 @@ sass:
 
 whitelist:
   - jekyll-redirect-from
-
-asciidoc:
-  processor: asciidoctor
-  ext: asciidoc,adoc,ad
-  page_attribute_prefix: jekyll
-  require_front_matter_header: true
-asciidoctor: {}
 
 include: ['_pages']
 

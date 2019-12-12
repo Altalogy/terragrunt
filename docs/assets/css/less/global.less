@@ -52,6 +52,34 @@ body {
   }
 }
 
+.highlighter-rouge.language-plaintext {
+  .highlight {
+    background: #F5F3FD;
+    code {
+      color: #545492;
+    }
+  }
+}
+
+pre[class*="language-"] {
+  background: #F5F3FD;
+}
+
+code.highlighter-rouge.language-plaintext {
+  background: #F5F3FD;
+  color: #5b4de5;
+  border-radius: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 87%;
+}
+
+@media only screen and (max-width: 767px) {
+  p + ul > li {
+    font-size: 14px;
+  }
+}
+
 .box {
   max-width: 900px;
   margin: 0 auto;

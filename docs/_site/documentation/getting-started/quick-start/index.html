@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Quick start</title>
 <meta name="description" content="Learn how to start with Terragrunt.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/getting-started/quick-start/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/getting-started/quick-start/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Quick start" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/getting-started/quick-start/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/getting-started/quick-start/
 " />
 <meta name="twitter:description" content="Learn how to start with Terragrunt." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Quick start"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/getting-started/quick-start/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/getting-started/quick-start/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn how to start with Terragrunt."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-01-getting-started-quick-start-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3180,298 +3180,230 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="introduction">Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph">
+            <h2 id="introduction">Introduction</h2>
+
 <p>Terragrunt is a thin wrapper that provides extra tools for keeping your configurations DRY, working with multiple Terraform modules, and managing remote state.</p>
-</div>
-<div class="paragraph">
+
 <p>To use it, you:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="https://learn.hashicorp.com/terraform/getting-started/install">Install Terraform</a>.</p>
-</li>
-<li>
-<p><a href="/terragrunt/documentation/getting-started/install/">Install Terragrunt</a>.</p>
-</li>
-<li>
-<p>Put your Terragrunt configuration in a <code>terragrunt.hcl</code> file. You&#8217;ll see several example configurations shortly.</p>
-</li>
-<li>
-<p>Now, instead of running <code>terraform</code> directly, you run the same commands with <code>terragrunt</code>:</p>
-</li>
+
+<ol>
+  <li>
+    <p><a href="https://learn.hashicorp.com/terraform/getting-started/install">Install Terraform</a>.</p>
+  </li>
+  <li>
+    <p><a href="/terragrunt/documentation/getting-started/install/">Install Terragrunt</a>.</p>
+  </li>
+  <li>
+    <p>Put your Terragrunt configuration in a <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file. You’ll see several example configurations shortly.</p>
+  </li>
+  <li>
+    <p>Now, instead of running <code class="language-plaintext highlighter-rouge">terraform</code> directly, you run the same commands with <code class="language-plaintext highlighter-rouge">terragrunt</code>:</p>
+  </li>
 </ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>terragrunt plan
+
+<!-- end list -->
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terragrunt plan
 terragrunt apply
 terragrunt output
-terragrunt destroy</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Terragrunt will forward almost all commands, arguments, and options directly to Terraform, but based on the settings in your <code>terragrunt.hcl</code> file, Terragrunt can help you accomplish the following:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="#keep-your-backend-configuration-dry">Keep your backend configuration DRY</a></p>
-</li>
-<li>
-<p><a href="#keep-your-terraform-cli-arguments-dry">Keep your Terraform CLI arguments DRY</a></p>
-</li>
-<li>
-<p><a href="#promote-immutable-versioned-terraform-modules-across-environments">Promote immutable, versioned Terraform modules across environments</a></p>
-</li>
+terragrunt destroy
+</code></pre></div></div>
+
+<p>Terragrunt will forward almost all commands, arguments, and options directly to Terraform, but based on the settings in your <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file, Terragrunt can help you accomplish the following:</p>
+
+<ol>
+  <li>
+    <p><a href="#keep-your-backend-configuration-dry">Keep your backend configuration DRY</a></p>
+  </li>
+  <li>
+    <p><a href="#keep-your-terraform-cli-arguments-dry">Keep your Terraform CLI arguments DRY</a></p>
+  </li>
+  <li>
+    <p><a href="#promote-immutable-versioned-terraform-modules-across-environments">Promote immutable, versioned Terraform modules across environments</a></p>
+  </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
+
 <h2 id="keep-your-backend-configuration-dry">Keep your backend configuration DRY</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><em>Terraform</em> backends allow you to store Terraform state in a shared location that everyone on your team can access, such as an S3 bucket, and provide locking around your state files to protect against race conditions. To use a Terraform backend, you add a <code>backend</code> configuration to your Terraform code:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># stage/frontend-app/main.tf
-terraform {
-  backend "s3" {
-    bucket         = "my-terraform-state"
-    key            = "stage/frontend-app/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "my-lock-table"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The code above tells Terraform to store the state for a <code>frontend-app</code> module in an S3 bucket called <code>my-terraform-state</code> under the path <code>stage/frontend-app/terraform.tfstate</code>, and to use a DynamoDB table called <code>my-lock-table</code> for locking. This is a great feature that every single Terraform team uses to collaborate, but it comes with one major gotcha: the <code>backend</code> configuration does not support variables or expressions of any sort. That is, the following will NOT work:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># stage/frontend-app/main.tf
-terraform {
-  backend "s3" {
-    # Using variables does NOT work here!
-    bucket         = var.terraform_state_bucket
-    key            = var.terraform_state_key
-    region         = var.terraform_state_region
-    encrypt        = var.terraform_state_encrypt
-    dynamodb_table = var.terraform_state_dynamodb_table
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>That means you have to copy/paste the same <code>backend</code> configuration into every one of your Terraform modules. Not only do you have to copy/paste, but you also have to very carefully <em>not</em> copy/paste the <code>key</code> value so that you don’t have two modules overwriting each other’s state files! E.g., The <code>backend</code> configuration for a <code>database</code> module would look nearly identical to the <code>backend</code> configuration of the <code>frontend-app</code> module, except for a different <code>key</code> value:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># stage/mysql/main.tf
-terraform {
-  backend "s3" {
-    bucket         = "my-terraform-state"
-    key            = "stage/mysql/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "my-lock-table"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Terragrunt allows you to keep your <code>backend</code> configuration DRY (“Don’t Repeat Yourself”) by defining it once in a root location and inheriting that configuration in all child modules. Let’s say your Terraform code has the following folder layout:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>stage
+
+<p><em>Terraform</em> backends allow you to store Terraform state in a shared location that everyone on your team can access, such as an S3 bucket, and provide locking around your state files to protect against race conditions. To use a Terraform backend, you add a <code class="language-plaintext highlighter-rouge">backend</code> configuration to your Terraform code:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stage/frontend-app/main.tf</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{</span>
+    <span class="nx">bucket</span>         <span class="p">=</span> <span class="s2">"my-terraform-state"</span>
+    <span class="nx">key</span>            <span class="p">=</span> <span class="s2">"stage/frontend-app/terraform.tfstate"</span>
+    <span class="nx">region</span>         <span class="p">=</span> <span class="s2">"us-east-1"</span>
+    <span class="nx">encrypt</span>        <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="s2">"my-lock-table"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The code above tells Terraform to store the state for a <code class="language-plaintext highlighter-rouge">frontend-app</code> module in an S3 bucket called <code class="language-plaintext highlighter-rouge">my-terraform-state</code> under the path <code class="language-plaintext highlighter-rouge">stage/frontend-app/terraform.tfstate</code>, and to use a DynamoDB table called <code class="language-plaintext highlighter-rouge">my-lock-table</code> for locking. This is a great feature that every single Terraform team uses to collaborate, but it comes with one major gotcha: the <code class="language-plaintext highlighter-rouge">backend</code> configuration does not support variables or expressions of any sort. That is, the following will NOT work:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stage/frontend-app/main.tf</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{</span>
+    <span class="c1"># Using variables does NOT work here!</span>
+    <span class="nx">bucket</span>         <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">terraform_state_bucket</span>
+    <span class="nx">key</span>            <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">terraform_state_key</span>
+    <span class="nx">region</span>         <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">terraform_state_region</span>
+    <span class="nx">encrypt</span>        <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">terraform_state_encrypt</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">terraform_state_dynamodb_table</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>That means you have to copy/paste the same <code class="language-plaintext highlighter-rouge">backend</code> configuration into every one of your Terraform modules. Not only do you have to copy/paste, but you also have to very carefully <em>not</em> copy/paste the <code class="language-plaintext highlighter-rouge">key</code> value so that you don’t have two modules overwriting each other’s state files! E.g., The <code class="language-plaintext highlighter-rouge">backend</code> configuration for a <code class="language-plaintext highlighter-rouge">database</code> module would look nearly identical to the <code class="language-plaintext highlighter-rouge">backend</code> configuration of the <code class="language-plaintext highlighter-rouge">frontend-app</code> module, except for a different <code class="language-plaintext highlighter-rouge">key</code> value:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stage/mysql/main.tf</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{</span>
+    <span class="nx">bucket</span>         <span class="p">=</span> <span class="s2">"my-terraform-state"</span>
+    <span class="nx">key</span>            <span class="p">=</span> <span class="s2">"stage/mysql/terraform.tfstate"</span>
+    <span class="nx">region</span>         <span class="p">=</span> <span class="s2">"us-east-1"</span>
+    <span class="nx">encrypt</span>        <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="s2">"my-lock-table"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Terragrunt allows you to keep your <code class="language-plaintext highlighter-rouge">backend</code> configuration DRY (“Don’t Repeat Yourself”) by defining it once in a root location and inheriting that configuration in all child modules. Let’s say your Terraform code has the following folder layout:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stage
 ├── frontend-app
 │   └── main.tf
 └── mysql
-    └── main.tf</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To use Terragrunt, add a single <code>terragrunt.hcl</code> file to the root of your repo, in the <code>stage</code> folder, and one <code>terragrunt.hcl</code> file in each module folder:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>stage
+    └── main.tf
+</code></pre></div></div>
+
+<p>To use Terragrunt, add a single <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file to the root of your repo, in the <code class="language-plaintext highlighter-rouge">stage</code> folder, and one <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file in each module folder:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stage
 ├── terragrunt.hcl
 ├── frontend-app
 │   ├── main.tf
 │   └── terragrunt.hcl
 └── mysql
     ├── main.tf
-    └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Next, in each of your Terraform modules, remove the contents of the <code>backend</code> configuration:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># stage/mysql/main.tf
-terraform {
-  # Intentionally empty. Will be filled by Terragrunt.
-  backend "s3" {}
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now you can define your <code>backend</code> configuration just once in the root <code>terragrunt.hcl</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># stage/terragrunt.hcl
-remote_state {
-  backend = "s3"
-  config = {
-    bucket = "my-terraform-state"
+    └── terragrunt.hcl
+</code></pre></div></div>
 
-    key = "${path_relative_to_include()}/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "my-lock-table"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>terragrunt.hcl</code> files use the same configuration language as Terraform (HCL) and the configuration is more or less the same as the <code>backend</code> configuration you had in each module, except that the <code>key</code> value is now using the <code>path_relative_to_include()</code> built-in function, which will automatically set <code>key</code> to the relative path between the root <code>terragrunt.hcl</code> and the child module (so your Terraform state folder structure will match your Terraform code folder structure, which makes it easy to go from one to the other).</p>
-</div>
-<div class="paragraph">
-<p>The final step is to update each of the child <code>terragrunt.hcl</code> files to tell them to include the configuration from the root <code>terragrunt.hcl</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># stage/mysql/terragrunt.hcl
-include {
-  path = find_in_parent_folders()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>find_in_parent_folders()</code> helper will automatically search up the directory tree to find the root <code>terragrunt.hcl</code> and inherit the <code>remote_state</code> configuration from it.</p>
-</div>
-<div class="paragraph">
-<p>Now, <a href="/documentation/getting-started/install" target="_blank" rel="noopener">install Terragrunt</a>, and run all the Terraform commands you’re used to, but with <code>terragrunt</code> as the command name rather than <code>terraform</code> (e.g., <code>terragrunt apply</code> instead of <code>terraform apply</code>). To deploy the database module, you would run:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ cd stage/mysql
-$ terragrunt apply</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Terragrunt will automatically find the <code>mysql</code> module’s <code>terragrunt.hcl</code> file, configure the <code>backend</code> using the settings from the root <code>terragrunt.hcl</code> file, and, thanks to the <code>path_relative_to_include()</code> function, will set the <code>key</code> to <code>stage/mysql/terraform.tfstate</code>. If you run <code>terragrunt apply</code> in <code>stage/frontend-app</code>, it’ll do the same, except it will set the <code>key</code> to <code>stage/frontend-app/terraform.tfstate</code>.</p>
-</div>
-<div class="paragraph">
-<p>You can now add as many child modules as you want, each with a <code>terragrunt.hcl</code> with the <code>include { &#8230;&#8203; }</code> block, and each of those modules will automatically inherit the proper <code>backend</code> configuration!</p>
-</div>
-</div>
-</div>
-<div class="sect1">
+<p>Next, in each of your Terraform modules, remove the contents of the <code class="language-plaintext highlighter-rouge">backend</code> configuration:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stage/mysql/main.tf</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Intentionally empty. Will be filled by Terragrunt.</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now you can define your <code class="language-plaintext highlighter-rouge">backend</code> configuration just once in the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stage/terragrunt.hcl</span>
+<span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="p">=</span> <span class="s2">"my-terraform-state"</span>
+
+    <span class="nx">key</span> <span class="p">=</span> <span class="s2">"${path_relative_to_include()}/terraform.tfstate"</span>
+    <span class="nx">region</span>         <span class="p">=</span> <span class="s2">"us-east-1"</span>
+    <span class="nx">encrypt</span>        <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="s2">"my-lock-table"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> files use the same configuration language as Terraform (HCL) and the configuration is more or less the same as the <code class="language-plaintext highlighter-rouge">backend</code> configuration you had in each module, except that the <code class="language-plaintext highlighter-rouge">key</code> value is now using the <code class="language-plaintext highlighter-rouge">path_relative_to_include()</code> built-in function, which will automatically set <code class="language-plaintext highlighter-rouge">key</code> to the relative path between the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> and the child module (so your Terraform state folder structure will match your Terraform code folder structure, which makes it easy to go from one to the other).</p>
+
+<p>The final step is to update each of the child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> files to tell them to include the configuration from the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stage/mysql/terragrunt.hcl</span>
+<span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">find_in_parent_folders()</code> helper will automatically search up the directory tree to find the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> and inherit the <code class="language-plaintext highlighter-rouge">remote_state</code> configuration from it.</p>
+
+<p>Now, <a href="/documentation/getting-started/install">install Terragrunt</a>, and run all the Terraform commands you’re used to, but with <code class="language-plaintext highlighter-rouge">terragrunt</code> as the command name rather than <code class="language-plaintext highlighter-rouge">terraform</code> (e.g., <code class="language-plaintext highlighter-rouge">terragrunt apply</code> instead of <code class="language-plaintext highlighter-rouge">terraform apply</code>). To deploy the database module, you would run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>stage/mysql
+<span class="nv">$ </span>terragrunt apply
+</code></pre></div></div>
+
+<p>Terragrunt will automatically find the <code class="language-plaintext highlighter-rouge">mysql</code> module’s <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file, configure the <code class="language-plaintext highlighter-rouge">backend</code> using the settings from the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file, and, thanks to the <code class="language-plaintext highlighter-rouge">path_relative_to_include()</code> function, will set the <code class="language-plaintext highlighter-rouge">key</code> to <code class="language-plaintext highlighter-rouge">stage/mysql/terraform.tfstate</code>. If you run <code class="language-plaintext highlighter-rouge">terragrunt apply</code> in <code class="language-plaintext highlighter-rouge">stage/frontend-app</code>, it’ll do the same, except it will set the <code class="language-plaintext highlighter-rouge">key</code> to <code class="language-plaintext highlighter-rouge">stage/frontend-app/terraform.tfstate</code>.</p>
+
+<p>You can now add as many child modules as you want, each with a <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> with the <code class="language-plaintext highlighter-rouge">include { …​ }</code> block, and each of those modules will automatically inherit the proper <code class="language-plaintext highlighter-rouge">backend</code> configuration!</p>
+
 <h2 id="keep-your-terraform-cli-arguments-dry">Keep your Terraform CLI arguments DRY</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>CLI flags are another common source of copy/paste in the Terraform world. For example, a typical pattern with Terraform is to define common account-level variables in an <code>account.tfvars</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># account.tfvars
-account_id     = "123456789012"
-account_bucket = "my-terraform-bucket"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And to define common region-level variables in a <code>region.tfvars</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># region.tfvars
-aws_region = "us-east-2"
-foo        = "bar"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can tell Terraform to use these variables using the <code>-var-file</code> argument:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ terraform apply \
-    -var-file=../../common.tfvars \
-    -var-file=../region.tfvars</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Having to remember these <code>-var-file</code> arguments every time can be tedious and error prone. Terragrunt allows you to keep your CLI arguments DRY by defining those arguments as code in your <code>terragrunt.hcl</code> configuration:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># terragrunt.hcl
-terraform {
-  extra_arguments "common_vars" {
-    commands = ["plan", "apply"]
 
-    arguments = [
-      "-var-file=../../common.tfvars",
-      "-var-file=../region.tfvars"
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now, when you run the <code>plan</code> or <code>apply</code> commands, Terragrunt will automatically add those arguments:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ terragrunt apply
+<p>CLI flags are another common source of copy/paste in the Terraform world. For example, a typical pattern with Terraform is to define common account-level variables in an <code class="language-plaintext highlighter-rouge">account.tfvars</code> file:</p>
 
-Running command: terraform with arguments
-[apply -var-file=../../common.tfvars -var-file=../region.tfvars]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can even use the <code>get_terraform_commands_that_need_vars()</code> built-in function to automatically get the list of all commands that accept <code>-var-file</code> and <code>-var</code> arguments:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># terragrunt.hcl
-terraform {
-  extra_arguments "common_vars" {
-    commands = get_terraform_commands_that_need_vars()
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># account.tfvars</span>
+<span class="nx">account_id</span>     <span class="err">=</span> <span class="s2">"123456789012"</span>
+<span class="nx">account_bucket</span> <span class="err">=</span> <span class="s2">"my-terraform-bucket"</span>
+</code></pre></div></div>
 
-    arguments = [
-      "-var-file=../../common.tfvars",
-      "-var-file=../region.tfvars"
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
+<p>And to define common region-level variables in a <code class="language-plaintext highlighter-rouge">region.tfvars</code> file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># region.tfvars</span>
+<span class="nx">aws_region</span> <span class="err">=</span> <span class="s2">"us-east-2"</span>
+<span class="nx">foo</span>        <span class="err">=</span> <span class="s2">"bar"</span>
+</code></pre></div></div>
+
+<p>You can tell Terraform to use these variables using the <code class="language-plaintext highlighter-rouge">-var-file</code> argument:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>terraform apply <span class="se">\</span>
+    <span class="nt">-var-file</span><span class="o">=</span>../../common.tfvars <span class="se">\</span>
+    <span class="nt">-var-file</span><span class="o">=</span>../region.tfvars
+</code></pre></div></div>
+
+<p>Having to remember these <code class="language-plaintext highlighter-rouge">-var-file</code> arguments every time can be tedious and error prone. Terragrunt allows you to keep your CLI arguments DRY by defining those arguments as code in your <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configuration:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># terragrunt.hcl</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"common_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"plan"</span><span class="p">,</span> <span class="s2">"apply"</span><span class="p">]</span>
+
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var-file=../../common.tfvars"</span><span class="p">,</span>
+      <span class="s2">"-var-file=../region.tfvars"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, when you run the <code class="language-plaintext highlighter-rouge">plan</code> or <code class="language-plaintext highlighter-rouge">apply</code> commands, Terragrunt will automatically add those arguments:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>terragrunt apply
+
+Running <span class="nb">command</span>: terraform with arguments
+<span class="o">[</span>apply <span class="nt">-var-file</span><span class="o">=</span>../../common.tfvars <span class="nt">-var-file</span><span class="o">=</span>../region.tfvars]
+</code></pre></div></div>
+
+<p>You can even use the <code class="language-plaintext highlighter-rouge">get_terraform_commands_that_need_vars()</code> built-in function to automatically get the list of all commands that accept <code class="language-plaintext highlighter-rouge">-var-file</code> and <code class="language-plaintext highlighter-rouge">-var</code> arguments:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># terragrunt.hcl</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">extra_arguments</span> <span class="s2">"common_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="nx">get_terraform_commands_that_need_vars</span><span class="err">()</span>
+
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var-file=../../common.tfvars"</span><span class="p">,</span>
+      <span class="s2">"-var-file=../region.tfvars"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h2 id="promote-immutable-versioned-terraform-modules-across-environments">Promote immutable, versioned Terraform modules across environments</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>One of the most important <a href="https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1" target="_blank" rel="noopener">lessons we’ve learned from writing hundreds of thousands of lines of infrastructure code</a> is that large modules should be considered harmful. That is, it is a Bad Idea to define all of your environments (dev, stage, prod, etc), or even a large amount of infrastructure (servers, databases, load balancers, DNS, etc), in a single Terraform module. Large modules are slow, insecure, hard to update, hard to code review, hard to test, and brittle (i.e., you have all your eggs in one basket).</p>
-</div>
-<div class="paragraph">
+
+<p>One of the most important <a href="https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1">lessons we’ve learned from writing hundreds of thousands of lines of infrastructure code</a> is that large modules should be considered harmful. That is, it is a Bad Idea to define all of your environments (dev, stage, prod, etc), or even a large amount of infrastructure (servers, databases, load balancers, DNS, etc), in a single Terraform module. Large modules are slow, insecure, hard to update, hard to code review, hard to test, and brittle (i.e., you have all your eggs in one basket).</p>
+
 <p>Therefore, you typically want to break up your infrastructure across multiple modules:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>├── prod
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── prod
 │   ├── app
 │   │   ├── main.tf
 │   │   └── outputs.tf
@@ -3500,82 +3432,69 @@ terraform {
     │   └── outputs.tf
     └── vpc
         ├── main.tf
-        └── outputs.tf</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The folder structure above shows how to separate the code for each environment (<code>prod</code>, <code>qa</code>, <code>stage</code>) and for each type of infrastructure (apps, databases, VPCs). However, the downside is that it isn’t DRY. The <code>.tf</code> files will contain a LOT of duplication. You can reduce it somewhat by defining all the infrastructure in <a href="https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d" target="_blank" rel="noopener">reusable Terraform modules</a>, but even the code to instantiate a module—including configuring the <code>provider</code>, <code>backend</code>, the module’s input variables, and <code>output</code> variables—means you still end up with dozens or hundreds of lines of copy/paste for every module in every environment:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># prod/app/main.tf
-provider "aws" {
-  region = "us-east-1"
-  # ... other provider settings ...
-}
-terraform {
-  backend "s3" {}
-}
-module "app" {
-  source = "../../../app"
-  instance_type  = "m4.large"
-  instance_count = 10
-  # ... other app settings ...
-}
-# prod/app/outputs.tf
-output "url" {
-  value = module.app.url
-}
-# ... and so on!</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Terragrunt allows you to define your Terraform code <em>once</em> and to promote a versioned, immutable “artifact” of that exact same code from environment to environment. Here’s a quick overview of how.</p>
-</div>
-<div class="paragraph">
-<p>First, create a Git repo called <code>infrastructure-modules</code> that has your Terraform code (<code>.tf</code> files). This is the exact same Terraform code you just saw above, except that any variables that will differ between environments should be exposed as input variables:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># infrastructure-modules/app/main.tf
-provider "aws" {
-  region = "us-east-1"
-  # ... other provider settings ...
-}
-terraform {
-  backend "s3" {}
-}
-module "app" {
-  source = "../../../app"
-  instance_type  = var.instance_type
-  instance_count = var.instance_count
-  # ... other app settings ...
-}
-# infrastructure-modules/app/outputs.tf
-output "url" {
-  value = module.app.url
-}
-# infrastructure-modules/app/variables.tf
+        └── outputs.tf
+</code></pre></div></div>
 
-variable "instance_type" {}
-variable "instance_count" {}</code></pre>
-</div>
-</div>
-<div class="paragraph">
+<p>The folder structure above shows how to separate the code for each environment (<code class="language-plaintext highlighter-rouge">prod</code>, <code class="language-plaintext highlighter-rouge">qa</code>, <code class="language-plaintext highlighter-rouge">stage</code>) and for each type of infrastructure (apps, databases, VPCs). However, the downside is that it isn’t DRY. The <code class="language-plaintext highlighter-rouge">.tf</code> files will contain a LOT of duplication. You can reduce it somewhat by defining all the infrastructure in <a href="https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d">reusable Terraform modules</a>, but even the code to instantiate a module—including configuring the <code class="language-plaintext highlighter-rouge">provider</code>, <code class="language-plaintext highlighter-rouge">backend</code>, the module’s input variables, and <code class="language-plaintext highlighter-rouge">output</code> variables—means you still end up with dozens or hundreds of lines of copy/paste for every module in every environment:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># prod/app/main.tf</span>
+<span class="nx">provider</span> <span class="s2">"aws"</span> <span class="p">{</span>
+  <span class="nx">region</span> <span class="p">=</span> <span class="s2">"us-east-1"</span>
+  <span class="c1"># ... other provider settings ...</span>
+<span class="p">}</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="nx">module</span> <span class="s2">"app"</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"../../../app"</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"m4.large"</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">10</span>
+  <span class="c1"># ... other app settings ...</span>
+<span class="p">}</span>
+<span class="c1"># prod/app/outputs.tf</span>
+<span class="nx">output</span> <span class="s2">"url"</span> <span class="p">{</span>
+  <span class="nx">value</span> <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">app</span><span class="err">.</span><span class="nx">url</span>
+<span class="p">}</span>
+<span class="c1"># ... and so on!</span>
+</code></pre></div></div>
+
+<p>Terragrunt allows you to define your Terraform code <em>once</em> and to promote a versioned, immutable “artifact” of that exact same code from environment to environment. Here’s a quick overview of how.</p>
+
+<p>First, create a Git repo called <code class="language-plaintext highlighter-rouge">infrastructure-modules</code> that has your Terraform code (<code class="language-plaintext highlighter-rouge">.tf</code> files). This is the exact same Terraform code you just saw above, except that any variables that will differ between environments should be exposed as input variables:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># infrastructure-modules/app/main.tf</span>
+<span class="nx">provider</span> <span class="s2">"aws"</span> <span class="p">{</span>
+  <span class="nx">region</span> <span class="p">=</span> <span class="s2">"us-east-1"</span>
+  <span class="c1"># ... other provider settings ...</span>
+<span class="p">}</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="nx">module</span> <span class="s2">"app"</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"../../../app"</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">instance_type</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">instance_count</span>
+  <span class="c1"># ... other app settings ...</span>
+<span class="p">}</span>
+<span class="c1"># infrastructure-modules/app/outputs.tf</span>
+<span class="nx">output</span> <span class="s2">"url"</span> <span class="p">{</span>
+  <span class="nx">value</span> <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">app</span><span class="err">.</span><span class="nx">url</span>
+<span class="p">}</span>
+<span class="c1"># infrastructure-modules/app/variables.tf</span>
+
+<span class="nx">variable</span> <span class="s2">"instance_type"</span> <span class="p">{}</span>
+<span class="nx">variable</span> <span class="s2">"instance_count"</span> <span class="p">{}</span>
+</code></pre></div></div>
+
 <p>Once this is in place, you can release a new version of this module by creating a Git tag:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ git tag -a "v0.0.1" -m "First release of app module"
-$ git push --follow-tags</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now, in another Git repo called <code>infrastructure-live</code>, you create the same folder structure you had before for all of your environments, but instead of lots of copy/pasted <code>.tf</code> files for each module, you have just a single <code>terragrunt.hcl</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre># infrastructure-live
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-a</span> <span class="s2">"v0.0.1"</span> <span class="nt">-m</span> <span class="s2">"First release of app module"</span>
+<span class="nv">$ </span>git push <span class="nt">--follow-tags</span>
+</code></pre></div></div>
+
+<p>Now, in another Git repo called <code class="language-plaintext highlighter-rouge">infrastructure-live</code>, you create the same folder structure you had before for all of your environments, but instead of lots of copy/pasted <code class="language-plaintext highlighter-rouge">.tf</code> files for each module, you have just a single <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># infrastructure-live
 ├── prod
 │   ├── app
 │   │   └── terragrunt.hcl
@@ -3596,108 +3515,81 @@ $ git push --follow-tags</code></pre>
     ├── mysql
     │   └── terragrunt.hcl
     └── vpc
-        └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The contents of each <code>terragrunt.hcl</code> file look something like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># infrastructure-live/prod/app/terragrunt.hcl
-terraform {
-  source =
-    "github.com:foo/infrastructure-modules.git//app?ref=v0.0.1"
-}
-inputs = {
-  instance_count = 10
-  instance_type  = "m4.large"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>terragrunt.hcl</code> file above sets the <code>source</code> parameter to point at the <code>app</code> module you just created in your <code>infrastructure-modules</code> repo, using the <code>ref</code> parameter to specify version <code>v0.0.1</code> of that repo. It also configures the variables for this module for the <code>prod</code> environment in the <code>inputs = {&#8230;&#8203;}</code> block.</p>
-</div>
-<div class="paragraph">
-<p>The <code>terragrunt.hcl</code> file in the <code>stage</code> environment will look similar, but it will configure smaller/fewer instances in the <code>inputs = {&#8230;&#8203;}</code> block to save money:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl"># infrastructure-live/stage/app/terragrunt.hcl
-terraform {
-  source =
-    "github.com:foo/infrastructure-modules.git//app?ref=v0.0.1"
-}
-inputs = {
-  instance_count = 3
-  instance_type  = "t2.micro"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>When you run <code>terragrunt apply</code>, Terragrunt will download your <code>app</code> module into a temporary folder, run <code>terraform apply</code> in that folder, passing the module the input variables you specified in the <code>inputs = {&#8230;&#8203;}</code> block:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ terragrunt apply
+        └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>The contents of each <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file look something like this:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># infrastructure-live/prod/app/terragrunt.hcl</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span>
+    <span class="s2">"github.com:foo/infrastructure-modules.git//app?ref=v0.0.1"</span>
+<span class="p">}</span>
+<span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">10</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"m4.large"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file above sets the <code class="language-plaintext highlighter-rouge">source</code> parameter to point at the <code class="language-plaintext highlighter-rouge">app</code> module you just created in your <code class="language-plaintext highlighter-rouge">infrastructure-modules</code> repo, using the <code class="language-plaintext highlighter-rouge">ref</code> parameter to specify version <code class="language-plaintext highlighter-rouge">v0.0.1</code> of that repo. It also configures the variables for this module for the <code class="language-plaintext highlighter-rouge">prod</code> environment in the <code class="language-plaintext highlighter-rouge">inputs = {…​}</code> block.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file in the <code class="language-plaintext highlighter-rouge">stage</code> environment will look similar, but it will configure smaller/fewer instances in the <code class="language-plaintext highlighter-rouge">inputs = {…​}</code> block to save money:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># infrastructure-live/stage/app/terragrunt.hcl</span>
+<span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span>
+    <span class="s2">"github.com:foo/infrastructure-modules.git//app?ref=v0.0.1"</span>
+<span class="p">}</span>
+<span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">3</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"t2.micro"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>When you run <code class="language-plaintext highlighter-rouge">terragrunt apply</code>, Terragrunt will download your <code class="language-plaintext highlighter-rouge">app</code> module into a temporary folder, run <code class="language-plaintext highlighter-rouge">terraform apply</code> in that folder, passing the module the input variables you specified in the <code class="language-plaintext highlighter-rouge">inputs = {…​}</code> block:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>terragrunt apply
 Downloading Terraform configurations from github.com:foo/infrastructure-modules.git...
-Running command: terraform with arguments [apply]...</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This way, each module in each environment is defined by a single <code>terragrunt.hcl</code> file that solely specifies the Terraform module to deploy and the input variables specific to that environment. This is about as DRY as you can get!</p>
-</div>
-<div class="paragraph">
-<p>Moreover, you can specify a different version of the module to deploy in each environment! For example, after making some changes to the <code>app</code> module in the <code>infrastructure-modules</code> repo, you could create a <code>v0.0.2</code> tag, and update just the <code>qa</code> environment to run this new version:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"># infrastructure-live/qa/app/terragrunt.hcl
-terraform {
-  source =
-    "github.com:foo/infrastructure-modules.git//app?ref=v0.0.2"
-}
-inputs = {
-  instance_count = 3
-  instance_type  = "t2.micro"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If it works well in the <code>qa</code> environment, you could promote the exact same code to the <code>stage</code> environment by updating its <code>terragrunt.hcl</code> file to run <code>v0.0.2</code>. And finally, if that code works well in <code>stage</code>, you could again promote the exact same code to <code>prod</code> by updating that <code>terragrunt.hcl</code> file to use <code>v0.0.2</code> as well.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="/terragrunt/assets/img/collections/documentation/promote-immutable-Terraform-code-across-envs.png"><img src="/terragrunt/assets/img/collections/documentation/promote-immutable-Terraform-code-across-envs.png" alt="promote immutable Terraform code across envs"></a>
-</div>
-<div class="title">Figure 1. Using Terragrunt to promote immutable Terraform code across environments</div>
-</div>
-<div class="paragraph">
+Running <span class="nb">command</span>: terraform with arguments <span class="o">[</span>apply]...
+</code></pre></div></div>
+
+<p>This way, each module in each environment is defined by a single <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file that solely specifies the Terraform module to deploy and the input variables specific to that environment. This is about as DRY as you can get!</p>
+
+<p>Moreover, you can specify a different version of the module to deploy in each environment! For example, after making some changes to the <code class="language-plaintext highlighter-rouge">app</code> module in the <code class="language-plaintext highlighter-rouge">infrastructure-modules</code> repo, you could create a <code class="language-plaintext highlighter-rouge">v0.0.2</code> tag, and update just the <code class="language-plaintext highlighter-rouge">qa</code> environment to run this new version:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># infrastructure-live/qa/app/terragrunt.hcl</span>
+terraform <span class="o">{</span>
+  <span class="nb">source</span> <span class="o">=</span>
+    <span class="s2">"github.com:foo/infrastructure-modules.git//app?ref=v0.0.2"</span>
+<span class="o">}</span>
+inputs <span class="o">=</span> <span class="o">{</span>
+  instance_count <span class="o">=</span> 3
+  instance_type  <span class="o">=</span> <span class="s2">"t2.micro"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If it works well in the <code class="language-plaintext highlighter-rouge">qa</code> environment, you could promote the exact same code to the <code class="language-plaintext highlighter-rouge">stage</code> environment by updating its <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file to run <code class="language-plaintext highlighter-rouge">v0.0.2</code>. And finally, if that code works well in <code class="language-plaintext highlighter-rouge">stage</code>, you could again promote the exact same code to <code class="language-plaintext highlighter-rouge">prod</code> by updating that <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file to use <code class="language-plaintext highlighter-rouge">v0.0.2</code> as well.</p>
+
+<p><img src="/terragrunt/assets/img/collections/documentation/promote-immutable-Terraform-code-across-envs.png" alt="Using Terragrunt to promote immutable Terraform code across environments" /></p>
+
 <p>If at any point you hit a problem, it will only affect the one environment, and you can roll back by deploying a previous version number. That’s immutable infrastructure at work!</p>
-</div>
-</div>
-</div>
-<div class="sect1">
+
 <h2 id="next-steps">Next steps</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that you&#8217;ve seen the basics of Terragrunt, here is some further reading to learn more:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="/terragrunt/use-cases/">Use cases</a>: Learn about the core use cases Terragrunt supports.</p>
-</li>
-<li>
-<p><a href="/terragrunt/documentation/">Documentation</a>: Check out the detailed Terragrunt documentation.</p>
-</li>
-<li>
-<p><a href="https://www.terraformupandrunning.com/"><em>Terraform: Up &amp; Running</em></a>: This book is the fastest way to get up and running with Terraform! Terragrunt is a direct implementation of many of the ideas from this book.</p>
-</li>
+
+<p>Now that you’ve seen the basics of Terragrunt, here is some further reading to learn more:</p>
+
+<ol>
+  <li>
+    <p><a href="/terragrunt/use-cases/">Use cases</a>: Learn about the core use cases Terragrunt supports.</p>
+  </li>
+  <li>
+    <p><a href="/terragrunt/documentation/">Documentation</a>: Check out the detailed Terragrunt documentation.</p>
+  </li>
+  <li>
+    <p><a href="https://www.terraformupandrunning.com/"><em>Terraform: Up &amp; Running</em></a>: This book is the fastest way to get up and running with Terraform! Terragrunt is a direct implementation of many of the ideas from this book.</p>
+  </li>
 </ol>
-</div>
-</div>
-</div>
+
         </div>
       </div>
     </div>

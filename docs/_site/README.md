@@ -89,22 +89,6 @@ order: 100                                      # <--- It sorts the docs on the 
 nav_title: Documentation
 nav_title_link: /documentation/
 ---
-:page-type: documentation
-:page-layout: documentation
-:page-liquid:
-
-:toc:
-:toc-placement!:
-
-// GitHub specific settings. See https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74 for details.
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-toc::[]
-endif::[]
 
 ```
 
@@ -316,21 +300,6 @@ excerpt: >-                     # <-- [CHANGE THIS] doc's description
 tags: ["CLI", "Another tag"]    # <-- [CHANGE THIS] doc's tags
 order: 102                      # <-- [CHANGE THIS] set different number to each doc to set right order
 ---
-:page-type: documentation
-:page-layout: documentation
-
-:toc:
-:toc-placement!:
-
-// GitHub specific settings. See https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74 for details.
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-toc::[]
-endif::[]
 ```
 5. Create `index` page for collection. Create folder with collection name in `_pages`: `my-collection`
 6. Add `index.html` in `_pages/my-collection`:
@@ -416,7 +385,7 @@ When the content of the "Documentation" and "Use cases" collections have been ch
 
 ## Markdown (md) > AsciiDoc (adoc) converter
 
-Recommended format of documents is ASCIIDoc (`.adoc`). If you use the Markdown format (`.md`), you can convert to AsciiDoc format with *Pandoc* this way:
+Recommended format of documents is Github Markdown (`.md`). If you use the Markdown format (`.md`), and you want to convert to AsciiDoc format, you can do this with *Pandoc*:
 
 1. Create `input.md` file and paste there Markdown content
 2. Run:
@@ -425,4 +394,28 @@ $ pandoc --from=gfm --to=asciidoc --wrap=none --atx-headers  input.md > output.a
 ```
 3. The converted content in `.adoc` format is printed in `output.adoc`
 
-You can use also `scripts/convert_md_to_adoc`.
+You can use also `scripts/convert_md_to_adoc.sh`.
+
+## AsciiDoc (adoc) > Markdown (md) converter
+
+To convert from `.adoc` (AsciiDoc) format to Markdown, you need *AsciiDoctor* and *Pandoc*.
+
+First, install Asciidoctor:
+```
+$ sudo apt-get install asciidoctor
+```
+
+Next, install Pandoc:
+https://pandoc.org/installing.html
+
+Then you can use script: `scripts/convert_adoc_to_md.sh` or use the command:
+
+```
+$ asciidoctor -b docbook input.adoc && pandoc -f docbook -t gfm input.xml -o output.md --wrap=none --atx-headers
+```
+
+In both cases:
+1. create a file: `input.adoc`,
+2. add content to the file,
+3. run script or command,
+4. The output can be found in `output.md`.

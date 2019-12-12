@@ -1,1 +1,1 @@
-Sitemap: https://terragrunt.io/terragrunt/sitemap.xml
+Sitemap: http://151.80.145.8:4000/terragrunt/sitemap.xml

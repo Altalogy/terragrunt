@@ -1,0 +1,123 @@
+I"�<h2 id="terragrunt-configuration-file">Terragrunt configuration file</h2>
+
+<p>Terragrunt configuration is defined in a <code class="highlighter-rouge">terragrunt.hcl</code> file. This uses the same HCL syntax as Terraform itself.</p>
+
+<p>Here’s an example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+
+<span class="nx">dependencies</span> <span class="p">{</span>
+  <span class="nx">paths</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"../vpc"</span><span class="p">,</span> <span class="s2">"../mysql"</span><span class="p">,</span> <span class="s2">"../redis"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Terragrunt figures out the path to its config file according to the following rules:</p>
+
+<ol>
+  <li>
+    <p>The value of the <code class="highlighter-rouge">--terragrunt-config</code> command-line option, if specified.</p>
+  </li>
+  <li>
+    <p>The value of the <code class="highlighter-rouge">TERRAGRUNT_CONFIG</code> environment variable, if defined.</p>
+  </li>
+  <li>
+    <p>A <code class="highlighter-rouge">terragrunt.hcl</code> file in the current working directory, if it exists.</p>
+  </li>
+  <li>
+    <p>If none of these are found, exit with an error.</p>
+  </li>
+</ol>
+
+<h2 id="configuration-parsing-order">Configuration parsing order</h2>
+
+<p>It is important to be aware of the terragrunt configuration parsing order when using features like <a href="/terragrunt/documentation/features/locals/#locals">locals</a> and <a href="/terragrunt/use-cases/execute-terraform-commands-on-multiple-modules-at-once/#passing-outputs-between-modules">dependency outputs</a>, where you can reference attributes of other blocks in the config in your <code class="highlighter-rouge">inputs</code>. For example, because <code class="highlighter-rouge">locals</code> are evaluated before <code class="highlighter-rouge">dependency</code> blocks, you can not bind outputs from <code class="highlighter-rouge">dependency</code> into <code class="highlighter-rouge">locals</code>. On the other hand, for the same reason, you can use <code class="highlighter-rouge">locals</code> in the <code class="highlighter-rouge">dependency</code> blocks.</p>
+
+<p>Currently terragrunt parses the config in the following order:</p>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">include</code> block</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">locals</code> block</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">dependencies</code> block</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">dependency</code> blocks, including calling <code class="highlighter-rouge">terragrunt output</code> on the dependent modules to retrieve the outputs</p>
+  </li>
+  <li>
+    <p>Everything else</p>
+  </li>
+  <li>
+    <p>The config referenced by <code class="highlighter-rouge">include</code></p>
+  </li>
+  <li>
+    <p>A merge operation between the config referenced by <code class="highlighter-rouge">include</code> and the current config.</p>
+  </li>
+</ol>
+
+<p>Blocks that are parsed earlier in the process will be made available for use in the parsing of later blocks. Similarly, you cannot use blocks that are parsed later earlier in the process (e.g you can’t reference <code class="highlighter-rouge">dependency</code> in <code class="highlighter-rouge">locals</code>, <code class="highlighter-rouge">include</code>, or <code class="highlighter-rouge">dependencies</code> blocks).</p>
+
+<p>Note that the parsing order is slightly different when using the <code class="highlighter-rouge">-all</code> flavors of the command. In the <code class="highlighter-rouge">-all</code> flavors of the command, Terragrunt parses the configuration twice. In the first pass, it follows the following parsing order:</p>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">include</code> block of all configurations in the tree</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">locals</code> block of all configurations in the tree</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">dependency</code> blocks of all configurations in the tree, but does NOT retrieve the outputs</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">terraform</code> block of all configurations in the tree</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">dependencies</code> block of all configurations in the tree</p>
+  </li>
+</ol>
+
+<p>The results of this pass are then used to build the dependency graph of the modules in the tree. Once the graph is constructed, Terragrunt will loop through the modules and run the specified command. It will then revert to the single configuration parsing order specified above for each module as it runs the command.</p>
+
+<p>This allows Terragrunt to avoid resolving <code class="highlighter-rouge">dependency</code> on modules that haven’t been applied yet when doing a clean deployment from scratch with <code class="highlighter-rouge">apply-all</code>.</p>
+
+<h2 id="formatting-terragrunthcl">Formatting terragrunt.hcl</h2>
+
+<p>You can rewrite <code class="highlighter-rouge">terragrunt.hcl</code> files to a canonical format using the <code class="highlighter-rouge">hclfmt</code> command built into <code class="highlighter-rouge">terragrunt</code>. Similar to <code class="highlighter-rouge">terraform fmt</code>, this command applies a subset of <a href="https://www.terraform.io/docs/configuration/style.html">the Terraform language style conventions</a>, along with other minor adjustments for readability.</p>
+
+<p>This command will recursively search for <code class="highlighter-rouge">terragrunt.hcl</code> files and format all of them under a given directory tree. Consider the following file structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+├── terragrunt.hcl
+├── prod
+│   └── terragrunt.hcl
+├── dev
+│   └── terragrunt.hcl
+└── qa
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>If you run <code class="highlighter-rouge">terragrunt hclfmt</code> at the <code class="highlighter-rouge">root</code>, this will update:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">root/terragrunt.hcl</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">root/prod/terragrunt.hcl</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">root/dev/terragrunt.hcl</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">root/qa/terragrunt.hcl</code></p>
+  </li>
+</ul>
+
+<p>Additionally, there’s a flag <code class="highlighter-rouge">--terragrunt-check</code>. It allows to validating if files are properly formatted. It does not rewrite files and in case of invalid format, it will return an error with exit status 0.</p>
+:ET

@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Auto-retry</title>
 <meta name="description" content="Auto-Retry is a feature of terragrunt that will automatically address situations where a terraform command needs to be re-run.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/features/auto-retry/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/features/auto-retry/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Auto-retry" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/features/auto-retry/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/auto-retry/
 " />
 <meta name="twitter:description" content="Auto-Retry is a feature of terragrunt that will automatically address situations where a terraform command needs to be re-run." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Auto-retry"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/features/auto-retry/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/auto-retry/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Auto-Retry is a feature of terragrunt that will automatically address situations where a terraform command needs to be re-run."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-retry-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,41 +3165,29 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="auto-retry">Auto-Retry</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><em>Auto-Retry</em> is a feature of <code>terragrunt</code> that will automatically address situations where a <code>terraform</code> command needs to be re-run.</p>
-</div>
-<div class="paragraph">
-<p>Terraform can fail with transient errors which can be addressed by simply retrying the command again. In the event <code>terragrunt</code> finds one of these errors, the command will be re-run again automatically.</p>
-</div>
-<div class="paragraph">
+            <h2 id="auto-retry">Auto-Retry</h2>
+
+<p><em>Auto-Retry</em> is a feature of <code class="language-plaintext highlighter-rouge">terragrunt</code> that will automatically address situations where a <code class="language-plaintext highlighter-rouge">terraform</code> command needs to be re-run.</p>
+
+<p>Terraform can fail with transient errors which can be addressed by simply retrying the command again. In the event <code class="language-plaintext highlighter-rouge">terragrunt</code> finds one of these errors, the command will be re-run again automatically.</p>
+
 <p><strong>Example</strong></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ terragrunt apply
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
 ...
 Initializing provider plugins...
 - Checking for available provider plugins on https://releases.hashicorp.com...
-Error installing provider "template": error fetching checksums: Get https://releases.hashicorp.com/terraform-provider-template/1.0.0/terraform-provider-template_1.0.0_SHA256SUMS: net/http: TLS handshake timeout.</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Terragrunt sees this error, and knows it is a transient error that can addressed by re-running the <code>apply</code> command.</p>
-</div>
-<div class="paragraph">
-<p><code>auto-retry</code> will try a maximum of three times to re-run the command, at which point it will deem the error as not transient, and accept the terraform failure. Retries will occur when the error is encountered, pausing for 5 seconds between retries.</p>
-</div>
-<div class="paragraph">
-<p>Known errors that <code>auto-retry</code> will rerun, are maintained in the <code>TerragruntOptions.RetryableErrors</code> array. Future upgrades to <code>terragrunt</code> may include the ability to configure <code>auto-retry</code> by specifying additional error strings and configuring max retries and retry intervals the <code>terragrunt</code> config (PRs welcome!).</p>
-</div>
-<div class="paragraph">
-<p>To disable <code>auto-retry</code>, use the <code>--terragrunt-no-auto-retry</code> command line option or set the <code>TERRAGRUNT_AUTO_RETRY</code> environment variable to <code>false</code>.</p>
-</div>
-</div>
-</div>
+Error installing provider "template": error fetching checksums: Get https://releases.hashicorp.com/terraform-provider-template/1.0.0/terraform-provider-template_1.0.0_SHA256SUMS: net/http: TLS handshake timeout.
+</code></pre></div></div>
+
+<p>Terragrunt sees this error, and knows it is a transient error that can addressed by re-running the <code class="language-plaintext highlighter-rouge">apply</code> command.</p>
+
+<p><code class="language-plaintext highlighter-rouge">auto-retry</code> will try a maximum of three times to re-run the command, at which point it will deem the error as not transient, and accept the terraform failure. Retries will occur when the error is encountered, pausing for 5 seconds between retries.</p>
+
+<p>Known errors that <code class="language-plaintext highlighter-rouge">auto-retry</code> will rerun, are maintained in the <code class="language-plaintext highlighter-rouge">TerragruntOptions.RetryableErrors</code> array. Future upgrades to <code class="language-plaintext highlighter-rouge">terragrunt</code> may include the ability to configure <code class="language-plaintext highlighter-rouge">auto-retry</code> by specifying additional error strings and configuring max retries and retry intervals the <code class="language-plaintext highlighter-rouge">terragrunt</code> config (PRs welcome!).</p>
+
+<p>To disable <code class="language-plaintext highlighter-rouge">auto-retry</code>, use the <code class="language-plaintext highlighter-rouge">--terragrunt-no-auto-retry</code> command line option or set the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_AUTO_RETRY</code> environment variable to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
         </div>
       </div>
     </div>

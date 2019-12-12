@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Caching</title>
 <meta name="description" content="Learn more about caching in Terragrunt.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/features/caching/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/features/caching/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Caching" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/features/caching/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/caching/
 " />
 <meta name="twitter:description" content="Learn more about caching in Terragrunt." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Caching"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/features/caching/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/caching/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn more about caching in Terragrunt."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-caching-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-caching-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-caching-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-caching-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-caching-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-caching-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-caching-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-caching-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,36 +3165,24 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="clearing-the-terragrunt-cache">Clearing the Terragrunt cache</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Terragrunt creates a <code>.terragrunt-cache</code> folder in the current working directory as its scratch directory. It downloads your remote Terraform configurations into this folder, runs your Terraform commands in this folder, and any modules and providers those commands download also get stored in this folder. You can safely delete this folder any time and Terragrunt will recreate it as necessary.</p>
-</div>
-<div class="paragraph">
-<p>If you need to clean up a lot of these folders (e.g., after <code>terragrunt apply-all</code>), you can use the following commands on Mac and Linux:</p>
-</div>
-<div class="paragraph">
-<p>Recursively find all the <code>.terragrunt-cache</code> folders that are children of the current folder:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">find . -type d -name ".terragrunt-cache"</code></pre>
-</div>
-</div>
-<div class="paragraph">
+            <h2 id="clearing-the-terragrunt-cache">Clearing the Terragrunt cache</h2>
+
+<p>Terragrunt creates a <code class="language-plaintext highlighter-rouge">.terragrunt-cache</code> folder in the current working directory as its scratch directory. It downloads your remote Terraform configurations into this folder, runs your Terraform commands in this folder, and any modules and providers those commands download also get stored in this folder. You can safely delete this folder any time and Terragrunt will recreate it as necessary.</p>
+
+<p>If you need to clean up a lot of these folders (e.g., after <code class="language-plaintext highlighter-rouge">terragrunt apply-all</code>), you can use the following commands on Mac and Linux:</p>
+
+<p>Recursively find all the <code class="language-plaintext highlighter-rouge">.terragrunt-cache</code> folders that are children of the current folder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> d <span class="nt">-name</span> <span class="s2">".terragrunt-cache"</span>
+</code></pre></div></div>
+
 <p>If you are ABSOLUTELY SURE you want to delete all the folders that come up in the previous command, you can recursively delete all of them as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Also consider setting the <code>TERRAGRUNT_DOWNLOAD</code> environment variable if you wish to place the cache directories somewhere else.</p>
-</div>
-</div>
-</div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> d <span class="nt">-name</span> <span class="s2">".terragrunt-cache"</span> <span class="nt">-prune</span> <span class="nt">-exec</span> <span class="nb">rm</span> <span class="nt">-rf</span> <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div></div>
+
+<p>Also consider setting the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_DOWNLOAD</code> environment variable if you wish to place the cache directories somewhere else.</p>
+
         </div>
       </div>
     </div>

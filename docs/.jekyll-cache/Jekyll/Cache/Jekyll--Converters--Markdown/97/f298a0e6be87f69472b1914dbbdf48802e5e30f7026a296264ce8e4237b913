@@ -1,0 +1,18 @@
+I"C<h2 id="clearing-the-terragrunt-cache">Clearing the Terragrunt cache</h2>
+
+<p>Terragrunt creates a <code class="highlighter-rouge">.terragrunt-cache</code> folder in the current working directory as its scratch directory. It downloads your remote Terraform configurations into this folder, runs your Terraform commands in this folder, and any modules and providers those commands download also get stored in this folder. You can safely delete this folder any time and Terragrunt will recreate it as necessary.</p>
+
+<p>If you need to clean up a lot of these folders (e.g., after <code class="highlighter-rouge">terragrunt apply-all</code>), you can use the following commands on Mac and Linux:</p>
+
+<p>Recursively find all the <code class="highlighter-rouge">.terragrunt-cache</code> folders that are children of the current folder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> d <span class="nt">-name</span> <span class="s2">".terragrunt-cache"</span>
+</code></pre></div></div>
+
+<p>If you are ABSOLUTELY SURE you want to delete all the folders that come up in the previous command, you can recursively delete all of them as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> d <span class="nt">-name</span> <span class="s2">".terragrunt-cache"</span> <span class="nt">-prune</span> <span class="nt">-exec</span> <span class="nb">rm</span> <span class="nt">-rf</span> <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div></div>
+
+<p>Also consider setting the <code class="highlighter-rouge">TERRAGRUNT_DOWNLOAD</code> environment variable if you wish to place the cache directories somewhere else.</p>
+:ET

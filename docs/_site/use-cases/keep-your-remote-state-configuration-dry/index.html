@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Keep your remote state configuration DRY</title>
 <meta name="description" content="Learn how to create and manage remote state configuration.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/use-cases/keep-your-remote-state-configuration-dry/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/use-cases/keep-your-remote-state-configuration-dry/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Keep your remote state configuration DRY" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/use-cases/keep-your-remote-state-configuration-dry/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/use-cases/keep-your-remote-state-configuration-dry/
 " />
 <meta name="twitter:description" content="Learn how to create and manage remote state configuration." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Keep your remote state configuration DRY"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/use-cases/keep-your-remote-state-configuration-dry/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/use-cases/keep-your-remote-state-configuration-dry/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Learn how to create and manage remote state configuration."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-use-cases-keep-your-remote-state-configuration-dry-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3166,78 +3166,62 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="keep-your-remote-state-configuration-dry">Keep your remote state configuration DRY</h2>
-<div class="sectionbody">
-<div class="ulist">
+            <h2 id="keep-your-remote-state-configuration-dry">Keep your remote state configuration DRY</h2>
+
 <ul>
-<li>
-<p><a href="#motivation">Motivation</a></p>
-</li>
-<li>
-<p><a href="#filling-in-remote-state-settings-with-terragrunt">Filling in remote state settings with Terragrunt</a></p>
-</li>
-<li>
-<p><a href="#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a></p>
-</li>
+  <li>
+    <p><a href="#motivation">Motivation</a></p>
+  </li>
+  <li>
+    <p><a href="#filling-in-remote-state-settings-with-terragrunt">Filling in remote state settings with Terragrunt</a></p>
+  </li>
+  <li>
+    <p><a href="#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a></p>
+  </li>
 </ul>
-</div>
-<div class="sect2">
+
 <h3 id="motivation">Motivation</h3>
-<div class="paragraph">
-<p>Terraform supports <a href="https://www.terraform.io/docs/state/remote.html">remote state storage</a> via a variety of <a href="https://www.terraform.io/docs/backends">backends</a> that you normally configure in your <code>.tf</code> files as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  backend "s3" {
-    bucket         = "my-terraform-state"
-    key            = "frontend-app/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "my-lock-table"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Unfortunately, the <code>backend</code> configuration does not support expressions, variables, or functions. This makes it hard to keep your code <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> if you have multiple Terraform modules. For example, consider the following folder structure, which uses different Terraform modules to deploy a backend app, frontend app, MySQL database, and a VPC:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>├── backend-app
+
+<p>Terraform supports <a href="https://www.terraform.io/docs/state/remote.html">remote state storage</a> via a variety of <a href="https://www.terraform.io/docs/backends">backends</a> that you normally configure in your <code class="language-plaintext highlighter-rouge">.tf</code> files as follows:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{</span>
+    <span class="nx">bucket</span>         <span class="p">=</span> <span class="s2">"my-terraform-state"</span>
+    <span class="nx">key</span>            <span class="p">=</span> <span class="s2">"frontend-app/terraform.tfstate"</span>
+    <span class="nx">region</span>         <span class="p">=</span> <span class="s2">"us-east-1"</span>
+    <span class="nx">encrypt</span>        <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="s2">"my-lock-table"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Unfortunately, the <code class="language-plaintext highlighter-rouge">backend</code> configuration does not support expressions, variables, or functions. This makes it hard to keep your code <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> if you have multiple Terraform modules. For example, consider the following folder structure, which uses different Terraform modules to deploy a backend app, frontend app, MySQL database, and a VPC:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── backend-app
 │   └── main.tf
 ├── frontend-app
 │   └── main.tf
 ├── mysql
 │   └── main.tf
 └── vpc
-    └── main.tf</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To use remote state with each of these modules, you would have to copy/paste the exact same <code>backend</code> configuration into each of the <code>main.tf</code> files. The only thing that would differ between the configurations would be the <code>key</code> parameter: e.g., the <code>key</code> for <code>mysql/main.tf</code> might be <code>mysql/terraform.tfstate</code> and the <code>key</code> for <code>frontend-app/main.tf</code> might be <code>frontend-app/terraform.tfstate</code>.</p>
-</div>
-<div class="paragraph">
-<p>To keep your remote state configuration DRY, you can use Terragrunt. You still have to specify the <code>backend</code> you want to use in each module, but instead of copying and pasting the configuration settings over and over again into each <code>main.tf</code> file, you can leave them blank (this is known as <a href="https://www.terraform.io/docs/backends/config.html#partial-configuration">partial configuration</a>):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">terraform {
-  # The configuration for this backend will be filled in by Terragrunt
-  backend "s3" {}
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+    └── main.tf
+</code></pre></div></div>
+
+<p>To use remote state with each of these modules, you would have to copy/paste the exact same <code class="language-plaintext highlighter-rouge">backend</code> configuration into each of the <code class="language-plaintext highlighter-rouge">main.tf</code> files. The only thing that would differ between the configurations would be the <code class="language-plaintext highlighter-rouge">key</code> parameter: e.g., the <code class="language-plaintext highlighter-rouge">key</code> for <code class="language-plaintext highlighter-rouge">mysql/main.tf</code> might be <code class="language-plaintext highlighter-rouge">mysql/terraform.tfstate</code> and the <code class="language-plaintext highlighter-rouge">key</code> for <code class="language-plaintext highlighter-rouge">frontend-app/main.tf</code> might be <code class="language-plaintext highlighter-rouge">frontend-app/terraform.tfstate</code>.</p>
+
+<p>To keep your remote state configuration DRY, you can use Terragrunt. You still have to specify the <code class="language-plaintext highlighter-rouge">backend</code> you want to use in each module, but instead of copying and pasting the configuration settings over and over again into each <code class="language-plaintext highlighter-rouge">main.tf</code> file, you can leave them blank (this is known as <a href="https://www.terraform.io/docs/backends/config.html#partial-configuration">partial configuration</a>):</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># The configuration for this backend will be filled in by Terragrunt</span>
+  <span class="nx">backend</span> <span class="s2">"s3"</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="filling-in-remote-state-settings-with-terragrunt">Filling in remote state settings with Terragrunt</h3>
-<div class="paragraph">
-<p>To fill in the settings via Terragrunt, create a <code>terragrunt.hcl</code> file in the root folder, plus one <code>terragrunt.hcl</code> file in each of the Terraform modules:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>├── terragrunt.hcl
+
+<p>To fill in the settings via Terragrunt, create a <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file in the root folder, plus one <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file in each of the Terraform modules:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── terragrunt.hcl
 ├── backend-app
 │   ├── main.tf
 │   └── terragrunt.hcl
@@ -3249,217 +3233,167 @@
 │   └── terragrunt.hcl
 └── vpc
     ├── main.tf
-    └── terragrunt.hcl</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In your <strong>root</strong> <code>terragrunt.hcl</code> file, you can define your entire remote state configuration just once in a <code>remote_state</code> block (which supports all the same <a href="https://www.terraform.io/docs/backends/types/index.html">backend types</a> as Terraform), as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  backend = "s3"
-  config = {
-    bucket         = "my-terraform-state"
-    key            = "${path_relative_to_include()}/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "my-lock-table"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In each of the <strong>child</strong> <code>terragrunt.hcl</code> files, such as <code>mysql/terragrunt.hcl</code>, you can tell Terragrunt to automatically include all the settings from the root <code>terragrunt.hcl</code> file as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">include {
-  path = find_in_parent_folders()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>include</code> block tells Terragrunt to use the exact same Terragrunt configuration from the <code>terragrunt.hcl</code> file specified via the <code>path</code> parameter. It behaves exactly as if you had copy/pasted the Terraform configuration from the included file <code>remote_state</code> configuration into <code>mysql/terragrunt.hcl</code>, but this approach is much easier to maintain!</p>
-</div>
-<div class="paragraph">
-<p>The next time you run <code>terragrunt</code>, it will automatically configure all the settings in the <code>remote_state.config</code> block, if they aren&#8217;t configured already, by calling <a href="https://www.terraform.io/docs/commands/init.html">terraform init</a>.</p>
-</div>
-<div class="paragraph">
-<p>The <code>terragrunt.hcl</code> files above use two Terragrunt built-in functions:</p>
-</div>
-<div class="ulist">
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>In your <strong>root</strong> <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file, you can define your entire remote state configuration just once in a <code class="language-plaintext highlighter-rouge">remote_state</code> block (which supports all the same <a href="https://www.terraform.io/docs/backends/types/index.html">backend types</a> as Terraform), as follows:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="p">=</span> <span class="s2">"s3"</span>
+  <span class="nx">config</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">bucket</span>         <span class="p">=</span> <span class="s2">"my-terraform-state"</span>
+    <span class="nx">key</span>            <span class="p">=</span> <span class="s2">"${path_relative_to_include()}/terraform.tfstate"</span>
+    <span class="nx">region</span>         <span class="p">=</span> <span class="s2">"us-east-1"</span>
+    <span class="nx">encrypt</span>        <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">dynamodb_table</span> <span class="p">=</span> <span class="s2">"my-lock-table"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In each of the <strong>child</strong> <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> files, such as <code class="language-plaintext highlighter-rouge">mysql/terragrunt.hcl</code>, you can tell Terragrunt to automatically include all the settings from the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file as follows:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">include</span> <span class="p">{</span>
+  <span class="nx">path</span> <span class="p">=</span> <span class="nx">find_in_parent_folders</span><span class="err">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">include</code> block tells Terragrunt to use the exact same Terragrunt configuration from the <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file specified via the <code class="language-plaintext highlighter-rouge">path</code> parameter. It behaves exactly as if you had copy/pasted the Terraform configuration from the included file <code class="language-plaintext highlighter-rouge">remote_state</code> configuration into <code class="language-plaintext highlighter-rouge">mysql/terragrunt.hcl</code>, but this approach is much easier to maintain!</p>
+
+<p>The next time you run <code class="language-plaintext highlighter-rouge">terragrunt</code>, it will automatically configure all the settings in the <code class="language-plaintext highlighter-rouge">remote_state.config</code> block, if they aren’t configured already, by calling <a href="https://www.terraform.io/docs/commands/init.html">terraform init</a>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> files above use two Terragrunt built-in functions:</p>
+
 <ul>
-<li>
-<p><code>find_in_parent_folders()</code>: This function returns the path to the first <code>terragrunt.hcl</code> file it finds in the parent folders above the current <code>terragrunt.hcl</code> file. In the example above, the call to <code>find_in_parent_folders()</code> in <code>mysql/terragrunt.hcl</code> will return <code>../terragrunt.hcl</code>. This way, you don&#8217;t have to hard code the <code>path</code> parameter in every module.</p>
-</li>
-<li>
-<p><code>path_relative_to_include()</code>: This function returns the relative path between the current <code>terragrunt.hcl</code> file and the path specified in its <code>include</code> block. We typically use this in a root <code>terragrunt.hcl</code> file so that each Terraform child module stores its Terraform state at a different <code>key</code>. For example, the <code>mysql</code> module will have its <code>key</code> parameter resolve to <code>mysql/terraform.tfstate</code> and the <code>frontend-app</code> module will have its <code>key</code> parameter resolve to <code>frontend-app/terraform.tfstate</code>.</p>
-</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">find_in_parent_folders()</code>: This function returns the path to the first <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file it finds in the parent folders above the current <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file. In the example above, the call to <code class="language-plaintext highlighter-rouge">find_in_parent_folders()</code> in <code class="language-plaintext highlighter-rouge">mysql/terragrunt.hcl</code> will return <code class="language-plaintext highlighter-rouge">../terragrunt.hcl</code>. This way, you don’t have to hard code the <code class="language-plaintext highlighter-rouge">path</code> parameter in every module.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">path_relative_to_include()</code>: This function returns the relative path between the current <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file and the path specified in its <code class="language-plaintext highlighter-rouge">include</code> block. We typically use this in a root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file so that each Terraform child module stores its Terraform state at a different <code class="language-plaintext highlighter-rouge">key</code>. For example, the <code class="language-plaintext highlighter-rouge">mysql</code> module will have its <code class="language-plaintext highlighter-rouge">key</code> parameter resolve to <code class="language-plaintext highlighter-rouge">mysql/terraform.tfstate</code> and the <code class="language-plaintext highlighter-rouge">frontend-app</code> module will have its <code class="language-plaintext highlighter-rouge">key</code> parameter resolve to <code class="language-plaintext highlighter-rouge">frontend-app/terraform.tfstate</code>.</p>
+  </li>
 </ul>
-</div>
-<div class="paragraph">
+
 <p>See <a href="/terragrunt/documentation/features/built-in-functions/#built-in-functions">the Built-in Functions docs</a> for more info.</p>
-</div>
-<div class="paragraph">
+
 <p>Check out the <a href="https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example">terragrunt-infrastructure-modules-example</a> and <a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example">terragrunt-infrastructure-live-example</a> repos for fully-working sample code that demonstrates how to use Terragrunt to manage remote state.</p>
-</div>
-</div>
-<div class="sect2">
+
 <h3 id="rules-for-merging-parent-and-child-configurations">Rules for merging parent and child configurations</h3>
-<div class="paragraph">
-<p>The child <code>.hcl</code> file&#8217;s <code>terraform</code> settings will be merged into the parent file&#8217;s <code>terraform</code> settings as follows:</p>
-</div>
-<div class="ulist">
+
+<p>The child <code class="language-plaintext highlighter-rouge">.hcl</code> file’s <code class="language-plaintext highlighter-rouge">terraform</code> settings will be merged into the parent file’s <code class="language-plaintext highlighter-rouge">terraform</code> settings as follows:</p>
+
 <ul>
-<li>
-<p>If an <code>extra_arguments</code> block in the child has the same name as an <code>extra_arguments</code> block in the parent, then the child&#8217;s block will override the parent&#8217;s.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Specifying an empty <code>extra_arguments</code> block in a child with the same name will effectively remove the parent&#8217;s block.</p>
-</li>
+  <li>
+    <p>If an <code class="language-plaintext highlighter-rouge">extra_arguments</code> block in the child has the same name as an <code class="language-plaintext highlighter-rouge">extra_arguments</code> block in the parent, then the child’s block will override the parent’s.</p>
+
+    <ul>
+      <li>Specifying an empty <code class="language-plaintext highlighter-rouge">extra_arguments</code> block in a child with the same name will effectively remove the parent’s block.</li>
+    </ul>
+  </li>
+  <li>
+    <p>If an <code class="language-plaintext highlighter-rouge">extra_arguments</code> block in the child has a different name than <code class="language-plaintext highlighter-rouge">extra_arguments</code> blocks in the parent, then both the parent and child’s <code class="language-plaintext highlighter-rouge">extra_arguments</code> will be effective.</p>
+
+    <ul>
+      <li>
+        <p>The child’s <code class="language-plaintext highlighter-rouge">extra_arguments</code> will be placed <em>after</em> the parent’s <code class="language-plaintext highlighter-rouge">extra_arguments</code> on the terraform command line.</p>
+      </li>
+      <li>
+        <p>Therefore, if a child’s and parent’s <code class="language-plaintext highlighter-rouge">extra_arguments</code> include <code class="language-plaintext highlighter-rouge">.tfvars</code> files with the same variable defined, the value from the <code class="language-plaintext highlighter-rouge">.tfvars</code> file from the child’s <code class="language-plaintext highlighter-rouge">extra_arguments</code> will be used by terraform.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>If a <code class="language-plaintext highlighter-rouge">before_hook</code> or <code class="language-plaintext highlighter-rouge">after_hook</code> block in the child has the same name as the hook block in the parent, then the child’s block will override the parent’s.</p>
+
+    <ul>
+      <li>Specifying an empty hook block in a child with the same name will effectively remove the parent’s block.</li>
+    </ul>
+  </li>
+  <li>
+    <p>If a <code class="language-plaintext highlighter-rouge">before_hook</code> or <code class="language-plaintext highlighter-rouge">after_hook</code> block in the child has a different name than hook blocks in the parent, then both the parent and child’s hook blocks will be effective.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">source</code> field in the child will override <code class="language-plaintext highlighter-rouge">source</code> field in the parent</p>
+  </li>
 </ul>
-</div>
-</li>
-<li>
-<p>If an <code>extra_arguments</code> block in the child has a different name than <code>extra_arguments</code> blocks in the parent, then both the parent and child&#8217;s <code>extra_arguments</code> will be effective.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The child&#8217;s <code>extra_arguments</code> will be placed <em>after</em> the parent&#8217;s <code>extra_arguments</code> on the terraform command line.</p>
-</li>
-<li>
-<p>Therefore, if a child&#8217;s and parent&#8217;s <code>extra_arguments</code> include <code>.tfvars</code> files with the same variable defined, the value from the <code>.tfvars</code> file from the child&#8217;s <code>extra_arguments</code> will be used by terraform.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>If a <code>before_hook</code> or <code>after_hook</code> block in the child has the same name as the hook block in the parent, then the child&#8217;s block will override the parent&#8217;s.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Specifying an empty hook block in a child with the same name will effectively remove the parent&#8217;s block.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>If a <code>before_hook</code> or <code>after_hook</code> block in the child has a different name than hook blocks in the parent, then both the parent and child&#8217;s hook blocks will be effective.</p>
-</li>
-<li>
-<p>The <code>source</code> field in the child will override <code>source</code> field in the parent</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Other settings in the child <code>.hcl</code> file override the respective settings in the parent.</p>
-</div>
-</div>
-<div class="sect2">
+
+<p>Other settings in the child <code class="language-plaintext highlighter-rouge">.hcl</code> file override the respective settings in the parent.</p>
+
 <h3 id="create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</h3>
-<div class="paragraph">
-<p>When you run <code>terragrunt</code> with <code>remote_state</code> configuration, it will automatically create the following resources if they don&#8217;t already exist:</p>
-</div>
-<div class="ulist">
+
+<p>When you run <code class="language-plaintext highlighter-rouge">terragrunt</code> with <code class="language-plaintext highlighter-rouge">remote_state</code> configuration, it will automatically create the following resources if they don’t already exist:</p>
+
 <ul>
-<li>
-<p><strong>S3 bucket</strong>: If you are using the <a href="https://www.terraform.io/docs/backends/types/s3.html">S3 backend</a> for remote state storage and the <code>bucket</code> you specify in <code>remote_state.config</code> doesn&#8217;t already exist, Terragrunt will create it automatically, with <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html">versioning</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">server-side encryption</a>, and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html">access logging</a> enabled.</p>
-<div class="paragraph">
-<p>In addition, you can let terragrunt tag the bucket with custom tags that you specify in <code>remote_state.config.s3_bucket_tags</code>.</p>
-</div>
-</li>
-<li>
-<p><strong>DynamoDB table</strong>: If you are using the <a href="https://www.terraform.io/docs/backends/types/s3.html">S3 backend</a> for remote state storage and you specify a <code>dynamodb_table</code> (a <a href="https://www.terraform.io/docs/backends/types/s3.html#dynamodb_table">DynamoDB table used for locking</a>) in <code>remote_state.config</code>, if that table doesn&#8217;t already exist, Terragrunt will create it automatically, with <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html">server-side encryption</a> enabled, including a primary key called <code>LockID</code>.</p>
-<div class="paragraph">
-<p>In addition, you can let terragrunt tag the DynamoDB table with custom tags that you specify in <code>remote_state.config.dynamodb_table_tags</code>.</p>
-</div>
-</li>
-<li>
-<p><strong>GCS bucket</strong>: If you are using the <a href="https://www.terraform.io/docs/backends/types/gcs.html">GCS backend</a> for remote state storage and the <code>bucket</code> you specify in <code>remote_state.config</code> doesn&#8217;t already exist, Terragrunt will create it automatically, with <a href="https://cloud.google.com/storage/docs/object-versioning">versioning</a> enabled. For this to work correctly you must also specify <code>project</code> and <code>location</code> keys in <code>remote_state.config</code>, so Terragrunt knows where to create the bucket. You will also need to supply valid credentials using either <code>remote_state.config.credentials</code> or by setting the <code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable. If you want to skip creating the bucket entirely, simply set <code>skip_bucket_creation</code> to <code>true</code> and Terragrunt will assume the bucket has already been created. If you don&#8217;t specify <code>bucket</code> in <code>remote_state</code> then terragrunt will assume that you will pass <code>bucket</code> through <code>-backend-config</code> in <code>extra_arguments</code>.</p>
-<div class="paragraph">
-<p>We also strongly recommend you enable <a href="https://cloud.google.com/storage/docs/access-logs">Cloud Audit Logs</a> to audit and track API operations performed against the state bucket.</p>
-</div>
-<div class="paragraph">
-<p>In addition, you can let Terragrunt label the bucket with custom labels that you specify in <code>remote_state.config.gcs_bucket_labels</code>.</p>
-</div>
-</li>
+  <li>
+    <p><strong>S3 bucket</strong>: If you are using the <a href="https://www.terraform.io/docs/backends/types/s3.html">S3 backend</a> for remote state storage and the <code class="language-plaintext highlighter-rouge">bucket</code> you specify in <code class="language-plaintext highlighter-rouge">remote_state.config</code> doesn’t already exist, Terragrunt will create it automatically, with <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html">versioning</a>, <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">server-side encryption</a>, and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html">access logging</a> enabled.</p>
+
+    <p>In addition, you can let terragrunt tag the bucket with custom tags that you specify in <code class="language-plaintext highlighter-rouge">remote_state.config.s3_bucket_tags</code>.</p>
+  </li>
+  <li>
+    <p><strong>DynamoDB table</strong>: If you are using the <a href="https://www.terraform.io/docs/backends/types/s3.html">S3 backend</a> for remote state storage and you specify a <code class="language-plaintext highlighter-rouge">dynamodb_table</code> (a <a href="https://www.terraform.io/docs/backends/types/s3.html#dynamodb_table">DynamoDB table used for locking</a>) in <code class="language-plaintext highlighter-rouge">remote_state.config</code>, if that table doesn’t already exist, Terragrunt will create it automatically, with <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html">server-side encryption</a> enabled, including a primary key called <code class="language-plaintext highlighter-rouge">LockID</code>.</p>
+
+    <p>In addition, you can let terragrunt tag the DynamoDB table with custom tags that you specify in <code class="language-plaintext highlighter-rouge">remote_state.config.dynamodb_table_tags</code>.</p>
+  </li>
+  <li>
+    <p><strong>GCS bucket</strong>: If you are using the <a href="https://www.terraform.io/docs/backends/types/gcs.html">GCS backend</a> for remote state storage and the <code class="language-plaintext highlighter-rouge">bucket</code> you specify in <code class="language-plaintext highlighter-rouge">remote_state.config</code> doesn’t already exist, Terragrunt will create it automatically, with <a href="https://cloud.google.com/storage/docs/object-versioning">versioning</a> enabled. For this to work correctly you must also specify <code class="language-plaintext highlighter-rouge">project</code> and <code class="language-plaintext highlighter-rouge">location</code> keys in <code class="language-plaintext highlighter-rouge">remote_state.config</code>, so Terragrunt knows where to create the bucket. You will also need to supply valid credentials using either <code class="language-plaintext highlighter-rouge">remote_state.config.credentials</code> or by setting the <code class="language-plaintext highlighter-rouge">GOOGLE_APPLICATION_CREDENTIALS</code> environment variable. If you want to skip creating the bucket entirely, simply set <code class="language-plaintext highlighter-rouge">skip_bucket_creation</code> to <code class="language-plaintext highlighter-rouge">true</code> and Terragrunt will assume the bucket has already been created. If you don’t specify <code class="language-plaintext highlighter-rouge">bucket</code> in <code class="language-plaintext highlighter-rouge">remote_state</code> then terragrunt will assume that you will pass <code class="language-plaintext highlighter-rouge">bucket</code> through <code class="language-plaintext highlighter-rouge">-backend-config</code> in <code class="language-plaintext highlighter-rouge">extra_arguments</code>.</p>
+
+    <p>We also strongly recommend you enable <a href="https://cloud.google.com/storage/docs/access-logs">Cloud Audit Logs</a> to audit and track API operations performed against the state bucket.</p>
+
+    <p>In addition, you can let Terragrunt label the bucket with custom labels that you specify in <code class="language-plaintext highlighter-rouge">remote_state.config.gcs_bucket_labels</code>.</p>
+  </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><strong>Note</strong>: If you specify a <code>profile</code> key in <code>remote_state.config</code>, Terragrunt will automatically use this AWS profile when creating the S3 bucket or DynamoDB table.</p>
-</div>
-<div class="paragraph">
-<p><strong>Note</strong>: You can disable automatic remote state initialization by setting <code>remote_state.disable_init</code>, this will skip the automatic creation of remote state resources and will execute <code>terraform init</code> passing the <code>backend=false</code> option. This can be handy when running commands such as <code>validate-all</code> as part of a CI process where you do not want to initialize remote state.</p>
-</div>
-<div class="paragraph">
+
+<p><strong>Note</strong>: If you specify a <code class="language-plaintext highlighter-rouge">profile</code> key in <code class="language-plaintext highlighter-rouge">remote_state.config</code>, Terragrunt will automatically use this AWS profile when creating the S3 bucket or DynamoDB table.</p>
+
+<p><strong>Note</strong>: You can disable automatic remote state initialization by setting <code class="language-plaintext highlighter-rouge">remote_state.disable_init</code>, this will skip the automatic creation of remote state resources and will execute <code class="language-plaintext highlighter-rouge">terraform init</code> passing the <code class="language-plaintext highlighter-rouge">backend=false</code> option. This can be handy when running commands such as <code class="language-plaintext highlighter-rouge">validate-all</code> as part of a CI process where you do not want to initialize remote state.</p>
+
 <p>The following example demonstrates using an environment variable to configure this option:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  # ...
 
-  disable_init = tobool(get_env("TERRAGRUNT_DISABLE_INIT", "false"))
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+
+  <span class="nx">disable_init</span> <span class="p">=</span> <span class="nx">tobool</span><span class="err">(</span><span class="nx">get_env</span><span class="err">(</span><span class="s2">"TERRAGRUNT_DISABLE_INIT"</span><span class="err">,</span> <span class="s2">"false"</span><span class="err">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="s3-specific-remote-state-settings">S3-specific remote state settings</h3>
-<div class="paragraph">
-<p>For the <code>s3</code> backend, the following config options can be used for S3-compatible object stores, as necessary:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
-  # ...
 
-  skip_bucket_versioning         = true # use only if the object store does not support versioning
-  skip_bucket_ssencryption       = true # use only if non-encrypted Terraform State is required and/or the object store does not support server-side encryption
-  skip_bucket_accesslogging      = true # use only if the cost for the extra object space is undesirable or the object store does not support access logging
-  enable_lock_table_ssencryption = true # use only if non-encrypted DynamoDB Lock Table for the Terraform State is required and/or the NoSQL database service does not support server-side encryption
+<p>For the <code class="language-plaintext highlighter-rouge">s3</code> backend, the following config options can be used for S3-compatible object stores, as necessary:</p>
 
-  shared_credentials_file     = "/path/to/credentials/file"
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  force_path_style            = true
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+  <span class="c1"># ...</span>
+
+  <span class="nx">skip_bucket_versioning</span>         <span class="p">=</span> <span class="kc">true</span> <span class="c1"># use only if the object store does not support versioning</span>
+  <span class="nx">skip_bucket_ssencryption</span>       <span class="p">=</span> <span class="kc">true</span> <span class="c1"># use only if non-encrypted Terraform State is required and/or the object store does not support server-side encryption</span>
+  <span class="nx">skip_bucket_accesslogging</span>      <span class="p">=</span> <span class="kc">true</span> <span class="c1"># use only if the cost for the extra object space is undesirable or the object store does not support access logging</span>
+  <span class="nx">enable_lock_table_ssencryption</span> <span class="p">=</span> <span class="kc">true</span> <span class="c1"># use only if non-encrypted DynamoDB Lock Table for the Terraform State is required and/or the NoSQL database service does not support server-side encryption</span>
+
+  <span class="nx">shared_credentials_file</span>     <span class="p">=</span> <span class="s2">"/path/to/credentials/file"</span>
+  <span class="nx">skip_credentials_validation</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">skip_metadata_api_check</span>     <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">force_path_style</span>            <span class="p">=</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <p>If you experience an error for any of these configurations, confirm you are using Terraform v0.12.2 or greater.</p>
-</div>
-<div class="paragraph">
-<p>Further, the config options <code>s3_bucket_tags</code>, <code>dynamodb_table_tags</code>, <code>skip_bucket_versioning</code>, <code>skip_bucket_ssencryption</code>, <code>skip_bucket_accesslogging</code>, and <code>enable_lock_table_ssencryption</code> are only valid for backend <code>s3</code>. They are used by terragrunt and are <strong>not</strong> passed on to terraform. See section <a href="#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a>.</p>
-</div>
-</div>
-<div class="sect2">
+
+<p>Further, the config options <code class="language-plaintext highlighter-rouge">s3_bucket_tags</code>, <code class="language-plaintext highlighter-rouge">dynamodb_table_tags</code>, <code class="language-plaintext highlighter-rouge">skip_bucket_versioning</code>, <code class="language-plaintext highlighter-rouge">skip_bucket_ssencryption</code>, <code class="language-plaintext highlighter-rouge">skip_bucket_accesslogging</code>, and <code class="language-plaintext highlighter-rouge">enable_lock_table_ssencryption</code> are only valid for backend <code class="language-plaintext highlighter-rouge">s3</code>. They are used by terragrunt and are <strong>not</strong> passed on to terraform. See section <a href="#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a>.</p>
+
 <h3 id="gcs-specific-remote-state-settings">GCS-specific remote state settings</h3>
-<div class="paragraph">
-<p>For the <code>gcs</code> backend, the following config options can be used for GCS-compatible object stores, as necessary:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-hcl" data-lang="hcl">remote_state {
- # ...
 
- skip_bucket_versioning = true # use only if the object store does not support versioning
+<p>For the <code class="language-plaintext highlighter-rouge">gcs</code> backend, the following config options can be used for GCS-compatible object stores, as necessary:</p>
 
- encryption_key = "GOOGLE_ENCRYPTION_KEY"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">remote_state</span> <span class="p">{</span>
+ <span class="c1"># ...</span>
+
+ <span class="nx">skip_bucket_versioning</span> <span class="p">=</span> <span class="kc">true</span> <span class="c1"># use only if the object store does not support versioning</span>
+
+ <span class="nx">encryption_key</span> <span class="p">=</span> <span class="s2">"GOOGLE_ENCRYPTION_KEY"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <p>If you experience an error for any of these configurations, confirm you are using Terraform v0.12.0 or greater.</p>
-</div>
-<div class="paragraph">
-<p>Further, the config options <code>gcs_bucket_labels</code> and <code>skip_bucket_versioning</code> are only valid for the backend <code>gcs</code>. They are used by terragrunt and are <strong>not</strong> passed on to terraform. See section <a href="#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a>.</p>
-</div>
-</div>
-</div>
-</div>
+
+<p>Further, the config options <code class="language-plaintext highlighter-rouge">gcs_bucket_labels</code> and <code class="language-plaintext highlighter-rouge">skip_bucket_versioning</code> are only valid for the backend <code class="language-plaintext highlighter-rouge">gcs</code>. They are used by terragrunt and are <strong>not</strong> passed on to terraform. See section <a href="#create-remote-state-and-locking-resources-automatically">Create remote state and locking resources automatically</a>.</p>
+
         </div>
       </div>
     </div>

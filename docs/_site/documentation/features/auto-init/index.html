@@ -16,7 +16,7 @@
 <![endif]-->
 <title>Auto-init</title>
 <meta name="description" content="Auto-Init is a feature of Terragrunt that makes it so that terragrunt init does not need to be called explicitly before other terragrunt commands.">
-<link rel="canonical" href="https://terragrunt.io/terragrunt/documentation/features/auto-init/
+<link rel="canonical" href="http://151.80.145.8:4000/terragrunt/documentation/features/auto-init/
 ">
 
 <META NAME="robots" CONTENT="index">
@@ -54,18 +54,18 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="" />
 <meta name="twitter:title" content="Auto-init" />
-<meta name="twitter:url" content="https://terragrunt.io/terragrunt/documentation/features/auto-init/
+<meta name="twitter:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/auto-init/
 " />
 <meta name="twitter:description" content="Auto-Init is a feature of Terragrunt that makes it so that terragrunt init does not need to be called explicitly before other terragrunt commands." />
-<meta name="twitter:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png" />
+<meta name="twitter:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png" />
 
 <meta property="og:title" content="Auto-init"/>
-<meta property="og:url" content="https://terragrunt.io/terragrunt/documentation/features/auto-init/
+<meta property="og:url" content="http://151.80.145.8:4000/terragrunt/documentation/features/auto-init/
 "/>
 <meta property="og:site_name" content="Terragrunt | Terraform wrapper"/>
 <meta property="article:author" content=""/>
 <meta property="og:description" content="Auto-Init is a feature of Terragrunt that makes it so that terragrunt init does not need to be called explicitly before other terragrunt commands."/>
-<meta property="og:image" content="https://terragrunt.io/terragrunt/assets/img/terragrunt-thumbnail.png"/>
+<meta property="og:image" content="http://151.80.145.8:4000/terragrunt/assets/img/terragrunt-thumbnail.png"/>
 
 
     </head>
@@ -91,10 +91,10 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-adoc" ga-event-action="install-terragrunt">Install</a></li>
-          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-adoc" ga-event-action="quick-start">Quick Start</a></li>
-          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-adoc" ga-event-action="documentation">Docs</a></li>
-          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-adoc" ga-event-action="use-cases">Use cases</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/install" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-md" ga-event-action="install-terragrunt">Install</a></li>
+          <li><a href="/terragrunt/documentation/getting-started/quick-start" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-md" ga-event-action="quick-start">Quick Start</a></li>
+          <li><a href="/terragrunt/documentation/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-md" ga-event-action="documentation">Docs</a></li>
+          <li><a href="/terragrunt/use-cases/" ga-on="click" ga-event-category="nav-documentation-02-features-auto-init-md" ga-event-action="use-cases">Use cases</a></li>
         </ul>
       </div>
     </div>
@@ -3165,42 +3165,32 @@
 
       <div class="col-xs-12 col-md-7 col-lg-9 cb-section-white">
         <div class="cb-doc-content js-scroll-spy" data-scroll-spy-nav-selector="#toc">
-            <div class="sect1">
-<h2 id="auto-init">Auto-Init</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><em>Auto-Init</em> is a feature of Terragrunt that makes it so that <code>terragrunt init</code> does not need to be called explicitly before other terragrunt commands.</p>
-</div>
-<div class="paragraph">
-<p>When Auto-Init is enabled (the default), terragrunt will automatically call <a href="https://www.terraform.io/docs/commands/init.html"><code>terraform init</code></a> during other commands (e.g. <code>terragrunt plan</code>) when terragrunt detects that:</p>
-</div>
-<div class="ulist">
+            <h2 id="auto-init">Auto-Init</h2>
+
+<p><em>Auto-Init</em> is a feature of Terragrunt that makes it so that <code class="language-plaintext highlighter-rouge">terragrunt init</code> does not need to be called explicitly before other terragrunt commands.</p>
+
+<p>When Auto-Init is enabled (the default), terragrunt will automatically call <a href="https://www.terraform.io/docs/commands/init.html"><code class="language-plaintext highlighter-rouge">terraform init</code></a> during other commands (e.g. <code class="language-plaintext highlighter-rouge">terragrunt plan</code>) when terragrunt detects that:</p>
+
 <ul>
-<li>
-<p><code>terraform init</code> has never been called, or</p>
-</li>
-<li>
-<p><code>source</code> needs to be downloaded, or</p>
-</li>
-<li>
-<p>the modules or remote state used by the module have changed since the previous call to <code>terraform init</code>.</p>
-</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">terraform init</code> has never been called, or</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">source</code> needs to be downloaded, or</p>
+  </li>
+  <li>
+    <p>the modules or remote state used by the module have changed since the previous call to <code class="language-plaintext highlighter-rouge">terraform init</code>.</p>
+  </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>As mentioned <a href="#extra_arguments-for-init">above</a>, <code>extra_arguments</code> can be configured to allow customization of the <code>terraform init</code> command.</p>
-</div>
-<div class="paragraph">
-<p>Note that there might be cases where terragrunt does not properly detect that <code>terraform init</code> needs be called. In this case, terraform would fail. Running <code>terragrunt init</code> again corrects this situation.</p>
-</div>
-<div class="paragraph">
-<p>For some use cases, it might be desirable to disable Auto-Init. For example, if each user wants to specify a different <code>-plugin-dir</code> option to <code>terraform init</code> (and therefore it cannot be put in <code>extra_arguments</code>). To disable Auto-Init, use the <code>--terragrunt-no-auto-init</code> command line option or set the <code>TERRAGRUNT_AUTO_INIT</code> environment variable to <code>false</code>.</p>
-</div>
-<div class="paragraph">
-<p>Disabling Auto-Init means that you <em>must</em> explicitly call <code>terragrunt init</code> prior to any other terragrunt commands for a particular configuration. If Auto-Init is disabled, and terragrunt detects that <code>terraform init</code> needs to be called, then terragrunt will fail.</p>
-</div>
-</div>
-</div>
+
+<p>As <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#extra_arguments-for-init">mentioned</a>, <code class="language-plaintext highlighter-rouge">extra_arguments</code> can be configured to allow customization of the <code class="language-plaintext highlighter-rouge">terraform init</code> command.</p>
+
+<p>Note that there might be cases where terragrunt does not properly detect that <code class="language-plaintext highlighter-rouge">terraform init</code> needs be called. In this case, terraform would fail. Running <code class="language-plaintext highlighter-rouge">terragrunt init</code> again corrects this situation.</p>
+
+<p>For some use cases, it might be desirable to disable Auto-Init. For example, if each user wants to specify a different <code class="language-plaintext highlighter-rouge">-plugin-dir</code> option to <code class="language-plaintext highlighter-rouge">terraform init</code> (and therefore it cannot be put in <code class="language-plaintext highlighter-rouge">extra_arguments</code>). To disable Auto-Init, use the <code class="language-plaintext highlighter-rouge">--terragrunt-no-auto-init</code> command line option or set the <code class="language-plaintext highlighter-rouge">TERRAGRUNT_AUTO_INIT</code> environment variable to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p>Disabling Auto-Init means that you <em>must</em> explicitly call <code class="language-plaintext highlighter-rouge">terragrunt init</code> prior to any other terragrunt commands for a particular configuration. If Auto-Init is disabled, and terragrunt detects that <code class="language-plaintext highlighter-rouge">terraform init</code> needs to be called, then terragrunt will fail.</p>
+
         </div>
       </div>
     </div>

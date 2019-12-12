@@ -1,0 +1,55 @@
+I"�<h2 id="before-and-after-hooks">Before and After Hooks</h2>
+
+<p><em>Before Hooks</em> or <em>After Hooks</em> are a feature of terragrunt that make it possible to define custom actions that will be called either before or after execution of the <code class="highlighter-rouge">terraform</code> command.</p>
+
+<p>Here’s an example:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">before_hook</span> <span class="s2">"before_hook_1"</span> <span class="p">{</span>
+    <span class="nx">commands</span>     <span class="p">=</span> <span class="p">[</span><span class="s2">"apply"</span><span class="p">,</span> <span class="s2">"plan"</span><span class="p">]</span>
+    <span class="nx">execute</span>      <span class="p">=</span> <span class="p">[</span><span class="s2">"echo"</span><span class="p">,</span> <span class="s2">"Foo"</span><span class="p">]</span>
+    <span class="nx">run_on_error</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="p">}</span>
+
+  <span class="nx">before_hook</span> <span class="s2">"before_hook_2"</span> <span class="p">{</span>
+    <span class="nx">commands</span>     <span class="p">=</span> <span class="p">[</span><span class="s2">"apply"</span><span class="p">]</span>
+    <span class="nx">execute</span>      <span class="p">=</span> <span class="p">[</span><span class="s2">"echo"</span><span class="p">,</span> <span class="s2">"Bar"</span><span class="p">]</span>
+    <span class="nx">run_on_error</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="p">}</span>
+
+  <span class="nx">before_hook</span> <span class="s2">"interpolation_hook_1"</span> <span class="p">{</span>
+    <span class="nx">commands</span>     <span class="p">=</span> <span class="p">[</span><span class="s2">"apply"</span><span class="p">,</span> <span class="s2">"plan"</span><span class="p">]</span>
+    <span class="nx">execute</span>      <span class="p">=</span> <span class="p">[</span><span class="s2">"echo"</span><span class="p">,</span> <span class="nx">get_env</span><span class="err">(</span><span class="s2">"HOME"</span><span class="p">,</span> <span class="s2">"HelloWorld"</span><span class="err">)</span><span class="p">]</span>
+    <span class="nx">run_on_error</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="p">}</span>
+
+  <span class="nx">after_hook</span> <span class="s2">"after_hook_1"</span> <span class="p">{</span>
+    <span class="nx">commands</span>     <span class="p">=</span> <span class="p">[</span><span class="s2">"apply"</span><span class="p">,</span> <span class="s2">"plan"</span><span class="p">]</span>
+    <span class="nx">execute</span>      <span class="p">=</span> <span class="p">[</span><span class="s2">"echo"</span><span class="p">,</span> <span class="s2">"Baz"</span><span class="p">]</span>
+    <span class="nx">run_on_error</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="p">}</span>
+
+  <span class="nx">after_hook</span> <span class="s2">"init_from_module"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"init-from-module"</span><span class="p">]</span>
+    <span class="nx">execute</span>  <span class="p">=</span> <span class="p">[</span><span class="s2">"cp"</span><span class="p">,</span> <span class="s2">"${get_parent_terragrunt_dir()}/foo.tf"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Hooks support the following arguments:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">commands</code> (required): the <code class="highlighter-rouge">terraform</code> commands that will trigger the execution of the hook.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">execute</code> (required): the shell command to execute.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">run_on_error</code> (optional): if set to true, this hook will run even if a previous hook hit an error, or in the case of “after” hooks, if the Terraform command hit an error. Default is false.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">init_from_module</code> and <code class="highlighter-rouge">init</code>: This is not an argument, but a special name you can use for hooks that run during initialization. There are two stages of initialization: one is to download <a href="/terragrunt/use-cases/keep-your-terraform-code-dry">remote configurations</a> using <code class="highlighter-rouge">go-getter</code>; the other is <a href="/terragrunt/documentation/features/auto-init">Auto-Init</a>, which configures the backend and downloads provider plugins and modules. If you wish to execute a hook when Terragrunt is using <code class="highlighter-rouge">go-getter</code> to download remote configurations, name the hook <code class="highlighter-rouge">init_from_module</code>. If you wish to execute a hook when Terragrunt is using <code class="highlighter-rouge">terraform init</code> for Auto-Init, name the hook <code class="highlighter-rouge">init</code>.</p>
+  </li>
+</ul>
+:ET
