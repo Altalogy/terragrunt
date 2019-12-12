@@ -145,7 +145,7 @@ include {
 
 The `find_in_parent_folders()` helper will automatically search up the directory tree to find the root `terragrunt.hcl` and inherit the `remote_state` configuration from it.
 
-Now, [install Terragrunt](/documentation/getting-started/install), and run all the Terraform commands you’re used to, but with `terragrunt` as the command name rather than `terraform` (e.g., `terragrunt apply` instead of `terraform apply`). To deploy the database module, you would run:
+Now, [install Terragrunt]({{site.baseurl}}/documentation/getting-started/install), and run all the Terraform commands you’re used to, but with `terragrunt` as the command name rather than `terraform` (e.g., `terragrunt apply` instead of `terraform apply`). To deploy the database module, you would run:
 
 ``` bash
 $ cd stage/mysql
