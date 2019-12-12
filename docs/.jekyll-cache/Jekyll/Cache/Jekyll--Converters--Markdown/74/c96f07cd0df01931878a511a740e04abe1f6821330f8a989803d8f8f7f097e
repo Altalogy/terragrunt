@@ -1,0 +1,44 @@
+I"t<h2 id="work-with-multiple-aws-accounts">Work with multiple AWS accounts</h2>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>The most secure way to manage infrastructure in AWS is to use <a href="https://aws.amazon.com/answers/account-management/aws-multi-account-security-strategy/">multiple AWS accounts</a>. You define all your IAM users in one account (e.g., the “security” account) and deploy all of your infrastructure into a number of other accounts (e.g., the “dev”, “stage”, and “prod” accounts). To access those accounts, you login to the security account and <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-roles.html">assume an IAM role</a> in the other accounts.</p>
+
+<p>There are a few ways to assume IAM roles when using AWS CLI tools, such as Terraform:</p>
+
+<ol>
+  <li>
+    <p>One option is to create a named <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html">profile</a>, each with a different <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-roles.html">role_arn</a> parameter. You then tell Terraform which profile to use via the <code class="highlighter-rouge">AWS_PROFILE</code> environment variable. The downside to using profiles is that you have to store your AWS credentials in plaintext on your hard drive.</p>
+  </li>
+  <li>
+    <p>Another option is to use environment variables and the <a href="https://aws.amazon.com/cli/">AWS CLI</a>. You first set the credentials for the security account (the one where your IAM users are defined) as the environment variables <code class="highlighter-rouge">AWS_ACCESS_KEY_ID</code> and <code class="highlighter-rouge">AWS_SECRET_ACCESS_KEY</code> and run <code class="highlighter-rouge">aws sts assume-role --role-arn &lt;ROLE&gt;</code>. This gives you back a blob of JSON that contains new <code class="highlighter-rouge">AWS_ACCESS_KEY_ID</code> and <code class="highlighter-rouge">AWS_SECRET_ACCESS_KEY</code> values you can set as environment variables to allow Terraform to use that role. The advantage of this approach is that you can store your AWS credentials in a secret store and never write them to disk in plaintext. The disadvantage is that assuming an IAM role requires several tedious steps. Worse yet, the credentials you get back from the <code class="highlighter-rouge">assume-role</code> command are only good for up to 1 hour, so you have to repeat this process often.</p>
+  </li>
+  <li>
+    <p>A final option is to modify your AWS provider with the <a href="https://www.terraform.io/docs/providers/aws/#assume-role">assume_role configuration</a> and your S3 backend with the <a href="https://www.terraform.io/docs/backends/types/s3.html#role_arn">role_arn parameter</a>. You can then set the credentials for the security account (the one where your IAM users are defined) as the environment variables <code class="highlighter-rouge">AWS_ACCESS_KEY_ID</code> and <code class="highlighter-rouge">AWS_SECRET_ACCESS_KEY</code> and when you run <code class="highlighter-rouge">terraform apply</code> or <code class="highlighter-rouge">terragrunt apply</code>, Terraform/Terragrunt will assume the IAM role you specify automatically. The advantage of this approach is that you can store your AWS credentials in a secret store and never write them to disk in plaintext, and you get fresh credentials on every run of <code class="highlighter-rouge">apply</code>, without the complexity of calling <code class="highlighter-rouge">assume-role</code>. The disadvantage is that you have to modify all your Terraform / Terragrunt code to set the <code class="highlighter-rouge">role_arn</code> param and your Terraform backend configuration will change (and prompt you to manually confirm the update!) every time you change the IAM role you’re using.</p>
+  </li>
+</ol>
+
+<p>To avoid these frustrating trade-offs, you can configure Terragrunt to assume an IAM role for you, as described next.</p>
+
+<h3 id="configuring-terragrunt-to-assume-an-iam-role">Configuring Terragrunt to assume an IAM role</h3>
+
+<p>To tell Terragrunt to assume an IAM role, just set the <code class="highlighter-rouge">--terragrunt-iam-role</code> command line argument:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terragrunt apply <span class="nt">--terragrunt-iam-role</span> <span class="s2">"arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"</span>
+</code></pre></div></div>
+
+<p>Alternatively, you can set the <code class="highlighter-rouge">TERRAGRUNT_IAM_ROLE</code> environment variable:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">TERRAGRUNT_IAM_ROLE</span><span class="o">=</span><span class="s2">"arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"</span>
+terragrunt apply
+</code></pre></div></div>
+
+<p>Additionally, you can specify an <code class="highlighter-rouge">iam_role</code> property in the terragrunt config:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">iam_role</span> <span class="err">=</span> <span class="s2">"arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"</span>
+</code></pre></div></div>
+
+<p>Terragrunt will resolve the value of the option by first looking for the cli argument, then looking for the environment variable, then defaulting to the value specified in the config file.</p>
+
+<p>Terragrunt will call the <code class="highlighter-rouge">sts assume-role</code> API on your behalf and expose the credentials it gets back as environment variables when running Terraform. The advantage of this approach is that you can store your AWS credentials in a secret store and never write them to disk in plaintext, you get fresh credentials on every run of Terragrunt, without the complexity of calling <code class="highlighter-rouge">assume-role</code> yourself, and you don’t have to modify your Terraform code or backend configuration at all.</p>
+:ET

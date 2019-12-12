@@ -1,0 +1,324 @@
+I"RN<h2 id="execute-terraform-commands-on-multiple-modules-at-once">Execute Terraform commands on multiple modules at once</h2>
+
+<ul>
+  <li>
+    <p><a href="#motivation">Motivation</a></p>
+  </li>
+  <li>
+    <p><a href="#the-apply-all-destroy-all-output-all-and-plan-all-commands">The apply-all, destroy-all, output-all and plan-all commands</a></p>
+  </li>
+  <li>
+    <p><a href="#passing-outputs-between-modules">Passing outputs between modules</a></p>
+  </li>
+  <li>
+    <p><a href="#dependencies-between-modules">Dependencies between modules</a></p>
+  </li>
+  <li>
+    <p><a href="#testing-multiple-modules-locally">Testing multiple modules locally</a></p>
+  </li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>Let’s say your infrastructure is defined across multiple Terraform modules:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+├── backend-app
+│   └── main.tf
+├── frontend-app
+│   └── main.tf
+├── mysql
+│   └── main.tf
+├── redis
+│   └── main.tf
+└── vpc
+    └── main.tf
+</code></pre></div></div>
+
+<p>There is one module to deploy a frontend-app, another to deploy a backend-app, another for the MySQL database, and so on. To deploy such an environment, you’d have to manually run <code class="highlighter-rouge">terraform apply</code> in each of the subfolder, wait for it to complete, and then run <code class="highlighter-rouge">terraform apply</code> in the next subfolder. How do you avoid this tedious and time-consuming process?</p>
+
+<h3 id="the-apply-all-destroy-all-output-all-and-plan-all-commands">The apply-all, destroy-all, output-all and plan-all commands</h3>
+
+<p>To be able to deploy multiple Terraform modules in a single command, add a <code class="highlighter-rouge">terragrunt.hcl</code> file to each module:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+├── backend-app
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── frontend-app
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── mysql
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── redis
+│   ├── main.tf
+│   └── terragrunt.hcl
+└── vpc
+    ├── main.tf
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Now you can go into the <code class="highlighter-rouge">root</code> folder and deploy all the modules within it by using the <code class="highlighter-rouge">apply-all</code> command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd root
+terragrunt apply-all
+</code></pre></div></div>
+
+<p>When you run this command, Terragrunt will recursively look through all the subfolders of the current working directory, find all folders with a <code class="highlighter-rouge">terragrunt.hcl</code> file, and run <code class="highlighter-rouge">terragrunt apply</code> in each of those folders concurrently.</p>
+
+<p>Similarly, to undeploy all the Terraform modules, you can use the <code class="highlighter-rouge">destroy-all</code> command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd root
+terragrunt destroy-all
+</code></pre></div></div>
+
+<p>To see the currently applied outputs of all of the subfolders, you can use the <code class="highlighter-rouge">output-all</code> command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd root
+terragrunt output-all
+</code></pre></div></div>
+
+<p>Finally, if you make some changes to your project, you could evaluate the impact by using <code class="highlighter-rouge">plan-all</code> command:</p>
+
+<p>Note: It is important to realize that you could get errors running <code class="highlighter-rouge">plan-all</code> if you have dependencies between your projects and some of those dependencies haven’t been applied yet.</p>
+
+<p><em>Ex: If module A depends on module B and module B hasn’t been applied yet, then plan-all will show the plan for B, but exit with an error when trying to show the plan for A.</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd root
+terragrunt plan-all
+</code></pre></div></div>
+
+<p>If your modules have dependencies between them—for example, you can’t deploy the backend-app until MySQL and redis are deployed—you’ll need to express those dependencies in your Terragrunt configuration as explained in the next section.</p>
+
+<h3 id="passing-outputs-between-modules">Passing outputs between modules</h3>
+
+<p>Consider the following file structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+├── backend-app
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── mysql
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── redis
+│   ├── main.tf
+│   └── terragrunt.hcl
+└── vpc
+    ├── main.tf
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Suppose that you wanted to pass in the VPC ID of the VPC that is created from the <code class="highlighter-rouge">vpc</code> module in the folder structure above to the <code class="highlighter-rouge">mysql</code> module as an input variable. Or if you wanted to pass in the subnet IDs of the private subnet that is allocated as part of the <code class="highlighter-rouge">vpc</code> module.</p>
+
+<p>You can use the <code class="highlighter-rouge">dependency</code> block to extract the output variables to access another module’s output variables in the terragrunt <code class="highlighter-rouge">inputs</code> attribute.</p>
+
+<p>For example, suppose the <code class="highlighter-rouge">vpc</code> module outputs the ID under the name <code class="highlighter-rouge">vpc_id</code>. To access that output, you would specify in <code class="highlighter-rouge">mysql/terragrunt.hcl</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependency "vpc" {
+  config_path = "../vpc"
+}
+
+inputs = {
+  vpc_id = dependency.vpc.outputs.vpc_id
+}
+</code></pre></div></div>
+
+<p>When you apply this module, the output will be read from the <code class="highlighter-rouge">vpc</code> module and passed in as an input to the <code class="highlighter-rouge">mysql</code> module right before calling <code class="highlighter-rouge">terraform apply</code>.</p>
+
+<p>You can also specify multiple <code class="highlighter-rouge">dependency</code> blocks to access multiple different module output variables. For example, in the above folder structure, you might want to reference the <code class="highlighter-rouge">domain</code> output of the <code class="highlighter-rouge">redis</code> and <code class="highlighter-rouge">mysql</code> modules for use as <code class="highlighter-rouge">inputs</code> in the <code class="highlighter-rouge">backend-app</code> module. To access those outputs, you would specify in <code class="highlighter-rouge">backend-app/terragrunt.hcl</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependency "mysql" {
+  config_path = "../mysql"
+}
+
+dependency "redis" {
+  config_path = "../redis"
+}
+
+inputs = {
+  mysql_url = dependency.mysql.outputs.domain
+  redis_url = dependency.redis.outputs.domain
+}
+</code></pre></div></div>
+
+<p>Note that each <code class="highlighter-rouge">dependency</code> is automatically considered a dependency in Terragrunt. This means that when you run <code class="highlighter-rouge">apply-all</code> on a config that has <code class="highlighter-rouge">dependency</code> blocks, Terragrunt will not attempt to deploy the config until all the modules referenced in <code class="highlighter-rouge">dependency</code> blocks have been applied. So for the above example, the order for the <code class="highlighter-rouge">apply-all</code> command would be:</p>
+
+<ol>
+  <li>
+    <p>Deploy the VPC</p>
+  </li>
+  <li>
+    <p>Deploy MySQL and Redis in parallel</p>
+  </li>
+  <li>
+    <p>Deploy the backend-app</p>
+  </li>
+</ol>
+
+<p>If any of the modules failed to deploy, then Terragrunt will not attempt to deploy the modules that depend on them.</p>
+
+<p><strong>Note</strong>: Not all blocks are able to access outputs passed by <code class="highlighter-rouge">dependency</code> blocks. See the section on <a href="/terragrunt/documentation/getting-started/configuration/#configuration-parsing-order">Configuration parsing order</a> for more information.</p>
+
+<h4 id="unapplied-dependency-and-mock-outputs">Unapplied dependency and mock outputs</h4>
+
+<p>Terragrunt will return an error indicating the dependency hasn’t been applied yet if the terraform module managed by the terragrunt config referenced in a <code class="highlighter-rouge">dependency</code> block has not been applied yet. This is because you cannot actually fetch outputs out of an unapplied Terraform module, even if there are no resources being created in the module.</p>
+
+<p>This is most problematic when running commands that do not modify state (e.g <code class="highlighter-rouge">plan-all</code> and <code class="highlighter-rouge">validate-all</code>) on a completely new setup where no infrastructure has been deployed. You won’t be able to <code class="highlighter-rouge">plan</code> or <code class="highlighter-rouge">validate</code> a module if you can’t determine the <code class="highlighter-rouge">inputs</code>. If the module depends on the outputs of another module that hasn’t been applied yet, you won’t be able to compute the <code class="highlighter-rouge">inputs</code> unless the dependencies are all applied. However, in real life usage, you would want to run <code class="highlighter-rouge">validate-all</code> or <code class="highlighter-rouge">plan-all</code> on a completely new set of infrastructure.</p>
+
+<p>To address this, you can provide mock outputs to use when a module hasn’t been applied yet. This is configured using the <code class="highlighter-rouge">mock_outputs</code> attribute on the <code class="highlighter-rouge">dependency</code> block and it corresponds to a map that will be injected in place of the actual dependency outputs if the target config hasn’t been applied yet.</p>
+
+<p>For example, in the previous example with a <code class="highlighter-rouge">mysql</code> module and <code class="highlighter-rouge">vpc</code> module, suppose you wanted to place in a temporary, dummy value for the <code class="highlighter-rouge">vpc_id</code> during a <code class="highlighter-rouge">validate-all</code> for the <code class="highlighter-rouge">mysql</code> module. You can specify in <code class="highlighter-rouge">mysql/terragrunt.hcl</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependency "vpc" {
+  config_path = "../vpc"
+
+  mock_outputs = {
+    vpc_id = "temporary-dummy-id"
+  }
+}
+
+inputs = {
+  vpc_id = dependency.vpc.outputs.vpc_id
+}
+</code></pre></div></div>
+
+<p>You can now run <code class="highlighter-rouge">validate</code> on this config before the <code class="highlighter-rouge">vpc</code> module is applied because Terragrunt will use the map <code class="highlighter-rouge">{vpc_id = "temporary-dummy-id"}</code> as the <code class="highlighter-rouge">outputs</code> attribute on the dependency instead of erroring out.</p>
+
+<p>What if you wanted to restrict this behavior to only the <code class="highlighter-rouge">validate</code> command? For example, you might not want to use the defaults for a <code class="highlighter-rouge">plan</code> operation because the plan doesn’t give you any indication of what is actually going to be created.</p>
+
+<p>You can use the <code class="highlighter-rouge">mock_outputs_allowed_terraform_commands</code> attribute to indicate that the <code class="highlighter-rouge">mock_outputs</code> should only be used when running those Terraform commands. So to restrict the <code class="highlighter-rouge">mock_outputs</code> to only when <code class="highlighter-rouge">validate</code> is being run, you can modify the above <code class="highlighter-rouge">terragrunt.hcl</code> file to:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependency "vpc" {
+  config_path = "../vpc"
+
+  mock_outputs = {
+    vpc_id = "temporary-dummy-id"
+  }
+  mock_outputs_allowed_terraform_commands = ["validate"]
+}
+
+inputs = {
+  vpc_id = dependency.vpc.outputs.vpc_id
+}
+</code></pre></div></div>
+
+<p>Note that indicating <code class="highlighter-rouge">validate</code> means that the <code class="highlighter-rouge">mock_outputs</code> will be used either with <code class="highlighter-rouge">validate</code> or with <code class="highlighter-rouge">validate-all</code>.</p>
+
+<p>You can also use <code class="highlighter-rouge">skip_outputs</code> on the <code class="highlighter-rouge">dependency</code> block to specify the dependency without pulling in the outputs:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependency "vpc" {
+  config_path = "../vpc"
+  skip_outputs = true
+}
+</code></pre></div></div>
+
+<p>When <code class="highlighter-rouge">skip_outputs</code> is used with <code class="highlighter-rouge">mock_outputs</code>, mocked outputs will be returned without pulling in the outputs from remote states. This can be useful when you disable the backend initialization (<code class="highlighter-rouge">remote_state.disable_init</code>) in CI for example.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependency "vpc" {
+  config_path = "../vpc"
+  mock_outputs = {
+    vpc_id = "temporary-dummy-id"
+  }
+
+  skip_outputs = true
+}
+</code></pre></div></div>
+
+<h3 id="dependencies-between-modules">Dependencies between modules</h3>
+
+<p>You can also specify dependencies explicitly. Consider the following file structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+├── backend-app
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── frontend-app
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── mysql
+│   ├── main.tf
+│   └── terragrunt.hcl
+├── redis
+│   ├── main.tf
+│   └── terragrunt.hcl
+└── vpc
+    ├── main.tf
+    └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Let’s assume you have the following dependencies between Terraform modules:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">backend-app</code> depends on <code class="highlighter-rouge">mysql</code>, <code class="highlighter-rouge">redis</code>, and <code class="highlighter-rouge">vpc</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">frontend-app</code> depends on <code class="highlighter-rouge">backend-app</code> and <code class="highlighter-rouge">vpc</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">mysql</code> depends on <code class="highlighter-rouge">vpc</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">redis</code> depends on <code class="highlighter-rouge">vpc</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">vpc</code> has no dependencies</p>
+  </li>
+</ul>
+
+<p>You can express these dependencies in your <code class="highlighter-rouge">terragrunt.hcl</code> config files using a <code class="highlighter-rouge">dependencies</code> block. For example, in <code class="highlighter-rouge">backend-app/terragrunt.hcl</code> you would specify:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dependencies</span> <span class="p">{</span>
+  <span class="nx">paths</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"../vpc"</span><span class="p">,</span> <span class="s2">"../mysql"</span><span class="p">,</span> <span class="s2">"../redis"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Similarly, in <code class="highlighter-rouge">frontend-app/terragrunt.hcl</code>, you would specify:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dependencies</span> <span class="p">{</span>
+  <span class="nx">paths</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"../vpc"</span><span class="p">,</span> <span class="s2">"../backend-app"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Once you’ve specified the dependencies in each <code class="highlighter-rouge">terragrunt.hcl</code> file, when you run the <code class="highlighter-rouge">terragrunt apply-all</code> or <code class="highlighter-rouge">terragrunt destroy-all</code>, Terragrunt will ensure that the dependencies are applied or destroyed, respectively, in the correct order. For the example at the start of this section, the order for the <code class="highlighter-rouge">apply-all</code> command would be:</p>
+
+<ol>
+  <li>
+    <p>Deploy the VPC</p>
+  </li>
+  <li>
+    <p>Deploy MySQL and Redis in parallel</p>
+  </li>
+  <li>
+    <p>Deploy the backend-app</p>
+  </li>
+  <li>
+    <p>Deploy the frontend-app</p>
+  </li>
+</ol>
+
+<p>If any of the modules fail to deploy, then Terragrunt will not attempt to deploy the modules that depend on them. Once you’ve fixed the error, it’s usually safe to re-run the <code class="highlighter-rouge">apply-all</code> or <code class="highlighter-rouge">destroy-all</code> command again, since it’ll be a no-op for the modules that already deployed successfully, and should only affect the ones that had an error the last time around.</p>
+
+<p>To check all of your dependencies and validate the code in them, you can use the <code class="highlighter-rouge">validate-all</code> command.</p>
+
+<h3 id="testing-multiple-modules-locally">Testing multiple modules locally</h3>
+
+<p>If you are using Terragrunt to configure <a href="/terragrunt/use-cases/keep-your-terraform-code-dry/#remote-terraform-configurations">remote Terraform configurations</a> and all of your modules have the <code class="highlighter-rouge">source</code> parameter set to a Git URL, but you want to test with a local checkout of the code, you can use the <code class="highlighter-rouge">--terragrunt-source</code> parameter:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd root
+terragrunt plan-all --terragrunt-source /source/modules
+</code></pre></div></div>
+
+<p>If you set the <code class="highlighter-rouge">--terragrunt-source</code> parameter, the <code class="highlighter-rouge">xxx-all</code> commands will assume that parameter is pointing to a folder on your local file system that has a local checkout of all of your Terraform modules. For each module that is being processed via a <code class="highlighter-rouge">xxx-all</code> command, Terragrunt will read in the <code class="highlighter-rouge">source</code> parameter in that module’s <code class="highlighter-rouge">terragrunt.hcl</code> file, parse out the path (the portion after the double-slash), and append the path to the <code class="highlighter-rouge">--terragrunt-source</code> parameter to create the final local path for that module.</p>
+
+<p>For example, consider the following <code class="highlighter-rouge">terragrunt.hcl</code> file:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:acme/infrastructure-modules.git//networking/vpc?ref=v0.0.1"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you run <code class="highlighter-rouge">terragrunt apply-all --terragrunt-source /source/infrastructure-modules</code>, then the local path Terragrunt will compute for the module above will be <code class="highlighter-rouge">/source/infrastructure-modules//networking/vpc</code>.</p>
+:ET

@@ -1,0 +1,27 @@
+I"�<h1 id="stack-overflow">Stack Overflow</h1>
+
+<p>Many developers use Stack Overflow to find a help. Use <code class="highlighter-rouge">terragrunt</code> tag to find <a href="https://stackoverflow.com/questions/tagged/terragrunt">existing questions</a> or <a href="https://stackoverflow.com/questions/ask?tags=terragrunt">ask your own</a>.</p>
+
+<h1 id="github-issues">Github Issues</h1>
+
+<p>Read through <a href="https://github.com/gruntwork-io/terragrunt/issues">existing issues</a> or post a new one. Github issues is a good place to:</p>
+
+<ul>
+  <li>
+    <p>report a bug,</p>
+  </li>
+  <li>
+    <p>ask for a help,</p>
+  </li>
+  <li>
+    <p>ask for improvements,</p>
+  </li>
+  <li>
+    <p>to start contributing by solving simple issues.</p>
+  </li>
+</ul>
+
+<h1 id="commercial-support">Commercial support</h1>
+
+<p>If you need help with Terragrunt or anything else related to infrastructure or DevOps, Gruntwork offers <a href="https://gruntwork.io/support/">Commercial Support</a> via Slack, email, and phone/video. If you’re already a Gruntwork customer, hop on Slack and ask away! If not, <a href="https://www.gruntwork.io/pricing/">subscribe now</a>. If you’re not sure, feel free to email us at <a href="mailto:support@gruntwork.io">support@gruntwork.io</a>.</p>
+:ET

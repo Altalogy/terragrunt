@@ -1,0 +1,55 @@
+I"K <h2 id="cli-options">CLI Options</h2>
+
+<p>Terragrunt forwards all arguments and options to Terraform. The only exceptions are <code class="highlighter-rouge">--version</code>, <code class="highlighter-rouge">terragrunt-info</code> and arguments that start with the prefix <code class="highlighter-rouge">--terragrunt-</code>. The currently available options are:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-config</code>: A custom path to the <code class="highlighter-rouge">terragrunt.hcl</code> file. May also be specified via the <code class="highlighter-rouge">TERRAGRUNT_CONFIG</code> environment variable. The default path is <code class="highlighter-rouge">terragrunt.hcl</code> in the current directory (see <a href="/terragrunt/documentation/getting-started/configuration/#configuration">Configuration</a> for a slightly more nuanced explanation). This argument is not used with the <code class="highlighter-rouge">apply-all</code>, <code class="highlighter-rouge">destroy-all</code>, <code class="highlighter-rouge">output-all</code>, <code class="highlighter-rouge">validate-all</code>, and <code class="highlighter-rouge">plan-all</code> commands.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-tfpath</code>: A custom path to the Terraform binary. May also be specified via the <code class="highlighter-rouge">TERRAGRUNT_TFPATH</code> environment variable. The default is <code class="highlighter-rouge">terraform</code> in a directory on your PATH.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-no-auto-init</code>: Don’t automatically run <code class="highlighter-rouge">terraform init</code> when other commands are run (e.g. <code class="highlighter-rouge">terragrunt apply</code>). Useful if you want to pass custom arguments to <code class="highlighter-rouge">terraform init</code> that are specific to a user or execution environment, and therefore cannot be specified as <code class="highlighter-rouge">extra_arguments</code>. For example, <code class="highlighter-rouge">-plugin-dir</code>. You must run <code class="highlighter-rouge">terragrunt init</code> yourself in this case if needed. <code class="highlighter-rouge">terragrunt</code> will fail if it detects that <code class="highlighter-rouge">init</code> is needed, but auto init is disabled. See <a href="/terragrunt/documentation/features/auto-init#auto-init">Auto-Init</a></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-no-auto-retry</code>: Don’t automatically retry commands which fail with transient errors. See <a href="/terragrunt/documentation/features/auto-retry#auto-retry">Auto-Retry</a></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-non-interactive</code>: Don’t show interactive user prompts. This will default the answer for all prompts to ‘yes’. Useful if you need to run Terragrunt in an automated setting (e.g. from a script). May also be specified with the <a href="https://www.terraform.io/docs/configuration/environment-variables.html#tf_input">TF_INPUT</a> environment variable.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-working-dir</code>: Set the directory where Terragrunt should execute the <code class="highlighter-rouge">terraform</code> command. Default is the current working directory. Note that for the <code class="highlighter-rouge">apply-all</code>, <code class="highlighter-rouge">destroy-all</code>, <code class="highlighter-rouge">output-all</code>, <code class="highlighter-rouge">validate-all</code>, and <code class="highlighter-rouge">plan-all</code> commands, this parameter has a different meaning: Terragrunt will apply or destroy all the Terraform modules in the subfolders of the <code class="highlighter-rouge">terragrunt-working-dir</code>, running <code class="highlighter-rouge">terraform</code> in the root of each module it finds.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-download-dir</code>: The path where to download Terraform code when using <a href="https://blog.gruntwork.io/terragrunt-how-to-keep-your-terraform-code-dry-and-maintainable-f61ae06959d8">remote Terraform configurations</a>. May also be specified via the <code class="highlighter-rouge">TERRAGRUNT_DOWNLOAD</code> environment variable. Default is <code class="highlighter-rouge">.terragrunt-cache</code> in the working directory. We recommend adding this folder to your <code class="highlighter-rouge">.gitignore</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-source</code>: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. May also be specified via the <code class="highlighter-rouge">TERRAGRUNT_SOURCE</code> environment variable. The source should use the same syntax as the <a href="https://www.terraform.io/docs/modules/sources.html">Terraform module source</a> parameter. If you specify this argument for the <code class="highlighter-rouge">apply-all</code>, <code class="highlighter-rouge">destroy-all</code>, <code class="highlighter-rouge">output-all</code>, <code class="highlighter-rouge">validate-all</code>, or <code class="highlighter-rouge">plan-all</code> commands, Terragrunt will assume this is the local file path for all of your Terraform modules, and for each module processed by the <code class="highlighter-rouge">xxx-all</code> command, Terragrunt will automatically append the path of <code class="highlighter-rouge">source</code> parameter in each module to the <code class="highlighter-rouge">--terragrunt-source</code> parameter you passed in.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-source-update</code>: Delete the contents of the temporary folder before downloading Terraform source code into it. Can also be enabled by setting the <code class="highlighter-rouge">TERRAGRUNT_SOURCE_UPDATE</code> environment variable to <code class="highlighter-rouge">true</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-ignore-dependency-errors</code>: <code class="highlighter-rouge">*-all</code> commands continue processing components even if a dependency fails</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-iam-role</code>: Assume the specified IAM role ARN before running Terraform or AWS commands. May also be specified via the <code class="highlighter-rouge">TERRAGRUNT_IAM_ROLE</code> environment variable. This is a convenient way to use Terragrunt and Terraform with multiple AWS accounts.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-exclude-dir</code>: Unix-style glob of directories to exclude when running <code class="highlighter-rouge">*-all</code> commands. Modules under these directories will be excluded during execution of the commands. If a relative path is specified, it should be relative from <code class="highlighter-rouge">--terragrunt-working-dir</code>. Flag can be specified multiple times. This will only exclude the module, not its dependencies.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-include-dir</code>: Unix-style glob of directories to include when running <code class="highlighter-rouge">*-all</code> commands. Only modules under these directories (and all dependent modules) will be included during execution of the commands. If a relative path is specified, it should be relative from <code class="highlighter-rouge">--terragrunt-working-dir</code>. Flag can be specified multiple times.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-ignore-dependency-order</code>: Ignore the depedencies between modules when running <code class="highlighter-rouge">*-all</code> commands.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-ignore-external-dependencies</code>: Dont attempt to include any external dependencies when running <code class="highlighter-rouge">*-all</code> commands</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--terragrunt-include-external-dependencies</code>: Include any external dependencies when running <code class="highlighter-rouge">*-all</code> without asking.</p>
+  </li>
+</ul>
+:ET

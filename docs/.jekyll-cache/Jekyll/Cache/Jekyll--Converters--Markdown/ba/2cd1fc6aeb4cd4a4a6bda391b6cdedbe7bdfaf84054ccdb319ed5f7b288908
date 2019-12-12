@@ -1,0 +1,26 @@
+I"Š	<h2 id="auto-init">Auto-Init</h2>
+
+<p><em>Auto-Init</em> is a feature of Terragrunt that makes it so that <code class="highlighter-rouge">terragrunt init</code> does not need to be called explicitly before other terragrunt commands.</p>
+
+<p>When Auto-Init is enabled (the default), terragrunt will automatically call <a href="https://www.terraform.io/docs/commands/init.html"><code class="highlighter-rouge">terraform init</code></a> during other commands (e.g. <code class="highlighter-rouge">terragrunt plan</code>) when terragrunt detects that:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">terraform init</code> has never been called, or</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">source</code> needs to be downloaded, or</p>
+  </li>
+  <li>
+    <p>the modules or remote state used by the module have changed since the previous call to <code class="highlighter-rouge">terraform init</code>.</p>
+  </li>
+</ul>
+
+<p>As <a href="/terragrunt/use-cases/keep-your-cli-flags-dry/#extra_arguments-for-init">mentioned</a>, <code class="highlighter-rouge">extra_arguments</code> can be configured to allow customization of the <code class="highlighter-rouge">terraform init</code> command.</p>
+
+<p>Note that there might be cases where terragrunt does not properly detect that <code class="highlighter-rouge">terraform init</code> needs be called. In this case, terraform would fail. Running <code class="highlighter-rouge">terragrunt init</code> again corrects this situation.</p>
+
+<p>For some use cases, it might be desirable to disable Auto-Init. For example, if each user wants to specify a different <code class="highlighter-rouge">-plugin-dir</code> option to <code class="highlighter-rouge">terraform init</code> (and therefore it cannot be put in <code class="highlighter-rouge">extra_arguments</code>). To disable Auto-Init, use the <code class="highlighter-rouge">--terragrunt-no-auto-init</code> command line option or set the <code class="highlighter-rouge">TERRAGRUNT_AUTO_INIT</code> environment variable to <code class="highlighter-rouge">false</code>.</p>
+
+<p>Disabling Auto-Init means that you <em>must</em> explicitly call <code class="highlighter-rouge">terragrunt init</code> prior to any other terragrunt commands for a particular configuration. If Auto-Init is disabled, and terragrunt detects that <code class="highlighter-rouge">terraform init</code> needs to be called, then terragrunt will fail.</p>
+:ET

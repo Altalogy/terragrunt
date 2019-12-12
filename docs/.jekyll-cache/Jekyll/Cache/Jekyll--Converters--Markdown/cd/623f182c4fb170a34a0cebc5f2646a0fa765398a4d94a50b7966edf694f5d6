@@ -1,0 +1,55 @@
+I"�
+<h2 id="inputs">Inputs</h2>
+
+<p>You can set values for your module’s input parameters by specifying an <code class="highlighter-rouge">inputs</code> block in <code class="highlighter-rouge">terragrunt.hcl</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"t2.micro"</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">10</span>
+
+  <span class="nx">tags</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">Name</span> <span class="p">=</span> <span class="s2">"example-app"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Whenever you run a Terragrunt command, Terragrunt will set any inputs you pass in as environment variables. For example, with the <code class="highlighter-rouge">terragrunt.hcl</code> file above, running <code class="highlighter-rouge">terragrunt apply</code> is roughly equivalent to:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terragrunt apply
+
+# Roughly equivalent to:
+
+TF_VAR_instance_type="t2.micro" \
+TF_VAR_instance_count=10 \
+TF_VAR_tags='{"Name":"example-app"}' \
+terraform apply
+</code></pre></div></div>
+
+<p>Note that Terragrunt will respect any <code class="highlighter-rouge">TF_VAR_xxx</code> variables you’ve manually set in your environment, ensuring that anything in <code class="highlighter-rouge">inputs</code> will NOT be override anything you’ve already set in your environment.</p>
+
+<h3 id="variable-precedence">Variable precedence</h3>
+
+<p>Terragrunt follows the same variable precedence as <a href="https://www.terraform.io/docs/configuration/variables.html#variable-definition-precedence">terraform</a>.</p>
+
+<p>If the same variable is assigned multiple values, Terraform will use the <strong>last</strong> value it finds overriding any previous values.</p>
+
+<p>Variables are loaded in the following order:</p>
+
+<ul>
+  <li>
+    <p>Environment variables.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">terraform.tfvars</code> file, if present.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">terraform.tfvars.json</code> file, if present.</p>
+  </li>
+  <li>
+    <p>Any <code class="highlighter-rouge">.auto.tfvars</code>/<code class="highlighter-rouge">&lt;/emphasis&gt;.auto.tfvars.json</code> files, processed in order of their filenames.</p>
+  </li>
+  <li>
+    <p>Any <code class="highlighter-rouge">-var</code>/<code class="highlighter-rouge">-var-file</code> options on the command line, in the order they are provided.</p>
+  </li>
+</ul>
+:ET

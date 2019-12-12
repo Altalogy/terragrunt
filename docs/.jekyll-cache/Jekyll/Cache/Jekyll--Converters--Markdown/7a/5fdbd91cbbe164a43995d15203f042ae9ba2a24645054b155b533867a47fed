@@ -1,0 +1,245 @@
+I"gJ<h2 id="keep-your-terraform-code-dry">Keep your Terraform code DRY</h2>
+
+<ul>
+  <li>
+    <p><a href="#motivation">Motivation</a></p>
+  </li>
+  <li>
+    <p><a href="#remote-terraform-configurations">Remote Terraform configurations</a></p>
+  </li>
+  <li>
+    <p><a href="#how-to-use-remote-configurations">How to use remote configurations</a></p>
+  </li>
+  <li>
+    <p><a href="#achieve-dry-terraform-code-and-immutable-infrastructure">Achieve DRY Terraform code and immutable infrastructure</a></p>
+  </li>
+  <li>
+    <p><a href="#working-locally">Working locally</a></p>
+  </li>
+  <li>
+    <p><a href="#important-gotcha-working-with-relative-file-paths">Important gotcha: working with relative file paths</a></p>
+  </li>
+  <li>
+    <p><a href="#using-terragrunt-with-private-git-repos">Using Terragrunt with private Git repos</a></p>
+  </li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>Consider the following file structure, which defines three environments (prod, qa, stage) with the same infrastructure in each one (an app, a MySQL database, and a VPC):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└── live
+    ├── prod
+    │   ├── app
+    │   │   └── main.tf
+    │   ├── mysql
+    │   │   └── main.tf
+    │   └── vpc
+    │       └── main.tf
+    ├── qa
+    │   ├── app
+    │   │   └── main.tf
+    │   ├── mysql
+    │   │   └── main.tf
+    │   └── vpc
+    │       └── main.tf
+    └── stage
+        ├── app
+        │   └── main.tf
+        ├── mysql
+        │   └── main.tf
+        └── vpc
+            └── main.tf
+</code></pre></div></div>
+
+<p>The contents of each environment will be more or less identical, except perhaps for a few settings (e.g. the prod environment may run bigger or more servers). As the size of the infrastructure grows, having to maintain all of this duplicated code between environments becomes more error prone. You can reduce the amount of copy paste using <a href="https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d">Terraform modules</a>, but even the code to instantiate a module and set up input variables, output variables, providers, and remote state can still create a lot of maintenance overhead.</p>
+
+<p>How can you keep your Terraform code <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> so that you only have to define it once, no matter how many environments you have?</p>
+
+<h3 id="remote-terraform-configurations">Remote Terraform configurations</h3>
+
+<p>Terragrunt has the ability to download remote Terraform configurations. The idea is that you define the Terraform code for your infrastructure just once, in a single repo, called, for example, <code class="highlighter-rouge">modules</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└── modules
+    ├── app
+    │   └── main.tf
+    ├── mysql
+    │   └── main.tf
+    └── vpc
+        └── main.tf
+</code></pre></div></div>
+
+<p>This repo contains typical Terraform code, with one difference: anything in your code that should be different between environments should be exposed as an input variable. For example, the <code class="highlighter-rouge">app</code> module might expose the following variables:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">variable</span> <span class="s2">"instance_count"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"How many servers to run"</span>
+<span class="p">}</span>
+
+<span class="nx">variable</span> <span class="s2">"instance_type"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"What kind of servers to run (e.g. t2.large)"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>These variables allow you to run smaller/fewer servers in qa and stage to save money and larger/more servers in prod to ensure availability and scalability.</p>
+
+<p>In a separate repo, called, for example, <code class="highlighter-rouge">live</code>, you define the code for all of your environments, which now consists of just one <code class="highlighter-rouge">terragrunt.hcl</code> file per component (e.g. <code class="highlighter-rouge">app/terragrunt.hcl</code>, <code class="highlighter-rouge">mysql/terragrunt.hcl</code>, etc). This gives you the following file layout:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└── live
+    ├── prod
+    │   ├── app
+    │   │   └── terragrunt.hcl
+    │   ├── mysql
+    │   │   └── terragrunt.hcl
+    │   └── vpc
+    │       └── terragrunt.hcl
+    ├── qa
+    │   ├── app
+    │   │   └── terragrunt.hcl
+    │   ├── mysql
+    │   │   └── terragrunt.hcl
+    │   └── vpc
+    │       └── terragrunt.hcl
+    └── stage
+        ├── app
+        │   └── terragrunt.hcl
+        ├── mysql
+        │   └── terragrunt.hcl
+        └── vpc
+            └── terragrunt.hcl
+</code></pre></div></div>
+
+<p>Notice how there are no Terraform configurations (<code class="highlighter-rouge">.tf</code> files) in any of the folders. Instead, each <code class="highlighter-rouge">terragrunt.hcl</code> file specifies a <code class="highlighter-rouge">terraform { …​ }</code> block that specifies from where to download the Terraform code, as well as the environment-specific values for the input variables in that Terraform code. For example, <code class="highlighter-rouge">stage/app/terragrunt.hcl</code> may look like this:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Deploy version v0.0.3 in stage</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:foo/modules.git//app?ref=v0.0.3"</span>
+<span class="p">}</span>
+
+<span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">3</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"t2.micro"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><em>(Note: the double slash (<code class="highlighter-rouge">//</code>) in the <code class="highlighter-rouge">source</code> parameter is intentional and required. It’s part of Terraform’s Git syntax for <a href="https://www.terraform.io/docs/modules/sources.html">module sources</a>. Terraform may display a “Terraform initialized in an empty directory” warning, but you can safely ignore it.)</em></p>
+
+<p>And <code class="highlighter-rouge">prod/app/terragrunt.hcl</code> may look like this:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="c1"># Deploy version v0.0.1 in prod</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:foo/modules.git//app?ref=v0.0.1"</span>
+<span class="p">}</span>
+
+<span class="nx">inputs</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="nx">instance_count</span> <span class="p">=</span> <span class="mi">10</span>
+  <span class="nx">instance_type</span>  <span class="p">=</span> <span class="s2">"m2.large"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can now deploy the modules in your <code class="highlighter-rouge">live</code> repo. For example, to deploy the <code class="highlighter-rouge">app</code> module in stage, you would do the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd live/stage/app
+terragrunt apply
+</code></pre></div></div>
+
+<p>When Terragrunt finds the <code class="highlighter-rouge">terraform</code> block with a <code class="highlighter-rouge">source</code> parameter in <code class="highlighter-rouge">live/stage/app/terragrunt.hcl</code> file, it will:</p>
+
+<ol>
+  <li>
+    <p>Download the configurations specified via the <code class="highlighter-rouge">source</code> parameter into the <code class="highlighter-rouge">--terragrunt-download-dir</code> folder (by default <code class="highlighter-rouge">.terragrunt-cache</code> in the working directory, which we recommend adding to <code class="highlighter-rouge">.gitignore</code>). This downloading is done by using the same <a href="https://github.com/hashicorp/go-getter">go-getter library</a> Terraform uses, so the <code class="highlighter-rouge">source</code> parameter supports the exact same syntax as the <a href="https://www.terraform.io/docs/modules/sources.html">module source</a> parameter, including local file paths, Git URLs, and Git URLs with <code class="highlighter-rouge">ref</code> parameters (useful for checking out a specific tag, commit, or branch of Git repo). Terragrunt will download all the code in the repo (i.e. the part before the double-slash <code class="highlighter-rouge">//</code>) so that relative paths work correctly between modules in that repo.</p>
+  </li>
+  <li>
+    <p>Copy all files from the current working directory into the temporary folder.</p>
+  </li>
+  <li>
+    <p>Execute whatever Terraform command you specified in that temporary folder.</p>
+  </li>
+  <li>
+    <p>Pass any variables defined in the <code class="highlighter-rouge">inputs = { …​ }</code> block as environment variables (prefixed with <code class="highlighter-rouge">TF_VAR_</code> to your Terraform code. Notice how the <code class="highlighter-rouge">inputs</code> block in <code class="highlighter-rouge">stage/app/terragrunt.hcl</code> deploys fewer and smaller instances than prod.</p>
+  </li>
+</ol>
+
+<p>Check out the <a href="https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example">terragrunt-infrastructure-modules-example</a> and <a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example">terragrunt-infrastructure-live-example</a> repos for fully-working sample code that demonstrates this new folder structure.</p>
+
+<h3 id="achieve-dry-terraform-code-and-immutable-infrastructure">Achieve DRY Terraform code and immutable infrastructure</h3>
+
+<p>With this new approach, copy/paste between environments is minimized. The <code class="highlighter-rouge">terragrunt.hcl</code> files contain solely the <code class="highlighter-rouge">source</code> URL of the module to deploy and the <code class="highlighter-rouge">inputs</code> to set for that module in the current environment. To create a new environment, you copy an old one and update just the environment-specific <code class="highlighter-rouge">inputs</code> in the <code class="highlighter-rouge">terragrunt.hcl</code> files, which is about as close to the “essential complexity” of the problem as you can get.</p>
+
+<p>Just as importantly, since the Terraform module code is now defined in a single repo, you can version it (e.g., using Git tags and referencing them using the <code class="highlighter-rouge">ref</code> parameter in the <code class="highlighter-rouge">source</code> URL, as in the <code class="highlighter-rouge">stage/app/terragrunt.hcl</code> and <code class="highlighter-rouge">prod/app/terragrunt.hcl</code> examples above), and promote a single, immutable version through each environment (e.g., qa → stage → prod). This idea is inspired by Kief Morris’ blog post <a href="https://medium.com/@kief/https-medium-com-kief-using-pipelines-to-manage-environments-with-infrastructure-as-code-b37285a1cbf5">Using Pipelines to Manage Environments with Infrastructure as Code</a>.</p>
+
+<h3 id="working-locally">Working locally</h3>
+
+<p>If you’re testing changes to a local copy of the <code class="highlighter-rouge">modules</code> repo, you can use the <code class="highlighter-rouge">--terragrunt-source</code> command-line option or the <code class="highlighter-rouge">TERRAGRUNT_SOURCE</code> environment variable to override the <code class="highlighter-rouge">source</code> parameter. This is useful to point Terragrunt at a local checkout of your code so you can do rapid, iterative, make-a-change-and-rerun development:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd live/stage/app
+terragrunt apply --terragrunt-source ../../../modules//app
+</code></pre></div></div>
+
+<p><em>(Note: the double slash (<code class="highlighter-rouge">//</code>) here too is intentional and required. Terragrunt downloads all the code in the folder before the double-slash into the temporary folder so that relative paths between modules work correctly. Terraform may display a “Terraform initialized in an empty directory” warning, but you can safely ignore it.)</em></p>
+
+<h3 id="important-gotcha-terragrunt-caching">Important gotcha: Terragrunt caching</h3>
+
+<p>The first time you set the <code class="highlighter-rouge">source</code> parameter to a remote URL, Terragrunt will download the code from that URL into a tmp folder. It will <em>NOT</em> download it again afterwords unless you change that URL. That’s because downloading code—and more importantly, reinitializing remote state, redownloading provider plugins, and redownloading modules—can take a long time. To avoid adding 10-90 seconds of overhead to every Terragrunt command, Terragrunt assumes all remote URLs are immutable, and only downloads them once.</p>
+
+<p>Therefore, when working locally, you should use the <code class="highlighter-rouge">--terragrunt-source</code> parameter and point it at a local file path as described in the previous section. Terragrunt will copy the local files every time you run it, which is nearly instantaneous, and doesn’t require reinitializing everything, so you’ll be able to iterate quickly.</p>
+
+<p>If you need to force Terragrunt to redownload something from a remote URL, run Terragrunt with the <code class="highlighter-rouge">--terragrunt-source-update</code> flag and it’ll delete the tmp folder, download the files from scratch, and reinitialize everything. This can take a while, so avoid it and use <code class="highlighter-rouge">--terragrunt-source</code> when you can!</p>
+
+<h3 id="important-gotcha-working-with-relative-file-paths">Important gotcha: working with relative file paths</h3>
+
+<p>One of the gotchas with downloading Terraform configurations is that when you run <code class="highlighter-rouge">terragrunt apply</code> in folder <code class="highlighter-rouge">foo</code>, Terraform will actually execute in some temporary folder such as <code class="highlighter-rouge">.terragrunt-cache/foo</code>. That means you have to be especially careful with relative file paths, as they will be relative to that temporary folder and not the folder where you ran Terragrunt!</p>
+
+<p>In particular:</p>
+
+<ul>
+  <li>
+    <p><strong>Command line</strong>: When using file paths on the command line, such as passing an extra <code class="highlighter-rouge">-var-file</code> argument, you should use absolute paths:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Use absolute file paths on the CLI!</span>
+terragrunt apply <span class="nt">-var-file</span> /foo/bar/extra.tfvars
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Terragrunt configuration</strong>: When using file paths directly in your Terragrunt configuration (<code class="highlighter-rouge">terragrunt.hcl</code>), such as in an <code class="highlighter-rouge">extra_arguments</code> block, you can’t use hard-coded absolute file paths, or it won’t work on your teammates’ computers. Therefore, you should utilize the Terragrunt built-in function <code class="highlighter-rouge">get_terragrunt_dir()</code> to use a relative file path:</p>
+
+    <div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::git@github.com:foo/modules.git//frontend-app?ref=v0.0.3"</span>
+
+  <span class="nx">extra_arguments</span> <span class="s2">"custom_vars"</span> <span class="p">{</span>
+    <span class="nx">commands</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"apply"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">,</span>
+      <span class="s2">"import"</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"refresh"</span>
+    <span class="p">]</span>
+
+    <span class="c1"># With the get_terragrunt_dir() function, you can use relative paths!</span>
+    <span class="nx">arguments</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"-var-file=${get_terragrunt_dir()}/../common.tfvars"</span><span class="p">,</span>
+      <span class="s2">"-var-file=example.tfvars"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>See the <a href="/terragrunt/documentation/features/built-in-functions/#get_terragrunt_dir">get_terragrunt_dir()</a> documentation for more details.</p>
+  </li>
+</ul>
+
+<h3 id="using-terragrunt-with-private-git-repos">Using Terragrunt with private Git repos</h3>
+
+<p>The easiest way to use Terragrunt with private Git repos is to use SSH authentication. Configure your Git account so you can use it with SSH (see the <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">guide for GitHub here</a>) and use the SSH URL for your repo, prepended with <code class="highlighter-rouge">git::ssh://</code>:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"git::ssh://git@github.com/foo/modules.git//path/to/module?ref=v0.0.1"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Look up the Git repo for your repository to find the proper format.</p>
+
+<p>Note: In automated pipelines, you may need to run the following command for your Git repository prior to calling <code class="highlighter-rouge">terragrunt</code> to ensure that the ssh host is registered locally, e.g.:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh -T -oStrictHostKeyChecking=accept-new git@github.com || true
+</code></pre></div></div>
+:ET

@@ -1,0 +1,120 @@
+I""'<h2 id="aws-credentials">AWS credentials</h2>
+
+<p>Terragrunt uses the official <a href="https://aws.amazon.com/sdk-for-go/">AWS SDK for Go</a>, which means that it will automatically load credentials using the <a href="https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/">AWS standard approach</a>. If you need help configuring your credentials, please refer to the <a href="https://www.terraform.io/docs/providers/aws/#authentication">Terraform docs</a>.</p>
+
+<h2 id="aws-iam-policies">AWS IAM policies</h2>
+
+<p>Your AWS user must have an <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-identity-based.html">IAM policy</a> which grants permissions for interacting with DynamoDB and S3. Terragrunt will automatically create the configured DynamoDB tables and S3 buckets for storing remote state if they do not already exist.</p>
+
+<p>The following is an example IAM policy for use with Terragrunt. The policy grants the following permissions:</p>
+
+<ul>
+  <li>
+    <p>all DynamoDB permissions in all regions for tables used by Terragrunt</p>
+  </li>
+  <li>
+    <p>all S3 permissions for buckets used by Terragrunt</p>
+  </li>
+</ul>
+
+<p>Before using this policy, make sure to replace <code class="highlighter-rouge">1234567890</code> with your AWS account id and <code class="highlighter-rouge">terragrunt*</code> with your organization’s naming convention for AWS resources for Terraform remote state.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowAllDynamoDBActionsOnAllTerragruntTables"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dynamodb:*"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"arn:aws:dynamodb:*:1234567890:table/terragrunt*"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowAllS3ActionsOnTerragruntBuckets"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3:*"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"arn:aws:s3:::terragrunt*"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"arn:aws:s3:::terragrunt*/*"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>For a more minimal policy, for example when using a single bucket and DynamoDB table for multiple Terragrunt users, you can use the following. Be sure to replace <code class="highlighter-rouge">BUCKET_NAME</code> and <code class="highlighter-rouge">TABLE_NAME</code> with the S3 bucket name and DynamoDB table name respectively.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowCreateAndListS3ActionsOnSpecifiedTerragruntBucket"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"s3:ListBucket"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"s3:GetBucketVersioning"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"s3:CreateBucket"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:s3:::BUCKET_NAME"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowGetAndPutS3ActionsOnSpecifiedTerragruntBucketPath"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"s3:PutObject"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"s3:GetObject"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:s3:::BUCKET_NAME/some/path/here"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowCreateAndUpdateDynamoDBActionsOnSpecifiedTerragruntTable"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"dynamodb:PutItem"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"dynamodb:GetItem"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"dynamodb:DescribeTable"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"dynamodb:DeleteItem"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"dynamodb:CreateTable"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:dynamodb:*:*:table/TABLE_NAME"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>When the above is applied to an IAM user it will restrict them to creating the DynamoDB table if it doesn’t already exist and allow updating records for state locking, and for the S3 bucket will allow creating the bucket if it doesn’t already exist and only write files to the specified path.</p>
+
+<p>If you are only given access to an externally created Bucket you will need at least this IAM policy to be granted to your account:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:List*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::&lt;BucketName&gt;"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::&lt;BucketName&gt;/*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+</code></pre></div></div>
+
+<p>and you will need to set the flag <code class="highlighter-rouge">skip_bucket_versioning</code> to true (only bucket owners can check versioning status on an S3 Bucket)</p>
+:ET

@@ -1,0 +1,20 @@
+I"ª<h2 id="install-terragrunt">Install Terragrunt</h2>
+
+<p>Note that third-party Terragrunt packages may not be updated with the latest version, but are often close. Please check your version against the latest available on the <a href="https://github.com/gruntwork-io/terragrunt/releases">Releases Page</a>.</p>
+
+<h3 id="windows">Windows</h3>
+
+<p>You can install Terragrunt on Windows using <a href="https://chocolatey.org/">Chocolatey</a>: <code class="highlighter-rouge">choco install terragrunt</code>.</p>
+
+<h3 id="macos">macOS</h3>
+
+<p>You can install Terragrunt on macOS using <a href="https://brew.sh/">Homebrew</a>: <code class="highlighter-rouge">brew install terragrunt</code>.</p>
+
+<h3 id="linux">Linux</h3>
+
+<p>You can install Terragrunt on Linux using <a href="https://docs.brew.sh/Homebrew-on-Linux">Homebrew</a>: <code class="highlighter-rouge">brew install terragrunt</code>.</p>
+
+<h3 id="manual">Manual</h3>
+
+<p>You can install Terragrunt manually by going to the <a href="https://github.com/gruntwork-io/terragrunt/releases">Releases Page</a>, downloading the binary for your OS, renaming it to <code class="highlighter-rouge">terragrunt</code>, and adding it to your PATH.</p>
+:ET
