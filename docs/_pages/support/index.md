@@ -1,6 +1,6 @@
 ---
 layout: subpage
-permalink: /support
+permalink: /support/
 slug: support-page
 title: Support
 subtitle: Need a help?

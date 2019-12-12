@@ -1,6 +1,6 @@
 ---
 layout: subpage
-permalink: /cookie-policy
+permalink: /cookie-policy/
 slug: cookie-policy
 title: Cookie Policy
 subtitle: Learn about cookies
